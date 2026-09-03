@@ -1,5 +1,5 @@
 /**
- * NAMMA GYM - Dashboard Interactivity (Admin & User Portals)
+ * NAMMA GYM - Dashboard Interactivity (Admin & Member Portals)
  */
 
 (function () {
@@ -24,48 +24,197 @@
         qrModal.style.display = 'none';
       });
     }
+    if (qrModal) {
+      qrModal.addEventListener('click', (e) => {
+        if (e.target === qrModal) qrModal.style.display = 'none';
+      });
+    }
 
-    // 2. Class Reservation Toggle
-    document.querySelectorAll('.btn-reserve-class').forEach(btn => {
+    // 2. Tab Navigation
+    const tabButtons = document.querySelectorAll('.dash-nav-tab');
+    const tabContents = document.querySelectorAll('.dash-tab-pane');
+
+    tabButtons.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const row = btn.closest('.reservation-row');
-        const badge = row ? row.querySelector('.res-status-badge') : null;
+        const targetId = btn.getAttribute('data-target');
 
-        if (btn.dataset.booked === 'true') {
-          btn.dataset.booked = 'false';
-          btn.innerHTML = '<i class="fa-solid fa-plus mr-1"></i> Book';
-          btn.className = 'btn-reserve-class px-4 py-2 rounded-lg bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold uppercase transition-all';
+        tabButtons.forEach(b => b.classList.remove('is-active'));
+        tabContents.forEach(pane => pane.classList.remove('is-active'));
+
+        btn.classList.add('is-active');
+        const targetPane = document.getElementById(targetId);
+        if (targetPane) targetPane.classList.add('is-active');
+
+        // Update URL hash without jumping
+        history.replaceState(null, null, `#${targetId}`);
+      });
+    });
+
+    // Check URL hash on page load
+    if (window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      const matchingTab = document.querySelector(`.dash-nav-tab[data-target="${hash}"]`);
+      if (matchingTab) matchingTab.click();
+    }
+
+    // 3. Class Filters (Discipline & Day)
+    const disciplineFilter = document.getElementById('classDisciplineFilter');
+    const dayFilter = document.getElementById('classDayFilter');
+    const classCards = document.querySelectorAll('.class-card-item');
+
+    function filterClasses() {
+      const selectedDiscipline = disciplineFilter ? disciplineFilter.value : 'all';
+      const selectedDay = dayFilter ? dayFilter.value : 'all';
+
+      classCards.forEach(card => {
+        const disc = card.getAttribute('data-discipline') || '';
+        const day = card.getAttribute('data-day') || '';
+
+        const matchDisc = selectedDiscipline === 'all' || disc === selectedDiscipline;
+        const matchDay = selectedDay === 'all' || day === selectedDay;
+
+        card.style.display = (matchDisc && matchDay) ? '' : 'none';
+      });
+    }
+
+    if (disciplineFilter) disciplineFilter.addEventListener('change', filterClasses);
+    if (dayFilter) dayFilter.addEventListener('change', filterClasses);
+
+    // 4. Class Reservation Toggle
+    document.querySelectorAll('.btn-book-class').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const card = btn.closest('.class-card-item');
+        const badge = card ? card.querySelector('.class-seat-badge') : null;
+        const className = card ? card.querySelector('.class-title')?.textContent : 'Group Class';
+        const isBooked = btn.getAttribute('data-booked') === 'true';
+
+        if (isBooked) {
+          btn.setAttribute('data-booked', 'false');
+          btn.innerHTML = '<i class="fa-solid fa-calendar-plus mr-1"></i> Book Spot';
+          btn.className = 'btn-book-class btn btn--sm w-full';
           if (badge) {
-            badge.className = 'res-status-badge px-2.5 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-400';
-            badge.textContent = 'OPEN (4 LEFT)';
+            badge.className = 'class-seat-badge text-emerald-600 bg-emerald-50';
+            badge.innerHTML = '<i class="fa-solid fa-user-group text-xs"></i> <span>6 Spots Left</span>';
           }
-          if (window.showToast) window.showToast('Reservation cancelled.', 'info', 'Schedule Updated');
+          if (window.showToast) window.showToast(`Reservation for "${className}" has been cancelled.`, 'info', 'Booking Cancelled');
         } else {
-          btn.dataset.booked = 'true';
-          btn.innerHTML = '<i class="fa-solid fa-check mr-1"></i> Booked';
-          btn.className = 'btn-reserve-class px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase transition-all';
+          btn.setAttribute('data-booked', 'true');
+          btn.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Spot Reserved';
+          btn.className = 'btn-book-class btn btn--sm btn--outline w-full text-emerald-600 border-emerald-600';
           if (badge) {
-            badge.className = 'res-status-badge px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400';
-            badge.textContent = 'CONFIRMED';
+            badge.className = 'class-seat-badge text-amber-600 bg-amber-50';
+            badge.innerHTML = '<i class="fa-solid fa-circle-check text-xs"></i> <span>Confirmed</span>';
           }
-          if (window.showToast) window.showToast('Spot reserved! See you in the cage/rig.', 'success', 'Class Booked');
+          if (window.showToast) window.showToast(`You have reserved a spot for "${className}". Reminder sent!`, 'success', 'Class Reserved');
         }
       });
     });
 
-    // 3. Workout Set Logger Checkboxes
-    document.querySelectorAll('.workout-set-checkbox').forEach(cb => {
+    // 5. Workout Set Checkbox Tracking
+    const setCheckboxes = document.querySelectorAll('.workout-set-checkbox');
+    const workoutProgressEl = document.getElementById('workoutCompletedCount');
+    const workoutProgressBar = document.getElementById('workoutProgressBar');
+
+    function updateWorkoutProgress() {
+      const total = setCheckboxes.length;
+      let completed = 0;
+      setCheckboxes.forEach(cb => {
+        if (cb.checked) completed++;
+      });
+
+      if (workoutProgressEl) workoutProgressEl.textContent = `${completed}/${total} Sets`;
+      if (workoutProgressBar && total > 0) {
+        workoutProgressBar.style.width = `${(completed / total) * 100}%`;
+      }
+    }
+
+    setCheckboxes.forEach(cb => {
       cb.addEventListener('change', () => {
-        const item = cb.closest('.workout-set-item');
+        const row = cb.closest('.workout-set-row');
         if (cb.checked) {
-          item.classList.add('opacity-40', 'line-through');
-          if (window.showToast) window.showToast('Set logged to training history!', 'success', 'Progress Logged');
+          if (row) row.classList.add('is-completed');
+          if (window.showToast) window.showToast('Set recorded into coach progression logs.', 'success', 'Set Logged');
         } else {
-          item.classList.remove('opacity-40', 'line-through');
+          if (row) row.classList.remove('is-completed');
         }
+        updateWorkoutProgress();
       });
     });
+
+    // 6. Coach Chat Submission
+    const chatForm = document.getElementById('coachChatForm');
+    const chatInput = document.getElementById('coachChatInput');
+    const chatFeed = document.getElementById('coachChatFeed');
+
+    if (chatForm && chatInput && chatFeed) {
+      chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        const timeStr = 'Just now';
+        const userBubble = document.createElement('div');
+        userBubble.className = 'chat-bubble chat-bubble--user';
+        userBubble.innerHTML = `
+          <div class="chat-bubble__content">
+            <p>${text}</p>
+            <span class="chat-time">${timeStr}</span>
+          </div>
+        `;
+        chatFeed.appendChild(userBubble);
+        chatInput.value = '';
+        chatFeed.scrollTop = chatFeed.scrollHeight;
+
+        // Auto coach reply simulation
+        setTimeout(() => {
+          const coachBubble = document.createElement('div');
+          coachBubble.className = 'chat-bubble chat-bubble--coach';
+          coachBubble.innerHTML = `
+            <div class="chat-bubble__content">
+              <b>Coach Vikram Rao</b>
+              <p>Got it, Karthik! Focus on bracing your core through the eccentric phase today. I'll review your logs tonight.</p>
+              <span class="chat-time">Just now</span>
+            </div>
+          `;
+          chatFeed.appendChild(coachBubble);
+          chatFeed.scrollTop = chatFeed.scrollHeight;
+          if (window.showToast) window.showToast('Coach Vikram Rao replied to your note.', 'info', 'Coach Dispatch');
+        }, 1200);
+      });
+    }
+
+    // 7. Membership Renewal Modal
+    const btnRenewPlan = document.getElementById('btnRenewPlan');
+    const renewModal = document.getElementById('renewModal');
+    const btnCloseRenew = document.getElementById('btnCloseRenew');
+    const renewForm = document.getElementById('renewForm');
+
+    if (btnRenewPlan && renewModal) {
+      btnRenewPlan.addEventListener('click', () => {
+        renewModal.style.display = 'flex';
+      });
+    }
+    if (btnCloseRenew && renewModal) {
+      btnCloseRenew.addEventListener('click', () => {
+        renewModal.style.display = 'none';
+      });
+    }
+    if (renewModal) {
+      renewModal.addEventListener('click', (e) => {
+        if (e.target === renewModal) renewModal.style.display = 'none';
+      });
+    }
+    if (renewForm) {
+      renewForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (renewModal) renewModal.style.display = 'none';
+        if (window.showToast) {
+          window.showToast('Membership renewed for 12 months! Next renewal: September 28, 2027.', 'success', 'Membership Extended');
+        }
+      });
+    }
   }
 
   function initAdminDashboard() {
@@ -126,3 +275,4 @@
   });
 
 })();
+

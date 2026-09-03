@@ -135,8 +135,12 @@
 
           <!-- Brand Block -->
           <div class="ftr__brand">
-            <span class="hdr__mark"><img src="${prefix}assets/logo.png" alt="Namma Gym Logo" /></span>
-            <p class="ftr__brand-name">NAMMA<span>GYM</span></p>
+            <a class="hdr__brand" href="${prefix}index.html">
+              <span class="hdr__mark">
+                <img src="${prefix}assets/logo.png" alt="Namma Gym Logo" />
+              </span>
+              <span class="hdr__name">NAMMA GYM</span>
+            </a>
             <p class="ftr__brand-tagline">Indiranagar's neighbourhood gym since 2014. No shiny lobby. Just iron, grit, and community.</p>
             
             <div class="ftr__socials">

@@ -14,78 +14,390 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="icon" href="../assets/logo.png" />
+
+  <style>
+    .auth-card {
+      max-width: 960px;
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-2);
+      display: grid;
+      grid-template-columns: minmax(300px, 1fr) minmax(320px, 1.25fr);
+    }
+
+    .auth-banner {
+      background: linear-gradient(160deg, var(--navy) 0%, #0a1420 100%);
+      padding: 48px 40px;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .auth-banner::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 107, 53, 0.18) 0%, rgba(255, 107, 53, 0) 70%);
+      pointer-events: none;
+    }
+
+    .auth-banner::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: -40px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 107, 53, 0.12) 0%, rgba(255, 107, 53, 0) 70%);
+      pointer-events: none;
+    }
+
+    .auth-feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 28px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .auth-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13.5px;
+      color: #d1d9e2;
+    }
+
+    .auth-feature-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--orange);
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .auth-form-wrap {
+      padding: 48px 44px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-header {
+      margin-bottom: 24px;
+    }
+
+    .form-header h2 {
+      margin: 0 0 6px;
+      font-size: 34px;
+      letter-spacing: -0.01em;
+      color: var(--navy);
+    }
+
+    .form-header p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--gray);
+    }
+
+    .input-field-group {
+      position: relative;
+    }
+
+    .input-field-group input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      font-size: 14px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--ff-body);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .input-field-group input:focus {
+      background: #ffffff;
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
+    }
+
+    .password-toggle-btn {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--gray);
+      padding: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease;
+    }
+
+    .password-toggle-btn:hover {
+      color: var(--navy);
+    }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 22px 0 18px;
+    }
+
+    .auth-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .auth-divider-text {
+      font-family: var(--ff-head);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      white-space: nowrap;
+    }
+
+    .social-auth-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .btn-social {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--navy);
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(15, 30, 46, 0.03);
+    }
+
+    .btn-social:hover {
+      border-color: var(--gray-lt);
+      background: var(--paper);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(15, 30, 46, 0.08);
+    }
+
+    .btn-social:active {
+      transform: translateY(0);
+    }
+
+    .btn-social i {
+      font-size: 15px;
+    }
+
+    .btn-social.btn-google svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .create-account-wrap {
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .create-account-wrap span {
+      font-size: 14px;
+      color: var(--gray);
+    }
+
+    .create-account-link {
+      color: var(--orange);
+      font-family: var(--ff-head);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 800;
+      text-decoration: none;
+      margin-left: 6px;
+      transition: color 0.15s ease, text-decoration 0.15s ease;
+    }
+
+    .create-account-link:hover {
+      color: var(--orange-dk);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .auth-card {
+        grid-template-columns: 1fr;
+      }
+
+      .auth-banner {
+        padding: 32px 24px;
+      }
+
+      .auth-form-wrap {
+        padding: 36px 24px;
+      }
+
+      .social-auth-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body class="page-public" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 32px 16px; background: var(--paper);">
 
   <!-- Main Login Card Grid -->
-  <div style="max-width: 900px; width: 100%; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-2); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+  <div class="auth-card">
     
     <!-- Left Hero Banner -->
-    <div style="background: var(--navy); padding: 48px 40px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
+    <div class="auth-banner">
       <div style="position: relative; z-index: 2;">
-        <a href="../index.html" style="color: var(--orange); font-family: var(--ff-head); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 24px;">
-          <i class="fa-solid fa-arrow-left"></i> Back to Club
-        </a>
-        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+        <a href="../index.html" style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px; text-decoration: none;">
           <span class="hdr__mark" style="width: 40px; height: 40px;">
             <img src="../assets/logo.png" alt="Namma Gym Logo" />
           </span>
-          <span style="font-family: var(--ff-display); font-size: 22px; letter-spacing: .04em;">NAMMA<span style="color:var(--orange)">GYM</span></span>
-        </div>
-        <p class="eyebrow" style="margin-bottom: 12px;">MEMBER ACCESS</p>
-        <h2 style="color: #fff; margin-bottom: 16px; line-height: 1.05;">Step through the gate.</h2>
-        <ul style="color: #cbd5e1; font-size: 13px; display: flex; flex-direction: column; gap: 10px; margin: 0; padding-left: 18px;">
-          <li>Reserve classes 14 days in advance</li>
-          <li>Track working weights &amp; PR streaks</li>
-          <li>Direct 24/7 coach messaging portal</li>
+          <span style="font-family: var(--ff-display); font-size: 22px; letter-spacing: .04em;">NAMMA GYM</span>
+        </a>
+        <h2 style="color: #fff; margin-bottom: 14px; line-height: 1.05; font-size: clamp(28px, 3.5vw, 42px);">Step through the gate.</h2>
+        <p style="color: #cbd5e1; font-size: 14px; line-height: 1.6; margin-bottom: 0;">
+          Unlock your digital training badge, class reservations, and coach communication.
+        </p>
+
+        <ul class="auth-feature-list">
+          <li class="auth-feature-item">
+            <span class="auth-feature-icon"><i class="fa-solid fa-id-card-clip"></i></span>
+            <span>Digital QR Check-in &amp; Floor Access</span>
+          </li>
+          <li class="auth-feature-item">
+            <span class="auth-feature-icon"><i class="fa-solid fa-calendar-check"></i></span>
+            <span>Priority Slot &amp; Studio Bookings</span>
+          </li>
+          <li class="auth-feature-item">
+            <span class="auth-feature-icon"><i class="fa-solid fa-chart-line"></i></span>
+            <span>Workout Progression &amp; Coach Logs</span>
+          </li>
         </ul>
       </div>
 
+      <div style="padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); font-family: var(--ff-head); font-size: 11px; color: #a0aab8; letter-spacing: .1em; text-transform: uppercase; margin-top: 32px; position: relative; z-index: 2;">
+        EST. 2014 · INDIRANAGAR · BENGALURU
+      </div>
     </div>
 
     <!-- Right Login Form -->
-    <div style="padding: 48px 40px; background: #fff;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px;">
-        <div>
-          <h2 style="margin: 0; font-size: 32px;">Sign In</h2>
-          <span style="font-size: 13px; color: var(--gray);">Access your member or staff portal.</span>
-        </div>
-        <a href="signup.html" style="font-family: var(--ff-head); font-size: 11px; color: var(--orange); text-transform: uppercase; font-weight: 800; text-decoration: none;">Join Free &rarr;</a>
+    <div class="auth-form-wrap">
+      
+      <!-- Top Title (Existing top join text removed) -->
+      <div class="form-header">
+        <h2>Log In</h2>
+        <p>Welcome back!</p>
       </div>
 
-      <form id="loginForm" data-form="login" novalidate style="display: flex; flex-direction: column; gap: 18px;">
+      <form id="loginForm" data-form="login" novalidate style="display: flex; flex-direction: column; gap: 16px;">
         <div>
           <label for="memberId" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); margin-bottom: 6px;">Member ID or Email</label>
-          <input type="text" id="memberId" name="memberId" placeholder="e.g. NG-0042 or admin@nammagym.in" value="NG-0042" required style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--line); font-size: 14px; background: var(--paper); outline: none;" />
+          <div class="input-field-group">
+            <input type="text" id="memberId" name="memberId" placeholder="e.g. NG-0042 or admin@nammagym.in" value="NG-0042" required />
+          </div>
         </div>
 
         <div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <label for="password" style="font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy);">Password</label>
-            <a href="#" style="font-size: 12px; color: var(--gray); text-decoration: none;">Forgot?</a>
+            <a href="#" id="forgotPasswordBtn" style="font-size: 12px; color: var(--orange); font-weight: 600; text-decoration: none;">Forgot Password?</a>
           </div>
-          <input type="password" id="password" name="password" placeholder="••••••••" value="demo123" required style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--line); font-size: 14px; background: var(--paper); outline: none;" />
+          <div class="input-field-group">
+            <input type="password" id="password" name="password" placeholder="••••••••" value="demo123" required />
+            <button type="button" class="password-toggle-btn" id="togglePasswordBtn" aria-label="Toggle password visibility">
+              <i class="fa-regular fa-eye" id="togglePasswordIcon"></i>
+            </button>
+          </div>
         </div>
 
-        <button type="submit" class="btn btn--lg" style="width: 100%; margin-top: 8px;">
-          <span>Authenticate &amp; Enter</span> <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
+        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--gray);">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <input type="checkbox" id="rememberMe" checked style="accent-color: var(--orange); width: 15px; height: 15px; cursor: pointer;" />
+            <span>Remember me </span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn--lg" style="width: 100%; margin-top: 4px;">
+          <span>Log in</span> <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
         </button>
       </form>
 
-      <!-- Quick Demo Logins -->
-      <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line);">
-        <span style="display: block; font-family: var(--ff-head); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--gray); margin-bottom: 12px;">Quick Demo Portals:</span>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <a href="user/user-dashboard.html" style="padding: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; text-decoration: none; color: var(--navy); display: block;">
-            <b style="color: #10b981; font-size: 12px; display: block; font-family: var(--ff-head);">👤 Member Portal</b>
-            <span style="font-size: 11px; color: var(--gray);">NG-0042 (Karthik)</span>
-          </a>
-          <a href="admin/admin-dashboard.html" style="padding: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; text-decoration: none; color: var(--navy); display: block;">
-            <b style="color: #ef4444; font-size: 12px; display: block; font-family: var(--ff-head);">🛡️ Staff Admin</b>
-            <span style="font-size: 11px; color: var(--gray);">NG-ADMIN (Staff)</span>
-          </a>
-        </div>
+      <!-- Additional Sign In Options -->
+      <div class="auth-divider">
+        <div class="auth-divider-line"></div>
+        <span class="auth-divider-text">Or sign in with</span>
+        <div class="auth-divider-line"></div>
+      </div>
+
+      <div class="social-auth-grid">
+        <!-- Google -->
+        <button type="button" class="btn-social btn-google" id="socialGoogleBtn" title="Continue with Google">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Google</span>
+        </button>
+
+        <!-- Apple -->
+        <button type="button" class="btn-social" id="socialAppleBtn" title="Continue with Apple">
+          <i class="fa-brands fa-apple" style="font-size: 17px;"></i>
+          <span>Apple</span>
+        </button>
+
+        <!-- Mobile OTP -->
+        <button type="button" class="btn-social" id="socialOtpBtn" title="Sign in with Mobile OTP">
+          <i class="fa-solid fa-mobile-screen-button" style="color: var(--orange);"></i>
+          <span>OTP</span>
+        </button>
+      </div>
+
+      <!-- Center-Aligned Create Account Text -->
+      <div class="create-account-wrap">
+        <span>Don't have an account?</span>
+        <a href="signup.html" class="create-account-link">Create Account &rarr;</a>
       </div>
 
     </div>
@@ -95,6 +407,57 @@
   <script src="../js/form-validation.js"></script>
   <script src="../js/navbar.js"></script>
   <script src="../js/script.js"></script>
+  <script>
+    // Password toggle visibility
+    const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+    const passwordInput = document.getElementById('password');
+    const togglePasswordIcon = document.getElementById('togglePasswordIcon');
+
+    if (togglePasswordBtn && passwordInput && togglePasswordIcon) {
+      togglePasswordBtn.addEventListener('click', function () {
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        togglePasswordIcon.className = isPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+      });
+    }
+
+    // Forgot password prompt
+    const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+    if (forgotPasswordBtn) {
+      forgotPasswordBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const memberIdVal = document.getElementById('memberId').value.trim();
+        if (window.showToast) {
+          window.showToast(
+            memberIdVal ? `Password reset link dispatched to ${memberIdVal}.` : 'Please enter your Member ID or registered email to reset your password.',
+            'info',
+            'Password Reset'
+          );
+        }
+      });
+    }
+
+    // Social login handlers
+    const socialButtons = [
+      { id: 'socialGoogleBtn', provider: 'Google' },
+      { id: 'socialAppleBtn', provider: 'Apple' },
+      { id: 'socialOtpBtn', provider: 'Mobile OTP' }
+    ];
+
+    socialButtons.forEach(({ id, provider }) => {
+      const btn = document.getElementById(id);
+      if (btn) {
+        btn.addEventListener('click', function () {
+          if (window.showToast) {
+            window.showToast(`Redirecting to secure ${provider} authentication...`, 'info', `${provider} Sign-In`);
+          }
+          setTimeout(() => {
+            window.location.href = 'user/user-dashboard.html';
+          }, 1000);
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
