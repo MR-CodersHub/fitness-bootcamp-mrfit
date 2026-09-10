@@ -16,324 +16,144 @@
   <link rel="stylesheet" href="../../css/style.css" />
   <link rel="icon" href="../../assets/logo.png" />
 
-  <style>
-    /* Dashboard Specific Styles */
-    .dash-header-wrap {
-      background: var(--navy);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      color: #ffffff;
-      padding: 16px var(--pad);
-    }
-
-    .dash-nav-tabs {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 6px 0;
-      border-bottom: 1px solid var(--line);
-      margin-bottom: 28px;
-      scrollbar-width: none;
-    }
-    .dash-nav-tabs::-webkit-scrollbar { display: none; }
-
-    .dash-nav-tab {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-family: var(--ff-head);
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--gray);
-      text-decoration: none;
-      white-space: nowrap;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: 1px solid transparent;
-      background: transparent;
-    }
-
-    .dash-nav-tab:hover {
-      color: var(--navy);
-      background: var(--paper);
-    }
-
-    .dash-nav-tab.is-active {
-      background: var(--navy);
-      color: #ffffff;
-      border-color: var(--navy);
-    }
-
-    .dash-tab-pane {
-      display: none;
-      animation: fadeIn 0.25s ease forwards;
-    }
-
-    .dash-tab-pane.is-active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .dash-card {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow-1);
-    }
-
-    .dash-card--hero {
-      background: linear-gradient(135deg, var(--navy) 0%, #162638 100%);
-      color: #ffffff;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .dash-card--hero::before {
-      content: '';
-      position: absolute;
-      top: -40px;
-      right: -40px;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 107, 53, 0.25) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    /* Class Cards Grid */
-    .class-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 20px;
-    }
-
-    .class-card-item {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: var(--shadow-1);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-
-    .class-card-item:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-2);
-      border-color: var(--orange-lt);
-    }
-
-    .class-seat-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      font-family: var(--ff-head);
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    /* Attendance Matrix / Calendar */
-    .attendance-heatmap {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
-      margin: 16px 0;
-    }
-
-    .heat-day {
-      aspect-ratio: 1;
-      border-radius: 8px;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--gray);
-      transition: transform 0.15s ease;
-      cursor: pointer;
-    }
-
-    .heat-day:hover {
-      transform: scale(1.08);
-    }
-
-    .heat-day.is-attended {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: rgba(16, 185, 129, 0.4);
-      color: #059669;
-    }
-
-    .heat-day.is-today {
-      border: 2px solid var(--orange);
-      color: var(--orange);
-    }
-
-    .heat-day small {
-      font-size: 9px;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    /* Workout Plan Sets */
-    .workout-set-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      border-radius: 10px;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      margin-bottom: 10px;
-      transition: all 0.2s ease;
-    }
-
-    .workout-set-row.is-completed {
-      background: #f0fdf4;
-      border-color: #bbf7d0;
-      opacity: 0.85;
-    }
-
-    .workout-set-row.is-completed .set-title {
-      text-decoration: line-through;
-      color: var(--gray);
-    }
-
-    /* Coach Chat Feed */
-    .chat-bubble {
-      display: flex;
-      margin-bottom: 12px;
-    }
-
-    .chat-bubble--user {
-      justify-content: flex-end;
-    }
-
-    .chat-bubble--user .chat-bubble__content {
-      background: var(--orange);
-      color: #ffffff;
-      border-radius: 14px 14px 2px 14px;
-    }
-
-    .chat-bubble--coach .chat-bubble__content {
-      background: #ffffff;
-      color: var(--navy);
-      border: 1px solid var(--line);
-      border-radius: 14px 14px 14px 2px;
-    }
-
-    .chat-bubble__content {
-      max-width: 82%;
-      padding: 12px 16px;
-      box-shadow: var(--shadow-1);
-    }
-
-    .chat-bubble__content p {
-      margin: 0 0 4px;
-      font-size: 13.5px;
-      line-height: 1.45;
-    }
-
-    .chat-bubble__content .chat-time {
-      font-size: 10px;
-      opacity: 0.75;
-      display: block;
-      text-align: right;
-    }
-
-    @media (max-width: 768px) {
-      .dash-stats-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .attendance-heatmap {
-        gap: 4px;
-      }
-    }
-
-    @media (max-width: 540px) {
-      .dash-stats-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
 </head>
 
-<body class="page-public" style="background: #f4f4f0;">
+<body class="page-public dash-page">
 
-  <!-- ============== MEMBER HEADER ============== -->
-  <header class="hdr hdr--dashboard">
-    <div class="hdr__row">
-      <div style="display: flex; align-items: center; gap: 16px;">
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div class="dash-sidebar-backdrop" id="dashSidebarBackdrop"></div>
+
+  <div class="dash-layout">
+
+    <!-- ============== MEMBER SIDE NAVIGATION BAR ============== -->
+    <aside class="dash-sidebar" id="dashSidebar" aria-label="Member Portal Navigation">
+      
+      <!-- Brand Header -->
+      <div class="dash-sidebar__brand">
         <a class="hdr__brand" href="../../index.html">
           <span class="hdr__mark">
             <img src="../../assets/logo.png" alt="Namma Gym Logo" />
           </span>
           <span class="hdr__name">NAMMA GYM</span>
         </a>
-      </div>
-
-      <div class="hdr__cta" style="display: flex; align-items: center; gap: 14px;">
-        <button id="btnShowQr" type="button" class="btn btn--sm" style="font-family: var(--ff-head);">
-          <i class="fa-solid fa-qrcode mr-1"></i> Gate Pass
-        </button>
-
-        <div style="display: flex; align-items: center; gap: 10px; padding-left: 14px; border-left: 1px solid rgba(255,255,255,0.15); font-size: 12px;">
-          <div style="text-align: right;" class="hidden sm:block">
-            <b style="color: #ffffff; display: block; font-size: 13px;">Karthik M.</b>
-            <span style="color: var(--orange); font-size: 11px; font-weight: 600;">NG-0042 · Athletic Pass</span>
-          </div>
-          <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--orange); color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
-            KM
-          </div>
-          <a href="../login.html" style="color: #cbd5e1; font-size: 15px; margin-left: 4px; text-decoration: none;" title="Log Out"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <button type="button" class="dash-sidebar-close" id="dashSidebarClose" aria-label="Close navigation sidebar">&times;</button>
         </div>
       </div>
-    </div>
-  </header>
 
-  <!-- Live Status Ribbon -->
-  <div class="dash-ticker-strip" style="background: #0b1520; color: #94a3b8; font-size: 12px; font-family: var(--ff-head); letter-spacing: 0.05em; padding: 8px var(--pad); display: flex; justify-content: space-between; align-items: center; text-transform: uppercase;">
-    <span><i class="fa-solid fa-fire text-orange-500 mr-1" style="color: var(--orange);"></i> 18 SESSIONS LOGGED THIS MONTH · 90% OF MONTHLY GOAL</span>
-    <span class="hidden sm:inline" style="color: #cbd5e1;">MEMBERSHIP RENEWS IN 25 DAYS · COACH: VIKRAM RAO</span>
-  </div>
+      <!-- Member Profile Mini Widget -->
+      <div class="dash-sidebar__user">
+        <div class="dash-user-avatar">
+          KM
+          <span class="online-dot" title="Member active in Indiranagar zone"></span>
+        </div>
+        <div class="dash-user-info">
+          <b>Karthik M.</b>
+          <span>NG-0042 · Athletic Pass</span>
+        </div>
+      </div>
 
-  <!-- ============== MAIN MEMBER DASHBOARD CONTAINER ============== -->
-  <main class="section" style="max-width: var(--maxw); margin: 0 auto; padding: 28px var(--pad) 64px;">
+      <!-- Navigation Section Groups -->
+      <nav class="dash-sidebar__nav" aria-label="Dashboard Views">
+        
+        <!-- Group 1: Main Workspace -->
+        <div class="dash-nav-group">
+          <span class="dash-nav-group-title">Main Workspace</span>
+          
+          <button type="button" class="dash-sidebar-nav-item is-active" data-target="tab-overview" data-title="Overview">
+            <i class="fa-solid fa-gauge-high"></i>
+            <span>Overview</span>
+          </button>
 
-    <!-- Dashboard Tabs Navigation -->
-    <nav class="dash-nav-tabs" aria-label="Dashboard views">
-      <button type="button" class="dash-nav-tab is-active" data-target="tab-overview">
-        <i class="fa-solid fa-gauge-high"></i> Overview
-      </button>
-      <button type="button" class="dash-nav-tab" data-target="tab-classes">
-        <i class="fa-solid fa-calendar-check"></i> Book Classes
-      </button>
-      <button type="button" class="dash-nav-tab" data-target="tab-attendance">
-        <i class="fa-solid fa-chart-simple"></i> Attendance History
-      </button>
-      <button type="button" class="dash-nav-tab" data-target="tab-workout">
-        <i class="fa-solid fa-dumbbell"></i> Workout Plans
-      </button>
-      <button type="button" class="dash-nav-tab" data-target="tab-membership">
-        <i class="fa-solid fa-id-card"></i> Membership &amp; Renewal
-      </button>
-    </nav>
+          <button type="button" class="dash-sidebar-nav-item" data-target="tab-classes" data-title="Book Classes">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>Book Classes</span>
+          </button>
+
+          <button type="button" class="dash-sidebar-nav-item" data-target="tab-workout" data-title="Workout Plans">
+            <i class="fa-solid fa-dumbbell"></i>
+            <span>Workout Plans</span>
+          </button>
+
+          <button type="button" class="dash-sidebar-nav-item" data-target="tab-attendance" data-title="Attendance">
+            <i class="fa-solid fa-chart-simple"></i>
+            <span>Attendance</span>
+          </button>
+        </div>
+
+        
+
+        <!-- Group 3: Portal & System Navigation -->
+        <div class="dash-nav-group">
+          <span class="dash-nav-group-title">Portals &amp; System</span>
+
+       
+
+          <a href="../../index.html" class="dash-sidebar-nav-item" title="Go to Namma Gym Public Website">
+            <i class="fa-solid fa-house"></i>
+            <span>Public Website</span>
+          </a>
+
+          <a href="../login.html" class="dash-sidebar-nav-item" title="Sign Out of Member Portal">
+            <i class="fa-solid fa-arrow-right-from-bracket" style="color: #94a3b8;"></i>
+            <span>Sign Out</span>
+          </a>
+        </div>
+
+      </nav>
+
+      <!-- Sidebar Footer Widget -->
+      <div class="dash-sidebar__footer">
+        
+
+        <button type="button" id="sidebarGatePassBtn" class="btn btn--sm" style="width: 100%; padding: 10px; font-size: 12px;">
+          <i class="fa-solid fa-qrcode mr-1"></i> Digital Gate Pass
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- ============== CONTENT AREA ============== -->
+    <div class="dash-content-area">
+
+      <!-- Sticky Topbar Header -->
+      <header class="dash-topbar">
+        
+        <div class="dash-topbar__left">
+          <!-- Mobile Sidebar Toggle Hamburger Button -->
+          <button type="button" class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Open sidebar menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <!-- Breadcrumb Path -->
+          <div class="dash-breadcrumb">
+            <span class="dash-breadcrumb-prefix">Member Portal</span>
+            <i class="fa-solid fa-chevron-right" style="font-size: 10px; opacity: 0.5;"></i>
+            <span id="dashBreadcrumbTitle" style="color: var(--orange);">Overview</span>
+          </div>
+        </div>
+
+        <div class="dash-topbar__right">
+          <!-- Theme Toggle -->
+          <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Switch Light/Dark Mode">
+            <i class="fa-solid fa-sun"></i>
+          </button>
+
+          <!-- RTL Toggle -->
+          <button type="button" class="rtl-toggle-btn" aria-label="Toggle RTL layout" title="Switch LTR/RTL">
+            RTL
+          </button>
+
+          <!-- User Avatar & Quick Logout -->
+          <div style="display: flex; align-items: center; gap: 8px; padding-left: 8px; border-left: 1px solid rgba(255,255,255,0.12);">
+            <a href="../login.html" style="color: #94a3b8; font-size: 14px; padding: 4px; text-decoration: none;" title="Log Out"><i class="fa-solid fa-power-off"></i></a>
+          </div>
+        </div>
+
+      </header>
+
+      <!-- Main Body Container with Tab Panes -->
+      <main class="dash-body">
 
     <!-- ============================================================
          TAB 1: OVERVIEW
@@ -345,16 +165,16 @@
         <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; position: relative; z-index: 2;">
           <div style="max-width: 620px;">
             <span class="eyebrow" style="color: var(--orange); margin-bottom: 6px; display: block;">MESOCYCLE BLOCK 3 · DAY 14</span>
-            <h2 style="color: #fff; margin-bottom: 8px; font-size: clamp(26px, 3.5vw, 36px);">Welcome back, Karthik.</h2>
+            <h2 style="color: #fff; margin-bottom: 8px; font-size: clamp(26px, 3.5vw, 36px); text-align: left;">Welcome back, Karthik.</h2>
             <p style="color: #cbd5e1; font-size: 14.5px; margin: 0; line-height: 1.55;">
               Today is heavy lower body power &amp; box jumps. You have reserved a spot for <b>Boxing &amp; Heavy Bag</b> tonight at 6:30 PM.
             </p>
           </div>
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button type="button" class="btn btn--sm" onclick="document.querySelector('.dash-nav-tab[data-target=\'tab-classes\']').click();">
+            <button type="button" class="btn btn--sm" onclick="document.querySelector('[data-target=\'tab-classes\']').click();">
               <i class="fa-solid fa-calendar-plus mr-1"></i> Book Class
             </button>
-            <button type="button" class="btn btn--sm btn--outline" style="color: #fff; border-color: #fff;" onclick="document.querySelector('.dash-nav-tab[data-target=\'tab-workout\']').click();">
+            <button type="button" class="btn btn--sm btn--outline" style="color: #fff; border-color: #fff;" onclick="document.querySelector('[data-target=\'tab-workout\']').click();">
               <i class="fa-solid fa-list-check mr-1"></i> Today's Sets
             </button>
           </div>
@@ -362,7 +182,7 @@
       </div>
 
       <!-- 4 High-Impact Stat Tiles -->
-      <div class="dash-stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px;">
+      <div class="dash-stats-grid">
         
         <!-- Attendance Tile -->
         <div class="dash-card">
@@ -418,7 +238,7 @@
       </div>
 
       <!-- Quick Dual Grid: Today's Workout + Reserved Classes -->
-      <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px;">
+      <div class="dash-split-grid">
         
         <!-- Workout Quick Summary -->
         <div class="dash-card">
@@ -427,7 +247,7 @@
               <span class="eyebrow" style="margin-bottom: 2px;">TODAY'S TARGET</span>
               <h3 style="margin: 0; font-size: 20px;">Lower Body Power &amp; Deceleration</h3>
             </div>
-            <button type="button" class="btn btn--sm btn--outline" style="font-size: 11px; padding: 6px 12px;" onclick="document.querySelector('.dash-nav-tab[data-target=\'tab-workout\']').click();">
+            <button type="button" class="btn btn--sm btn--outline" style="font-size: 11px; padding: 6px 12px;" onclick="document.querySelector('[data-target=\'tab-workout\']').click();">
               Full Plan &rarr;
             </button>
           </div>
@@ -465,7 +285,7 @@
                 <span class="eyebrow" style="margin-bottom: 2px;">RESERVATIONS</span>
                 <h3 style="margin: 0; font-size: 20px;">Your Schedule</h3>
               </div>
-              <button type="button" class="btn btn--sm btn--outline" style="font-size: 11px; padding: 6px 12px;" onclick="document.querySelector('.dash-nav-tab[data-target=\'tab-classes\']').click();">
+              <button type="button" class="btn btn--sm btn--outline" style="font-size: 11px; padding: 6px 12px;" onclick="document.querySelector('[data-target=\'tab-classes\']').click();">
                 Browse All &rarr;
               </button>
             </div>
@@ -696,7 +516,7 @@
     <div id="tab-attendance" class="dash-tab-pane">
       
       <!-- Metrics Bar -->
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;" class="dash-stats-grid">
+      <div class="dash-stats-grid">
         <div class="dash-card">
           <span style="font-family: var(--ff-head); font-size: 11px; color: var(--gray); text-transform: uppercase;">Current Streak</span>
           <h3 style="font-size: 28px; margin: 4px 0; color: var(--orange);"><i class="fa-solid fa-fire text-orange"></i> 5 Days</h3>
@@ -772,7 +592,7 @@
         <h3 style="margin: 0 0 16px; font-size: 20px;">Gate Check-In &amp; Turnstile Logs</h3>
         
         <div class="table-responsive">
-          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13.5px;">
+          <table style="width: 100%; min-width: 540px; border-collapse: collapse; text-align: left; font-size: 13.5px;">
             <thead>
               <tr style="background: var(--paper); border-bottom: 2px solid var(--line); font-family: var(--ff-head); font-size: 11.5px; text-transform: uppercase;">
                 <th style="padding: 12px 16px;">Date &amp; Day</th>
@@ -847,7 +667,7 @@
       </div>
 
       <!-- Split Layout: Workout Sets Checklist + Coach Note & Direct Messenger -->
-      <div style="display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px;">
+      <div class="dash-split-grid">
         
         <!-- Left: Prescribed Exercises Checklist -->
         <div class="dash-card">
@@ -1001,7 +821,7 @@
          ============================================================ -->
     <div id="tab-membership" class="dash-tab-pane">
       
-      <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; margin-bottom: 24px;">
+      <div class="dash-split-grid" style="margin-bottom: 24px;">
         
         <!-- Membership Card Overview -->
         <div class="dash-card">
@@ -1018,7 +838,7 @@
 
           <!-- Renewal Details Matrix -->
           <div style="background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin-bottom: 20px;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="dash-duo-grid">
               <div>
                 <span style="font-size: 12px; color: var(--gray); text-transform: uppercase; font-family: var(--ff-head);">Renewal Date</span>
                 <p style="margin: 2px 0 0; font-size: 18px; font-weight: 700; color: var(--navy);">September 28, 2026</p>
@@ -1034,7 +854,7 @@
 
           <!-- Plan Inclusions Checklist -->
           <h4 style="margin: 0 0 12px; font-size: 16px;">Included Member Privileges</h4>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 13px; color: var(--navy); margin-bottom: 24px;">
+          <div class="dash-duo-grid" style="font-size: 13px; color: var(--navy); margin-bottom: 24px;">
             <div><i class="fa-solid fa-circle-check text-orange-500 mr-2" style="color: var(--orange);"></i> Unlimited Iron Floor Access (5 AM - 11 PM)</div>
             <div><i class="fa-solid fa-circle-check text-orange-500 mr-2" style="color: var(--orange);"></i> 14-Day Advance Priority Class Booking</div>
             <div><i class="fa-solid fa-circle-check text-orange-500 mr-2" style="color: var(--orange);"></i> Monthly 1-on-1 PT Consultation</div>
@@ -1116,7 +936,105 @@
 
     </div>
 
-  </main>
+    <!-- ============================================================
+         TAB 6: COACH DIRECT DISPATCH & CONSULTATION
+         ============================================================ -->
+    <div id="tab-coach" class="dash-tab-pane">
+      <div class="dash-coach-grid">
+        
+        <!-- Left: Coach Profile & Guidance Directives -->
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          
+          <div class="dash-card">
+            <div style="text-align: center; margin-bottom: 16px;">
+              <div style="width: 84px; height: 84px; border-radius: 50%; overflow: hidden; margin: 0 auto 12px; border: 3px solid var(--orange); box-shadow: 0 4px 14px rgba(0,0,0,0.18);">
+                <img src="../../img/hero-trainer.jpg" alt="Coach Vikram Rao" style="width: 100%; height: 100%; object-fit: cover;" />
+              </div>
+              <h3 style="margin: 0 0 4px; font-size: 20px; color: var(--navy);">Coach Vikram Rao</h3>
+              <span style="font-size: 13px; color: var(--gray); display: block;">Head S&amp;C Coach · CSCS · Olympic Lifting</span>
+              <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: #10b981; font-weight: 700; margin-top: 8px; background: rgba(16,185,129,0.12); padding: 4px 12px; border-radius: 999px;">
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981;"></span> Online at Floor
+              </span>
+            </div>
+
+            <div style="background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-bottom: 16px; font-size: 13px; color: var(--navy); line-height: 1.55;">
+              <b style="color: var(--orange); display: block; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; font-family: var(--ff-head);">Active Mesocycle Directive:</b>
+              "Focus on explosive bar speed through the mid-sticking point on back squats today. Rest full 3 mins between sets."
+            </div>
+
+            <button type="button" class="btn btn--sm" style="width: 100%;" onclick="if(window.showToast) window.showToast('1-on-1 PT consultation request sent to Coach Vikram.', 'success', 'Session Scheduled');">
+              <i class="fa-solid fa-calendar-check mr-1"></i> Book 1-on-1 PT Review
+            </button>
+          </div>
+
+          <!-- Coach Protocols Checklist -->
+          <div class="dash-card">
+            <h4 style="margin: 0 0 14px; font-size: 15px;">Recovery Directives (Week 3)</h4>
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: var(--navy);">
+              <div style="display: flex; align-items: flex-start; gap: 10px;">
+                <i class="fa-solid fa-circle-check text-orange-500" style="color: var(--orange); margin-top: 3px;"></i>
+                <span>Post-squat: 10 mins soft-tissue roll on VMO &amp; adductors</span>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 10px;">
+                <i class="fa-solid fa-circle-check text-orange-500" style="color: var(--orange); margin-top: 3px;"></i>
+                <span>Electrolyte intake: 800mg sodium in 750ml water pre-workout</span>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 10px;">
+                <i class="fa-solid fa-circle-check text-orange-500" style="color: var(--orange); margin-top: 3px;"></i>
+                <span>Sleep protocol: 8+ hours with room temp under 21°C</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Dedicated Full Height Chat Workspace -->
+        <div class="dash-card" style="display: flex; flex-direction: column; min-height: 560px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <h3 style="margin: 0 0 2px; font-size: 18px; color: var(--navy);">Direct Coach Dispatch</h3>
+              <span style="font-size: 12.5px; color: var(--gray);">Priority 1-on-1 messaging channel with Head Coach Vikram Rao</span>
+            </div>
+            <span style="font-size: 11px; font-family: var(--ff-head); color: #10b981; background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 6px; text-transform: uppercase;">
+              <i class="fa-solid fa-lock mr-1"></i> Encrypted Direct Channel
+            </span>
+          </div>
+
+          <div id="coachChatFeedMain" style="flex: 1; overflow-y: auto; background: var(--paper); border-radius: 12px; padding: 16px; border: 1px solid var(--line); margin-bottom: 16px; display: flex; flex-direction: column; gap: 12px; max-height: 420px;">
+            <div class="chat-bubble chat-bubble--coach">
+              <div class="chat-bubble__content">
+                <p><b>Coach Vikram:</b> Karthik, your squat bar speed is looking sharper than last week. Let's push working sets to 142.5kg today.</p>
+                <span class="chat-time">Today · 06:45 AM</span>
+              </div>
+            </div>
+            <div class="chat-bubble chat-bubble--user">
+              <div class="chat-bubble__content">
+                <p>Will do coach! Knees feeling 100% after yesterday's contrast hydro bath. Will log video of set 4.</p>
+                <span class="chat-time">Today · 07:05 AM</span>
+              </div>
+            </div>
+            <div class="chat-bubble chat-bubble--coach">
+              <div class="chat-bubble__content">
+                <p><b>Coach Vikram:</b> Perfect. Also saw you're booked for 6:30 PM Boxing Heavy Bag tonight. Don't blow your forearms out before tomorrow's pull day.</p>
+                <span class="chat-time">Today · 08:30 AM</span>
+              </div>
+            </div>
+          </div>
+
+          <form id="coachChatFormMain" style="display: flex; gap: 10px;">
+            <input type="text" id="coachChatInputMain" placeholder="Type message or question for Coach Vikram..." style="flex: 1; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--line); font-size: 13.5px; background: var(--paper); outline: none;" />
+            <button type="submit" class="btn btn--sm" style="padding: 12px 22px;">
+              <i class="fa-solid fa-paper-plane mr-1"></i> Send
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+      </main><!-- /.dash-body -->
+    </div><!-- /.dash-content-area -->
+  </div><!-- /.dash-layout -->
 
   <!-- ============================================================
        MODAL: QR FACILITY GATE PASS

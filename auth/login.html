@@ -96,10 +96,11 @@
 
     .auth-form-wrap {
       padding: 48px 44px;
-      background: #ffffff;
+      background: #ffffff !important;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      color: #0f1e2e !important;
     }
 
     .form-header {
@@ -110,13 +111,20 @@
       margin: 0 0 6px;
       font-size: 34px;
       letter-spacing: -0.01em;
-      color: var(--navy);
+      color: #0f1e2e !important;
+      text-align: left !important;
     }
 
     .form-header p {
       margin: 0;
-      font-size: 14px;
-      color: var(--gray);
+      font-size: 14.5px;
+      color: #475569 !important;
+      font-weight: 500;
+    }
+
+    .auth-form-wrap label {
+      color: #0f1e2e !important;
+      font-weight: 700 !important;
     }
 
     .input-field-group {
@@ -127,19 +135,34 @@
       width: 100%;
       padding: 13px 16px;
       border-radius: 10px;
-      border: 1px solid var(--line);
+      border: 1.5px solid #cbd5e1 !important;
       font-size: 14px;
-      background: var(--paper);
-      color: var(--ink);
+      background: #f8fafc !important;
+      color: #0f1e2e !important;
       font-family: var(--ff-body);
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
 
+    .input-field-group input::placeholder {
+      color: #64748b !important;
+      opacity: 1 !important;
+    }
+
     .input-field-group input:focus {
-      background: #ffffff;
-      border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
+      background: #ffffff !important;
+      border-color: var(--orange) !important;
+      box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15) !important;
+      color: #0f1e2e !important;
+    }
+
+    .remember-label {
+      color: #1e293b !important;
+      font-weight: 500;
+    }
+    .remember-label span {
+      color: #1e293b !important;
+      font-weight: 500;
     }
 
     .password-toggle-btn {
@@ -149,7 +172,7 @@
       transform: translateY(-50%);
       background: none;
       border: none;
-      color: var(--gray);
+      color: #64748b !important;
       padding: 4px;
       cursor: pointer;
       font-size: 14px;
@@ -160,7 +183,7 @@
     }
 
     .password-toggle-btn:hover {
-      color: var(--navy);
+      color: #0f1e2e !important;
     }
 
     .auth-divider {
@@ -173,7 +196,7 @@
     .auth-divider-line {
       flex: 1;
       height: 1px;
-      background: var(--line);
+      background: #cbd5e1 !important;
     }
 
     .auth-divider-text {
@@ -181,7 +204,8 @@
       font-size: 11px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gray);
+      color: #64748b !important;
+      font-weight: 700;
       white-space: nowrap;
     }
 
@@ -198,9 +222,9 @@
       gap: 8px;
       padding: 11px 12px;
       border-radius: 10px;
-      border: 1px solid var(--line);
-      background: #ffffff;
-      color: var(--navy);
+      border: 1.5px solid #cbd5e1 !important;
+      background: #ffffff !important;
+      color: #0f1e2e !important;
       font-family: var(--ff-body);
       font-size: 13px;
       font-weight: 600;
@@ -210,11 +234,21 @@
       box-shadow: 0 2px 4px rgba(15, 30, 46, 0.03);
     }
 
+    .btn-social span {
+      color: #0f1e2e !important;
+      font-weight: 600;
+    }
+
     .btn-social:hover {
-      border-color: var(--gray-lt);
-      background: var(--paper);
+      border-color: #94a3b8 !important;
+      background: #f1f5f9 !important;
       transform: translateY(-1px);
       box-shadow: 0 4px 10px rgba(15, 30, 46, 0.08);
+      color: #0f1e2e !important;
+    }
+
+    .btn-social:hover span {
+      color: #0f1e2e !important;
     }
 
     .btn-social:active {
@@ -235,16 +269,17 @@
       text-align: center;
       margin-top: 24px;
       padding-top: 18px;
-      border-top: 1px solid var(--line);
+      border-top: 1px solid #e2e8f0 !important;
     }
 
     .create-account-wrap span {
       font-size: 14px;
-      color: var(--gray);
+      color: #475569 !important;
+      font-weight: 500;
     }
 
     .create-account-link {
-      color: var(--orange);
+      color: var(--orange) !important;
       font-family: var(--ff-head);
       font-size: 12px;
       letter-spacing: 0.04em;
@@ -256,7 +291,7 @@
     }
 
     .create-account-link:hover {
-      color: var(--orange-dk);
+      color: var(--orange-dk) !important;
       text-decoration: underline;
     }
 
@@ -294,7 +329,7 @@
           </span>
           <span style="font-family: var(--ff-display); font-size: 22px; letter-spacing: .04em;">NAMMA GYM</span>
         </a>
-        <h2 style="color: #fff; margin-bottom: 14px; line-height: 1.05; font-size: clamp(28px, 3.5vw, 42px);">Step through the gate.</h2>
+        <h2 style="color: #fff; margin-bottom: 14px; line-height: 1.05; font-size: clamp(28px, 3.5vw, 42px); text-align: left !important;">Step through the gate .</h2>
         <p style="color: #cbd5e1; font-size: 14px; line-height: 1.6; margin-bottom: 0;">
           Unlock your digital training badge, class reservations, and coach communication.
         </p>
@@ -331,29 +366,29 @@
 
       <form id="loginForm" data-form="login" novalidate style="display: flex; flex-direction: column; gap: 16px;">
         <div>
-          <label for="memberId" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); margin-bottom: 6px;">Member ID or Email</label>
+          <label for="memberId" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #0f1e2e; margin-bottom: 6px; font-weight: 700;">Member ID or Email</label>
           <div class="input-field-group">
-            <input type="text" id="memberId" name="memberId" placeholder="e.g. NG-0042 or admin@nammagym.in" value="NG-0042" required />
+            <input type="text" id="memberId" name="memberId" placeholder="Enter your member ID or email" required />
           </div>
         </div>
 
         <div>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <label for="password" style="font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy);">Password</label>
+            <label for="password" style="font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #0f1e2e; font-weight: 700;">Password</label>
             <a href="#" id="forgotPasswordBtn" style="font-size: 12px; color: var(--orange); font-weight: 600; text-decoration: none;">Forgot Password?</a>
           </div>
           <div class="input-field-group">
-            <input type="password" id="password" name="password" placeholder="••••••••" value="demo123" required />
+            <input type="password" id="password" name="password" placeholder="Enter your password" required />
             <button type="button" class="password-toggle-btn" id="togglePasswordBtn" aria-label="Toggle password visibility">
               <i class="fa-regular fa-eye" id="togglePasswordIcon"></i>
             </button>
           </div>
         </div>
 
-        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--gray);">
-          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px;">
+          <label class="remember-label" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
             <input type="checkbox" id="rememberMe" checked style="accent-color: var(--orange); width: 15px; height: 15px; cursor: pointer;" />
-            <span>Remember me </span>
+            <span>Remember me</span>
           </label>
         </div>
 

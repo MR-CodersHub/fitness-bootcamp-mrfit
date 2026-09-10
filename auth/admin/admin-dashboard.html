@@ -17,52 +17,141 @@
   <link rel="icon" href="../../assets/logo.png" />
 </head>
 
-<body class="page-public">
+<body class="page-public dash-page">
 
-  <!-- ============== ADMIN HEADER ============== -->
-  <header class="hdr hdr--dashboard">
-    <div class="hdr__row">
-      <div style="display: flex; align-items: center; gap: 16px;">
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div class="dash-sidebar-backdrop" id="dashSidebarBackdrop"></div>
+
+  <div class="dash-layout">
+
+    <!-- ============== ADMIN SIDE NAVIGATION BAR ============== -->
+    <aside class="dash-sidebar" id="dashSidebar" aria-label="Staff Command Navigation">
+      
+      <!-- Brand Header -->
+      <div class="dash-sidebar__brand">
         <a class="hdr__brand" href="../../index.html">
           <span class="hdr__mark">
             <img src="../../assets/logo.png" alt="Namma Gym Logo" />
           </span>
           <span class="hdr__name">NAMMA GYM</span>
         </a>
-       
-      </div>
-
-      <nav class="hdr__nav">
-        <a href="#roster" class="is-active">Member Roster</a>
-        <a href="#occupancy">Floor Metrics</a>
-        <a href="#classes">Class Slots</a>
-      </nav>
-
-      <div class="hdr__cta">
-    
-
-        <div style="display: flex; align-items: center; gap: 10px; padding-left: 14px; border-left: 1px solid var(--line); font-size: 12px;">
-          <div style="text-align: right;" class="hidden sm:block">
-            <b style="color: var(--navy); display: block;">Coach Vikram</b>
-            <span style="color: #ef4444; font-size: 11px; font-weight: 700;">Head Admin</span>
-          </div>
-          <div style="width: 34px; height: 34px; border-radius: 50%; background: rgba(239,68,68,0.15); color: #ef4444; display: flex; align-items: center; justify-content: center; font-weight: 800;">
-            VR
-          </div>
-          <a href="../login.html" style="color: var(--gray); font-size: 14px; margin-left: 4px;" title="Log Out"><i class="fa-solid fa-power-off"></i></a>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <button type="button" class="dash-sidebar-close" id="dashSidebarClose" aria-label="Close navigation sidebar">&times;</button>
         </div>
       </div>
-    </div>
-  </header>
 
-  <!-- ============== ADMIN MAIN CONTAINER ============== -->
-  <main class="section" style="padding-top: 40px;">
+      <!-- Admin Profile Mini Widget -->
+      <div class="dash-sidebar__user">
+        <div class="dash-user-avatar" style="background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3);">
+          VR
+          <span class="online-dot" style="background: #ef4444;" title="Head Administrator active"></span>
+        </div>
+        <div class="dash-user-info">
+          <b>Coach Vikram</b>
+          <span>Head Coach &amp; Floor Admin</span>
+        </div>
+      </div>
+
+      <!-- Navigation Section Groups -->
+      <nav class="dash-sidebar__nav" aria-label="Admin Navigation">
+        
+        <!-- Group 1: Floor Operations -->
+        <div class="dash-nav-group">
+          <span class="dash-nav-group-title">Floor Operations</span>
+          
+          <a href="#occupancy" class="dash-sidebar-nav-item is-active">
+            <i class="fa-solid fa-gauge-high"></i>
+            <span>Live Telemetry</span>
+          </a>
+
+          <a href="#roster" class="dash-sidebar-nav-item">
+            <i class="fa-solid fa-users"></i>
+            <span>Member Directory</span>
+          </a>
+
+          <a href="#classes" class="dash-sidebar-nav-item">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>Class Rosters &amp; Rig Slots</span>
+          </a>
+        </div>
+
+        <!-- Group 2: Management & Portals -->
+        <div class="dash-nav-group">
+          <span class="dash-nav-group-title">Portals &amp; Access</span>
+
+          <a href="../../index.html" class="dash-sidebar-nav-item" title="Go to Namma Gym Public Website">
+            <i class="fa-solid fa-house"></i>
+            <span>Public Website</span>
+          </a>
+
+          <a href="../login.html" class="dash-sidebar-nav-item" title="Sign Out of Admin Console">
+            <i class="fa-solid fa-power-off" style="color: #94a3b8;"></i>
+            <span>Sign Out</span>
+          </a>
+        </div>
+
+      </nav>
+
+      <!-- Sidebar Footer Widget -->
+      <div class="dash-sidebar__footer">
+        <div class="dash-live-occupancy-pill">
+          <div class="live-indicator">
+            <span class="live-pulse"></span>
+            <span>Turnstiles: Nominal</span>
+          </div>
+          <span style="font-weight: 700; font-size: 11px;">Gate Optical OK</span>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ============== CONTENT AREA ============== -->
+    <div class="dash-content-area">
+
+      <!-- Sticky Topbar Header -->
+      <header class="dash-topbar">
+        
+        <div class="dash-topbar__left">
+          <!-- Mobile Sidebar Toggle -->
+          <button type="button" class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Open sidebar menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <!-- Breadcrumb Path -->
+          <div class="dash-breadcrumb">
+            <span class="dash-breadcrumb-prefix">Staff Console</span>
+            <i class="fa-solid fa-chevron-right" style="font-size: 10px; opacity: 0.5;"></i>
+            <span id="dashBreadcrumbTitle" style="color: var(--orange);">Floor Telemetry &amp; Roster</span>
+          </div>
+        </div>
+
+        <div class="dash-topbar__right">
+          <!-- Theme Toggle -->
+          <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Switch Light/Dark Mode">
+            <i class="fa-solid fa-sun"></i>
+          </button>
+
+          <!-- RTL Toggle -->
+          <button type="button" class="rtl-toggle-btn" aria-label="Toggle RTL layout" title="Switch LTR/RTL">
+            RTL
+          </button>
+
+          <!-- Admin Avatar & Logout -->
+          <div style="display: flex; align-items: center; gap: 8px; padding-left: 8px; border-left: 1px solid rgba(255,255,255,0.12);">
+            <a href="../login.html" style="color: #94a3b8; font-size: 14px; padding: 4px; text-decoration: none;" title="Log Out"><i class="fa-solid fa-power-off"></i></a>
+          </div>
+        </div>
+
+      </header>
+
+      <!-- Main Body Container -->
+      <main class="dash-body">
     
     <!-- Top Metrics Row -->
     <section class="dash-stats-grid">
       
       <!-- Metric 1: Live Floor Count -->
-      <div style="background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-1);">
+      <div class="dash-card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span style="font-family: var(--ff-head); font-size: 11px; color: var(--gray); text-transform: uppercase;">Live Floor Count</span>
           <span style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
@@ -78,7 +167,7 @@
       </div>
 
       <!-- Metric 2: Today's Check-ins -->
-      <div style="background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-1);">
+      <div class="dash-card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span style="font-family: var(--ff-head); font-size: 11px; color: var(--gray); text-transform: uppercase;">Today's Check-ins</span>
           <i class="fa-solid fa-id-card-clip" style="color: var(--orange);"></i>
@@ -91,7 +180,7 @@
       </div>
 
       <!-- Metric 3: Active Members -->
-      <div style="background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-1);">
+      <div class="dash-card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span style="font-family: var(--ff-head); font-size: 11px; color: var(--gray); text-transform: uppercase;">Active Roster</span>
           <i class="fa-solid fa-users" style="color: #3b82f6;"></i>
@@ -104,7 +193,7 @@
       </div>
 
       <!-- Metric 4: Monthly Revenue (MRR) -->
-      <div style="background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-1);">
+      <div class="dash-card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span style="font-family: var(--ff-head); font-size: 11px; color: var(--gray); text-transform: uppercase;">Monthly MRR (Aug)</span>
           <i class="fa-solid fa-indian-rupee-sign" style="color: #10b981;"></i>
@@ -121,7 +210,7 @@
     <div class="dash-split-grid">
       
       <!-- Member Roster Table with Live Filtering -->
-      <section id="roster" style="background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-1);">
+      <section id="roster" class="dash-card">
         
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
           <div>
@@ -131,7 +220,7 @@
 
           <!-- Table Search and Status Filter -->
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <input type="text" id="adminMemberSearch" placeholder="Search name or ID..." style="padding: 10px 14px; border-radius: 8px; border: 1px solid var(--line); font-size: 12px; background: var(--paper); outline: none; width: 160px;" />
+            <input type="text" id="adminMemberSearch" placeholder="Search name or ID..." style="padding: 10px 14px; border-radius: 8px; border: 1px solid var(--line); font-size: 12px; background: var(--paper); outline: none; width: 160px; max-width: 100%;" />
             <select id="adminStatusFilter" style="padding: 10px 14px; border-radius: 8px; border: 1px solid var(--line); font-size: 12px; background: var(--paper); outline: none;">
               <option value="all">All Statuses</option>
               <option value="active">Active</option>
@@ -142,7 +231,7 @@
         </div>
 
         <div class="table-responsive">
-          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13px;">
+          <table style="width: 100%; min-width: 520px; border-collapse: collapse; text-align: left; font-size: 13px;">
             <thead>
               <tr style="background: var(--paper); border-bottom: 2px solid var(--line); font-family: var(--ff-head); font-size: 11px; text-transform: uppercase;">
                 <th style="padding: 12px 14px;">Member Name</th>
@@ -190,7 +279,7 @@
       <section style="display: flex; flex-direction: column; gap: 24px;">
         
         <!-- Live Class Capacity -->
-        <div style="background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-1);">
+        <div class="dash-card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
             <h4 style="margin: 0;">Upcoming Class Slots</h4>
             <span style="font-family: var(--ff-head); font-size: 11px; color: var(--orange); text-transform: uppercase;">Today</span>
@@ -224,7 +313,7 @@
         </div>
 
         <!-- Trainer Active Status -->
-        <div style="background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-1);">
+        <div class="dash-card">
           <h4 style="margin-bottom: 16px;">Floor Coaches on Duty</h4>
           <div style="display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -255,7 +344,9 @@
 
     </div>
 
-  </main>
+      </main><!-- /.dash-body -->
+    </div><!-- /.dash-content-area -->
+  </div><!-- /.dash-layout -->
   <script src="../../js/dashboard.js"></script>
   <script src="../../js/script.js"></script>
 </body>

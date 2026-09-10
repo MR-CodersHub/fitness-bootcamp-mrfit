@@ -67,13 +67,13 @@
   <!-- Mobile Drawer -->
   <div class="mobile-nav-drawer">
     <div class="mobile-nav-header">
-      <div class="flex items-center gap-2.5">
-        <span class="w-8 h-8 rounded-full overflow-hidden shadow-md flex items-center justify-center bg-orange-600 shrink-0">
-          <img src="../assets/logo.png" alt="Namma Gym Logo" class="w-full h-full object-cover" />
+      <a class="hdr__brand mobile-nav-brand" href="../index.html">
+        <span class="hdr__mark">
+          <img src="../assets/logo.png" alt="Namma Gym Logo" />
         </span>
-        <span class="font-['Anton',sans-serif] text-2xl text-white">NAMMA<span class="text-orange-500">GYM</span></span>
-      </div>
-      <button class="mobile-nav-close text-2xl text-slate-300 hover:text-white">&times;</button>
+        <span class="hdr__name">NAMMA GYM</span>
+      </a>
+      <button class="mobile-nav-close" aria-label="Close menu">&times;</button>
     </div>
     <div class="mobile-nav-links">
       <a href="../index.html">Home</a>
@@ -282,7 +282,7 @@
 
   <!-- ============== FACILITY HARDWARE HIGHLIGHTS ============== -->
   <section class="section section--paper section--wide">
-    <div class="section__head">
+    <div class="section__head section__head--center">
       <div>
         <p class="eyebrow">HARDWARE STANDARDS</p>
         <h2>Competition-grade facility.</h2>

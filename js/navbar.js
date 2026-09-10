@@ -102,13 +102,13 @@
 
     drawer.innerHTML = `
       <div class="mobile-nav-header">
-        <div class="flex items-center gap-2.5">
-          <span class="w-8 h-8 rounded-full overflow-hidden shadow-md flex items-center justify-center bg-orange-600 shrink-0">
-            <img src="${prefix}assets/logo.png" alt="Namma Gym Logo" class="w-full h-full object-cover" />
+        <a class="hdr__brand mobile-nav-brand" href="${prefix}index.html">
+          <span class="hdr__mark">
+            <img src="${prefix}assets/logo.png" alt="Namma Gym Logo" />
           </span>
-          <span class="font-['Anton',sans-serif] text-2xl text-white">NAMMA<span class="text-orange-500">GYM</span></span>
-        </div>
-        <button class="mobile-nav-close text-2xl text-slate-300 hover:text-white">&times;</button>
+          <span class="hdr__name">NAMMA GYM</span>
+        </a>
+        <button class="mobile-nav-close" aria-label="Close menu">&times;</button>
       </div>
       <div class="mobile-nav-links">
         <a href="${prefix}index.html"${homeActive}>Home</a>
@@ -176,14 +176,20 @@
           <!-- Contact Column -->
           <div class="ftr__col">
             <h4>Contact</h4>
-            <address class="ftr__address" style="font-style: normal;">
-              <strong>Flagship — Indiranagar</strong><br />
-              12th Main Road, 100ft Road, Stage 2<br />
-              Bengaluru, Karnataka 560038<br />
-              <strong>Branch — Koramangala</strong><br />
-              80 Feet Road, 6th Block<br />
-              Bengaluru, Karnataka 560095
-            </address>
+            <ul class="ftr__contact-list">
+              <li class="ftr__contact-item">
+                <i class="fa-solid fa-location-dot ftr__contact-icon"></i>
+                <span class="ftr__contact-text">12th Main Road, 100ft Road,<br>Bengaluru, Karnataka 560038</span>
+              </li>
+              <li class="ftr__contact-item">
+                <i class="fa-solid fa-phone ftr__contact-icon"></i>
+                <a class="ftr__contact-text" href="tel:+918012345678">+91 80 1234 5678</a>
+              </li>
+              <li class="ftr__contact-item">
+                <i class="fa-solid fa-envelope ftr__contact-icon"></i>
+                <a class="ftr__contact-text" href="mailto:hello@nammagym.in">hello@nammagym.in</a>
+              </li>
+            </ul>
           </div>
 
         </div>
@@ -336,7 +342,6 @@
   function setupMobileMenu() {
     const burgers = document.querySelectorAll('.hdr__burger');
     const drawer = document.querySelector('.mobile-nav-drawer');
-    const closeBtn = document.querySelector('.mobile-nav-close');
 
     if (!drawer) return;
 
@@ -347,18 +352,18 @@
       });
     });
 
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
+    drawer.addEventListener('click', (e) => {
+      if (e.target.closest('.mobile-nav-close') || e.target.closest('a')) {
         drawer.classList.remove('is-active');
         document.body.style.overflow = '';
-      });
-    }
+      }
+    });
 
-    drawer.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-active')) {
         drawer.classList.remove('is-active');
         document.body.style.overflow = '';
-      });
+      }
     });
   }
 

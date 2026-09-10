@@ -97,10 +97,11 @@
 
     .auth-form-wrap {
       padding: 44px 40px;
-      background: #ffffff;
+      background: #ffffff !important;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      color: #0f1e2e !important;
     }
 
     .form-header {
@@ -111,13 +112,20 @@
       margin: 0 0 6px;
       font-size: 34px;
       letter-spacing: -0.01em;
-      color: var(--navy);
+      color: #0f1e2e !important;
+      text-align: left !important;
     }
 
     .form-header p {
       margin: 0;
-      font-size: 14px;
-      color: var(--gray);
+      font-size: 14.5px;
+      color: #475569 !important;
+      font-weight: 500;
+    }
+
+    .auth-form-wrap label {
+      color: #0f1e2e !important;
+      font-weight: 700 !important;
     }
 
     .input-field-group {
@@ -129,20 +137,36 @@
       width: 100%;
       padding: 12px 16px;
       border-radius: 10px;
-      border: 1px solid var(--line);
+      border: 1.5px solid #cbd5e1 !important;
       font-size: 14px;
-      background: var(--paper);
-      color: var(--ink);
+      background: #f8fafc !important;
+      color: #0f1e2e !important;
       font-family: var(--ff-body);
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
 
+    .input-field-group input::placeholder,
+    .input-field-group select::placeholder {
+      color: #64748b !important;
+      opacity: 1 !important;
+    }
+
     .input-field-group input:focus,
     .input-field-group select:focus {
-      background: #ffffff;
-      border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
+      background: #ffffff !important;
+      border-color: var(--orange) !important;
+      box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15) !important;
+      color: #0f1e2e !important;
+    }
+
+    .terms-label {
+      color: #334155 !important;
+      font-weight: 500;
+    }
+    .terms-label span {
+      color: #334155 !important;
+      font-weight: 500;
     }
 
     .password-toggle-btn {
@@ -152,7 +176,7 @@
       transform: translateY(-50%);
       background: none;
       border: none;
-      color: var(--gray);
+      color: #64748b !important;
       padding: 4px;
       cursor: pointer;
       font-size: 14px;
@@ -163,7 +187,7 @@
     }
 
     .password-toggle-btn:hover {
-      color: var(--navy);
+      color: #0f1e2e !important;
     }
 
     .form-grid-2 {
@@ -182,7 +206,7 @@
     .auth-divider-line {
       flex: 1;
       height: 1px;
-      background: var(--line);
+      background: #cbd5e1 !important;
     }
 
     .auth-divider-text {
@@ -190,7 +214,8 @@
       font-size: 11px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gray);
+      color: #64748b !important;
+      font-weight: 700;
       white-space: nowrap;
     }
 
@@ -207,9 +232,9 @@
       gap: 8px;
       padding: 10px 12px;
       border-radius: 10px;
-      border: 1px solid var(--line);
-      background: #ffffff;
-      color: var(--navy);
+      border: 1.5px solid #cbd5e1 !important;
+      background: #ffffff !important;
+      color: #0f1e2e !important;
       font-family: var(--ff-body);
       font-size: 13px;
       font-weight: 600;
@@ -219,11 +244,21 @@
       box-shadow: 0 2px 4px rgba(15, 30, 46, 0.03);
     }
 
+    .btn-social span {
+      color: #0f1e2e !important;
+      font-weight: 600;
+    }
+
     .btn-social:hover {
-      border-color: var(--gray-lt);
-      background: var(--paper);
+      border-color: #94a3b8 !important;
+      background: #f1f5f9 !important;
       transform: translateY(-1px);
       box-shadow: 0 4px 10px rgba(15, 30, 46, 0.08);
+      color: #0f1e2e !important;
+    }
+
+    .btn-social:hover span {
+      color: #0f1e2e !important;
     }
 
     .btn-social:active {
@@ -244,16 +279,17 @@
       text-align: center;
       margin-top: 22px;
       padding-top: 16px;
-      border-top: 1px solid var(--line);
+      border-top: 1px solid #e2e8f0 !important;
     }
 
     .create-account-wrap span {
       font-size: 14px;
-      color: var(--gray);
+      color: #475569 !important;
+      font-weight: 500;
     }
 
     .create-account-link {
-      color: var(--orange);
+      color: var(--orange) !important;
       font-family: var(--ff-head);
       font-size: 12px;
       letter-spacing: 0.04em;
@@ -265,7 +301,7 @@
     }
 
     .create-account-link:hover {
-      color: var(--orange-dk);
+      color: var(--orange-dk) !important;
       text-decoration: underline;
     }
 
@@ -307,7 +343,7 @@
           </span>
           <span style="font-family: var(--ff-display); font-size: 22px; letter-spacing: .04em;">NAMMA GYM</span>
         </a>
-        <h2 style="color: #fff; margin-bottom: 14px; line-height: 1.05; font-size: clamp(28px, 3.5vw, 42px);">Join the tribe.</h2>
+        <h2 style="color: #fff; margin-bottom: 14px; line-height: 1.05; font-size: clamp(28px, 3.5vw, 42px); text-align: left !important;">Join the tribe.</h2>
         <p style="color: #cbd5e1; font-size: 14px; line-height: 1.6; margin-bottom: 0;">
           Step into Bengaluru's premier athletic conditioning facility. Unlock your digital member badge and coaching support.
         </p>
@@ -344,21 +380,21 @@
 
       <form id="signupForm" data-form="signup" novalidate style="display: flex; flex-direction: column; gap: 14px;">
         <div>
-          <label for="fullName" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); margin-bottom: 5px;">Full Name *</label>
+          <label for="fullName" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #0f1e2e; margin-bottom: 5px; font-weight: 700;">Full Name *</label>
           <div class="input-field-group">
-            <input type="text" id="fullName" name="fullName" placeholder="e.g. Maya Shankar" required />
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required />
           </div>
         </div>
 
         <div class="form-grid-2">
           <div>
-            <label for="email" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); margin-bottom: 5px;">Email Address *</label>
+            <label for="email" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #0f1e2e; margin-bottom: 5px; font-weight: 700;">Email Address *</label>
             <div class="input-field-group">
-              <input type="email" id="email" name="email" placeholder="maya@example.com" required />
+              <input type="email" id="email" name="email" placeholder="Enter your email address" required />
             </div>
           </div>
           <div>
-            <label for="phone" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); margin-bottom: 5px;">Mobile Number *</label>
+            <label for="phone" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #0f1e2e; margin-bottom: 5px; font-weight: 700;">Mobile Number *</label>
             <div class="input-field-group">
               <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" required />
             </div>
@@ -366,7 +402,7 @@
         </div>
 
         <div>
-          <label for="planChoice" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); margin-bottom: 5px;">Select Membership Tier</label>
+          <label for="planChoice" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #0f1e2e; margin-bottom: 5px; font-weight: 700;">Select Membership Tier</label>
           <div class="input-field-group">
             <select id="planChoice" name="planChoice">
               <option value="athletic">Athletic Pass (₹3,499/mo) — Most Popular</option>
@@ -378,19 +414,19 @@
         </div>
 
         <div>
-          <label for="password" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); margin-bottom: 5px;">Create Password *</label>
+          <label for="password" style="display: block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #0f1e2e; margin-bottom: 5px; font-weight: 700;">Create Password *</label>
           <div class="input-field-group">
-            <input type="password" id="password" name="password" placeholder="Minimum 6 characters" required />
+            <input type="password" id="password" name="password" placeholder="Create a password (min. 6 characters)" required />
             <button type="button" class="password-toggle-btn" id="togglePasswordBtn" aria-label="Toggle password visibility">
               <i class="fa-regular fa-eye" id="togglePasswordIcon"></i>
             </button>
           </div>
         </div>
 
-        <div style="font-size: 12.5px; color: var(--gray);">
-          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+        <div style="font-size: 12.5px;">
+          <label class="terms-label" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
             <input type="checkbox" id="agreeTerms" required style="accent-color: var(--orange); width: 15px; height: 15px; cursor: pointer;" />
-            <span>I agree to the <a href="../pages/Terms-of-service.html" style="color: var(--orange); font-weight: 600; text-decoration: none;">Terms</a> &amp; <a href="../pages/Privacy-policy.html" style="color: var(--orange); font-weight: 600; text-decoration: none;">Privacy Policy</a>.</span>
+            <span>I agree to the <a href="../pages/Terms-of-service.html" style="color: var(--orange); font-weight: 700; text-decoration: none;">Terms</a> &amp; <a href="../pages/Privacy-policy.html" style="color: var(--orange); font-weight: 700; text-decoration: none;">Privacy Policy</a>.</span>
           </label>
         </div>
 

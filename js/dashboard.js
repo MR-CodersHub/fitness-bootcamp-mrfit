@@ -9,53 +9,109 @@
     const isUserDash = window.location.pathname.includes('user-dashboard.html');
     if (!isUserDash) return;
 
+    // --- Mobile Sidebar Toggle & Overlay ---
+    const sidebar = document.getElementById('dashSidebar');
+    const sidebarToggle = document.getElementById('dashSidebarToggle');
+    const sidebarClose = document.getElementById('dashSidebarClose');
+    const sidebarBackdrop = document.getElementById('dashSidebarBackdrop');
+
+    function openSidebar() {
+      if (sidebar) sidebar.classList.add('is-open');
+      if (sidebarBackdrop) sidebarBackdrop.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      if (sidebar) sidebar.classList.remove('is-open');
+      if (sidebarBackdrop) sidebarBackdrop.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    if (sidebarToggle) sidebarToggle.addEventListener('click', openSidebar);
+    if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+    if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeSidebar);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) {
+        closeSidebar();
+      }
+    });
+
     // 1. Digital ID / QR Modal
     const showQrBtn = document.getElementById('btnShowQr');
+    const sidebarGatePassBtn = document.getElementById('sidebarGatePassBtn');
     const qrModal = document.getElementById('qrModal');
     const closeQrBtn = document.getElementById('btnCloseQr');
 
-    if (showQrBtn && qrModal) {
-      showQrBtn.addEventListener('click', () => {
-        qrModal.style.display = 'flex';
-      });
+    function openQrModal() {
+      if (qrModal) qrModal.style.display = 'flex';
     }
-    if (closeQrBtn && qrModal) {
-      closeQrBtn.addEventListener('click', () => {
-        qrModal.style.display = 'none';
-      });
+    function closeQrModal() {
+      if (qrModal) qrModal.style.display = 'none';
     }
+
+    if (showQrBtn) showQrBtn.addEventListener('click', openQrModal);
+    if (sidebarGatePassBtn) sidebarGatePassBtn.addEventListener('click', openQrModal);
+    if (closeQrBtn) closeQrBtn.addEventListener('click', closeQrModal);
     if (qrModal) {
       qrModal.addEventListener('click', (e) => {
-        if (e.target === qrModal) qrModal.style.display = 'none';
+        if (e.target === qrModal) closeQrModal();
       });
     }
 
-    // 2. Tab Navigation
-    const tabButtons = document.querySelectorAll('.dash-nav-tab');
+    // 2. Tab Navigation (Sidebar + In-page Nav)
+    const navItems = document.querySelectorAll('.dash-sidebar-nav-item[data-target], .dash-nav-tab[data-target]');
     const tabContents = document.querySelectorAll('.dash-tab-pane');
+    const breadcrumbTitle = document.getElementById('dashBreadcrumbTitle');
 
-    tabButtons.forEach(btn => {
+    function activateTab(targetId, titleText) {
+      if (!targetId) return;
+
+      // Update active nav buttons
+      navItems.forEach(item => {
+        if (item.getAttribute('data-target') === targetId) {
+          item.classList.add('is-active');
+          if (!titleText) titleText = item.getAttribute('data-title') || item.textContent.trim();
+        } else {
+          item.classList.remove('is-active');
+        }
+      });
+
+      // Update visible tab pane
+      tabContents.forEach(pane => pane.classList.remove('is-active'));
+      const targetPane = document.getElementById(targetId);
+      if (targetPane) {
+        targetPane.classList.add('is-active');
+      }
+
+      // Update breadcrumb text
+      if (breadcrumbTitle && titleText) {
+        breadcrumbTitle.textContent = titleText;
+      }
+
+      // Close mobile sidebar if open
+      closeSidebar();
+
+      // Update URL hash smoothly
+      history.replaceState(null, null, `#${targetId}`);
+    }
+
+    navItems.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         const targetId = btn.getAttribute('data-target');
-
-        tabButtons.forEach(b => b.classList.remove('is-active'));
-        tabContents.forEach(pane => pane.classList.remove('is-active'));
-
-        btn.classList.add('is-active');
-        const targetPane = document.getElementById(targetId);
-        if (targetPane) targetPane.classList.add('is-active');
-
-        // Update URL hash without jumping
-        history.replaceState(null, null, `#${targetId}`);
+        const titleText = btn.getAttribute('data-title');
+        activateTab(targetId, titleText);
       });
     });
 
     // Check URL hash on page load
     if (window.location.hash) {
       const hash = window.location.hash.substring(1);
-      const matchingTab = document.querySelector(`.dash-nav-tab[data-target="${hash}"]`);
-      if (matchingTab) matchingTab.click();
+      const matchingTab = document.querySelector(`[data-target="${hash}"]`);
+      if (matchingTab) {
+        activateTab(hash, matchingTab.getAttribute('data-title'));
+      }
     }
 
     // 3. Class Filters (Discipline & Day)
@@ -185,6 +241,45 @@
       });
     }
 
+    const chatFormMain = document.getElementById('coachChatFormMain');
+    const chatInputMain = document.getElementById('coachChatInputMain');
+    const chatFeedMain = document.getElementById('coachChatFeedMain');
+
+    if (chatFormMain && chatInputMain && chatFeedMain) {
+      chatFormMain.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = chatInputMain.value.trim();
+        if (!text) return;
+
+        const userBubble = document.createElement('div');
+        userBubble.className = 'chat-bubble chat-bubble--user';
+        userBubble.innerHTML = `
+          <div class="chat-bubble__content">
+            <p>${text}</p>
+            <span class="chat-time">Just now</span>
+          </div>
+        `;
+        chatFeedMain.appendChild(userBubble);
+        chatInputMain.value = '';
+        chatFeedMain.scrollTop = chatFeedMain.scrollHeight;
+
+        setTimeout(() => {
+          const coachBubble = document.createElement('div');
+          coachBubble.className = 'chat-bubble chat-bubble--coach';
+          coachBubble.innerHTML = `
+            <div class="chat-bubble__content">
+              <b>Coach Vikram Rao</b>
+              <p>Got your message, Karthik! Stay locked in on today's form and post your RPE notes right after the session.</p>
+              <span class="chat-time">Just now</span>
+            </div>
+          `;
+          chatFeedMain.appendChild(coachBubble);
+          chatFeedMain.scrollTop = chatFeedMain.scrollHeight;
+          if (window.showToast) window.showToast('Coach Vikram Rao replied to your dispatch.', 'info', 'Coach Dispatch');
+        }, 1200);
+      });
+    }
+
     // 7. Membership Renewal Modal
     const btnRenewPlan = document.getElementById('btnRenewPlan');
     const renewModal = document.getElementById('renewModal');
@@ -220,6 +315,38 @@
   function initAdminDashboard() {
     const isAdminDash = window.location.pathname.includes('admin-dashboard.html');
     if (!isAdminDash) return;
+
+    // --- Mobile Sidebar Toggle & Overlay ---
+    const sidebar = document.getElementById('dashSidebar');
+    const sidebarToggle = document.getElementById('dashSidebarToggle');
+    const sidebarClose = document.getElementById('dashSidebarClose');
+    const sidebarBackdrop = document.getElementById('dashSidebarBackdrop');
+
+    function openSidebar() {
+      if (sidebar) sidebar.classList.add('is-open');
+      if (sidebarBackdrop) sidebarBackdrop.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      if (sidebar) sidebar.classList.remove('is-open');
+      if (sidebarBackdrop) sidebarBackdrop.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    if (sidebarToggle) sidebarToggle.addEventListener('click', openSidebar);
+    if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+    if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeSidebar);
+
+    document.querySelectorAll('.dash-sidebar-nav-item').forEach(item => {
+      item.addEventListener('click', closeSidebar);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) {
+        closeSidebar();
+      }
+    });
 
     // 1. Live Member Filter & Search
     const searchInput = document.getElementById('adminMemberSearch');
