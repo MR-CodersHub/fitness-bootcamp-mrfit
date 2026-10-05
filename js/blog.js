@@ -1,5 +1,5 @@
 /**
- * NAMMA GYM - Blog Articles Dataset, Live Search/Filter & Dynamic Article Renderer
+ * MR FIT - Blog Articles Dataset, Live Search/Filter & Dynamic Article Renderer
  */
 
 (function () {
@@ -41,7 +41,7 @@
         <h3 class="text-2xl font-bold uppercase text-white mb-4">2. Volume Thresholds: Finding Your Maximum Recoverable Volume (MRV)</h3>
         <p class="text-slate-300 leading-relaxed mb-6">More is not always better. Doing 30 sets for chest in a single workout results in excessive muscle damage that impairs protein synthesis and extends recovery past 96 hours. For 90% of lifters, 10 to 18 high-quality sets per muscle group spread across 2–3 weekly sessions yields maximal growth.</p>
         
-        <h3 class="text-2xl font-bold uppercase text-white mb-4">3. Practical Application at Namma Gym</h3>
+        <h3 class="text-2xl font-bold uppercase text-white mb-4">3. Practical Application at Mr Fit</h3>
         <p class="text-slate-300 leading-relaxed mb-6">In our Barbell & Strength cycles, we prioritize exercises with high stability and great resistance profiles: barbell back squats, stiff-leg deadlifts, incline dumbbell presses, and chest-supported rows. Track your loads inside our Member Portal to ensure continuous progression.</p>
       `,
       related: ['nutrition-macros', 'recovery-sleep-hygiene']
@@ -276,7 +276,7 @@
     const article = BLOG_DATA[blogId] || BLOG_DATA['hypertrophy-principles'];
 
     // Title
-    document.title = `${article.title} · Namma Gym Insights`;
+    document.title = `${article.title} · Mr Fit Insights`;
 
     const titleEl = document.getElementById('blog-title');
     const categoryEl = document.getElementById('blog-category');
@@ -430,6 +430,6 @@
   });
 
   // Global export
-  window.NammaGymBlog = BLOG_DATA;
+  window.mrfitBlog = BLOG_DATA;
 
 })();

@@ -1,5 +1,5 @@
 /**
- * NAMMA GYM - Services Data Catalog & Dynamic Detail Page Renderer
+ * MR FIT - Services Data Catalog & Dynamic Detail Page Renderer
  */
 
 (function () {
@@ -382,7 +382,7 @@
     const data = SERVICES_DATA[serviceId] || SERVICES_DATA['strength-conditioning'];
 
     // Update document title & metadata
-    document.title = `${data.title} · Namma Gym Programs`;
+    document.title = `${data.title} · Mr Fit Programs`;
 
     // Render Dynamic Content in containers
     const titleEl = document.getElementById('svc-title');
@@ -508,6 +508,6 @@
   });
 
   // Global export
-  window.NammaGymServices = SERVICES_DATA;
+  window.mrfitServices = SERVICES_DATA;
 
 })();

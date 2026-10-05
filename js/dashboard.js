@@ -1,5 +1,5 @@
 /**
- * NAMMA GYM - Dashboard Interactivity (Admin & Member Portals)
+ * MR FIT - Dashboard Interactivity (Admin & Member Portals)
  */
 
 (function () {

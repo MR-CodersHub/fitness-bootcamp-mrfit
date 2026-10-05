@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Namma Gym — Strength, Conditioning &amp; Boxing in Indiranagar</title>
+  <title>Mr Fit — Outdoor Fitness Bootcamp</title>
   <meta name="description"
-    content="Namma Gym in Indiranagar, Bengaluru. Strength training, conditioning, boxing, MMA, yoga and personal coaching. Memberships from ₹1,999/mo." />
+    content="Mr Fit outdoor fitness bootcamp: energetic group sessions at parks near you. Build strength, endurance and community in the fresh air. Free 7-day trial." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -15,50 +15,188 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="./assets/logo.png">
+
+  <style>
+    /* ── Session Highlights (Bootcamp cards) ── */
+    .sessions {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 28px;
+    }
+    .session {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-1);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .session:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
+    .session__img {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+    .session__img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .session:hover .session__img img { transform: scale(1.06); }
+    .session__tag {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: var(--orange);
+      color: #fff;
+      font-family: var(--ff-head);
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+    .session__body { padding: 22px 24px 28px; }
+    .session__time {
+      font-family: var(--ff-head);
+      font-size: 11px;
+      letter-spacing: .12em;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .session__body h3 { font-size: 22px; margin-bottom: 8px; color: var(--navy); }
+    .session__body p  { font-size: 14px; color: var(--gray); margin: 0 0 16px; }
+    .session__meta {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      font-size: 12px; color: var(--gray);
+    }
+    .session__meta span { display: flex; align-items: center; gap: 5px; }
+    .session__meta i { color: var(--orange); }
+
+    /* ── Stats strip ── */
+    .stats-strip {
+      background: var(--navy);
+      color: #fff;
+      padding: 60px var(--pad);
+    }
+    .stats-strip__inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 40px;
+      text-align: center;
+    }
+    .stat__num {
+      font-family: var(--ff-display);
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: 1;
+      color: var(--orange);
+      display: block;
+    }
+    .stat__label {
+      font-family: var(--ff-head);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.65);
+      margin-top: 8px;
+      display: block;
+    }
+
+    /* ── Location preview cards ── */
+    .locations {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .loc {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      min-height: 220px;
+      display: flex;
+      align-items: flex-end;
+      box-shadow: var(--shadow-1);
+    }
+    .loc img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .loc::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(0deg, rgba(25,25,35,.78) 0%, rgba(25,25,35,.1) 60%);
+    }
+    .loc__info {
+      position: relative; z-index: 2;
+      padding: 22px;
+      width: 100%;
+    }
+    .loc__name {
+      font-family: var(--ff-head);
+      font-size: 20px;
+      color: #fff;
+      margin: 0 0 4px;
+      text-transform: uppercase;
+    }
+    .loc__detail {
+      font-size: 13px;
+      color: rgba(255,255,255,.72);
+    }
+    .loc__badge {
+      position: absolute; top: 14px; right: 14px; z-index: 3;
+      background: var(--orange);
+      color: #fff;
+      font-family: var(--ff-head);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+  </style>
 </head>
 
 <body class="page-public">
 
   <!-- ============== SHARED NAVBAR ============== -->
-  <header class="hdr">
+  <header class="hdr" id="site-header">
     <div class="hdr__row">
       <a class="hdr__brand" href="index.html">
         <span class="hdr__mark">
-          <img src="assets/logo.png" alt="Namma Gym Logo" />
+          <img src="assets/logo.png" alt="Mr Fit Logo" />
         </span>
-        <span class="hdr__name">NAMMA GYM</span>
+        <span class="hdr__name">MR FIT</span>
       </a>
 
       <nav class="hdr__nav" aria-label="Primary">
         <a href="index.html" class="is-active">Home</a>
-        <a href="pages/home-2.html">Home 2</a>
-        <a href="pages/about.html">About</a>
-        <a href="pages/services.html">Services</a>
-        <a href="pages/blog.html">Blog</a>
-        <a href="pages/contact.html">Contact</a>
+        <a href="pages/schedule.html">Schedule &amp; Locations</a>
+        <a href="pages/membership.html">Membership Plans</a>
+        <a href="pages/trainers.html">Trainers</a>
       </nav>
 
       <div class="hdr__cta">
         <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Switch Light/Dark Mode"><i class="fa-solid fa-sun"></i></button>
-        <button type="button" class="rtl-toggle-btn" aria-label="Toggle RTL layout" title="Switch LTR/RTL">RTL</button>
 
         <!-- Profile Dropdown -->
         <div class="profile-dropdown-wrap">
-          <button type="button" class="profile-btn" aria-label="User account and portals" title="Member &amp; Admin Portals"><i class="fa-solid fa-user"></i></button>
+          <button type="button" class="profile-btn" aria-label="User account and portals" title="Member Portals"><i class="fa-solid fa-user"></i></button>
           <div class="profile-menu">
             <div class="profile-menu__header">
-              <b>Namma Gym Portals</b>
+              <b>Mr Fit Portals</b>
               <span>Member &amp; Management Access</span>
             </div>
             <ul class="profile-menu__links">
-              <li><a href="auth/login.html"><i class="fa-solid fa-arrow-right-to-bracket text-orange-500"></i><span>Member Login</span></a></li>
-              <li><a href="auth/signup.html"><i class="fa-solid fa-user-plus text-amber-400"></i><span>Join / Signup</span><span class="profile-menu__badge">Trial</span></a></li>
-              <li><a href="auth/user/user-dashboard.html"><i class="fa-solid fa-id-card text-emerald-400"></i><span>User Dashboard</span><span class="profile-menu__badge bg-emerald-600">Member</span></a></li>
-              <li><a href="auth/admin/admin-dashboard.html"><i class="fa-solid fa-shield-halved text-rose-400"></i><span>Admin Dashboard</span><span class="profile-menu__badge bg-rose-600">Staff</span></a></li>
+              <li><a href="auth/login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i><span>Member Login</span></a></li>
+              <li><a href="auth/signup.html"><i class="fa-solid fa-user-plus"></i><span>Join / Signup</span><span class="profile-menu__badge">Free Trial</span></a></li>
+              <li><a href="auth/user/user-dashboard.html"><i class="fa-solid fa-id-card"></i><span>Member Dashboard</span><span class="profile-menu__badge bg-emerald-600">Member</span></a></li>
+              <li><a href="auth/admin/admin-dashboard.html"><i class="fa-solid fa-shield-halved"></i><span>Admin Dashboard</span><span class="profile-menu__badge bg-rose-600">Staff</span></a></li>
             </ul>
           </div>
         </div>
 
+        <a href="auth/login.html" class="btn btn--sm btn--pill">Login</a>
         <button class="hdr__burger" aria-label="Open menu" aria-expanded="false">&#9776;</button>
       </div>
     </div>
@@ -69,19 +207,18 @@
     <div class="mobile-nav-header">
       <a class="hdr__brand mobile-nav-brand" href="index.html">
         <span class="hdr__mark">
-          <img src="assets/logo.png" alt="Namma Gym Logo" />
+          <img src="assets/logo.png" alt="Mr Fit Logo" />
         </span>
-        <span class="hdr__name">NAMMA GYM</span>
+        <span class="hdr__name">MR FIT</span>
       </a>
       <button class="mobile-nav-close" aria-label="Close menu">&times;</button>
     </div>
     <div class="mobile-nav-links">
        <a href="index.html" class="is-active">Home</a>
-        <a href="pages/home-2.html">Home 2</a>
-        <a href="pages/about.html">About</a>
-        <a href="pages/services.html">Services</a>
-        <a href="pages/blog.html">Blog</a>
-        <a href="pages/contact.html">Contact</a>
+        <a href="pages/schedule.html">Schedule &amp; Locations</a>
+        <a href="pages/membership.html">Membership Plans</a>
+        <a href="pages/trainers.html">Trainers</a>
+        <a href="auth/login.html">Member Login</a>
     </div>
   </div>
 
@@ -95,238 +232,242 @@
       <!-- Main Copy / Left Headline & CTA -->
       <div class="hero__copy">
         <h1 class="hero__title">
-          <span>FUEL BUILD</span>
-          <span>PERFORM.</span>
+          <span>SWEAT</span>
+          <span>OUTSIDE.</span>
         </h1>
 
         <div class="hero__actions">
-          <a href="#pricing" class="btn btn--hero-primary btn--lg">Start Trial · ₹199</a>
-          <a href="#classes" class="btn btn--hero-outline btn--lg">Explore Classes</a>
+          <a href="#sessions" class="btn btn--hero-primary btn--lg">Explore Sessions</a>
+          <a href="pages/membership.html" class="btn btn--hero-outline btn--lg">Join Free Trial</a>
         </div>
       </div>
 
       <!-- Bottom-Left Ticker Line -->
       <div class="hero__ticker">
-        <span class="hero__ticker-text">ATHLETES AND EVERYDAY TRAINERS ARE BEING BUILT HERE · SINCE 2014</span>
+        <span class="hero__ticker-text">OUTDOOR BOOTCAMP · PARKS &amp; OPEN SPACES · RAIN OR SHINE · SINCE 2017</span>
       </div>
 
       <!-- Bottom-Right Statement Block -->
       <div class="hero__statement">
         <p class="hero__statement-text">
-          THE ESSENTIAL<br />
-          INGREDIENT FOR<br />
-          STRONGER BODIES<br />
-          AND LASTING RESULTS
+          FRESH AIR<br />
+          REAL RESULTS<br />
+          BUILT IN THE<br />
+          GREAT OUTDOORS
         </p>
       </div>
 
     </div>
   </section>
 
-  <!-- ============== CLASSES (services) ============== -->
-  <section class="section" id="classes">
+  <!-- ============== STATS STRIP ============== -->
+  <div class="stats-strip">
+    <div class="stats-strip__inner">
+      <div>
+        <span class="stat__num">12+</span>
+        <span class="stat__label">Outdoor Locations</span>
+      </div>
+      <div>
+        <span class="stat__num">1,400</span>
+        <span class="stat__label">Active Members</span>
+      </div>
+      <div>
+        <span class="stat__num">200+</span>
+        <span class="stat__label">Sessions / Month</span>
+      </div>
+      <div>
+        <span class="stat__num">7</span>
+        <span class="stat__label">Years Running</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== BOOTCAMP SESSION HIGHLIGHTS ============== -->
+  <section class="section" id="sessions">
     <div class="section__head">
       <div>
-        <p class="eyebrow">CLASSES DESIGNED FOR YOU</p>
-        <h2>Train your way.</h2>
+        <p class="eyebrow">BOOTCAMP SESSIONS</p>
+        <h2>Find your session.</h2>
+        <p>Every session is coach-led, time-efficient, and designed to build real-world fitness in the open air.</p>
       </div>
     </div>
 
-    <div class="services">
-      <article class="svc">
-        <div class="svc__media">
-          <img src="img/facility-2.jpg" alt="Personal training session" />
-          <div class="svc__badge">01</div>
+    <div class="sessions">
+      <article class="session">
+        <div class="session__img">
+          <img src="img/group-class.jpg" alt="Sunrise Burn bootcamp session" />
+          <span class="session__tag">Most Popular</span>
         </div>
-        <div class="svc__body">
-          <h3>Personal Training</h3>
-          <p>1-on-1 coaching with a programme written for you. Strength, mobility or physique goals.</p>
-          <ul class="svc__list">
-            <li><b>45-min sessions</b><i>From ₹600</i></li>
-            <li><b>Monthly PT pack</b><i>₹6,999 / 12 ses.</i></li>
-            <li><b>Custom program</b><i>Every 4 weeks</i></li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="svc">
-        <div class="svc__media">
-          <img src="img/group-class.jpg" alt="Group conditioning class" />
-          <div class="svc__badge">02</div>
-        </div>
-        <div class="svc__body">
-          <h3>Group Training</h3>
-          <p>Coach-led classes of 8–14 people. Boxing, conditioning, kettlebell, mobility and strongman.</p>
-          <ul class="svc__list">
-            <li><b>Drop-in class</b><i>With membership</i></li>
-            <li><b>30+ classes / week</b><i>5 AM – 9 PM</i></li>
-            <li><b>Portal booking</b><i>14 days ahead</i></li>
-          </ul>
+        <div class="session__body">
+          <div class="session__time"><i class="fa-regular fa-clock"></i> Mon · Wed · Fri &nbsp;·&nbsp; 6:00 AM</div>
+          <h3>Sunrise Burn</h3>
+          <p>Start your day strong. HIIT circuits, bodyweight drills and sprint finishers in the park before rush hour hits.</p>
+          <div class="session__meta">
+            <span><i class="fa-solid fa-users"></i> Up to 20</span>
+            <span><i class="fa-solid fa-clock"></i> 50 min</span>
+            <span><i class="fa-solid fa-location-dot"></i> Central Park</span>
+          </div>
         </div>
       </article>
 
-      <article class="svc">
-        <div class="svc__media">
-          <img src="img/boxing.jpg" alt="Boxing training session" />
-          <div class="svc__badge">03</div>
+      <article class="session">
+        <div class="session__img">
+          <img src="img/hero-trainer.jpg" alt="Power Hour strength session" />
+          <span class="session__tag">Strength</span>
         </div>
-        <div class="svc__body">
-          <h3>Boxing &amp; MMA</h3>
-          <p>Two heavy bags, a 180kg Muay Thai bag, and a 16ft MMA cage. Sparring on Tuesday &amp; Thursday.</p>
-          <ul class="svc__list">
-            <li><b>Fundamentals</b><i>Mon / Wed / Fri · 7 AM</i></li>
-            <li><b>Sparring</b><i>Tue / Thu · 7:30 PM</i></li>
-            <li><b>Cage work</b><i>Fri · 7 PM</i></li>
-          </ul>
+        <div class="session__body">
+          <div class="session__time"><i class="fa-regular fa-clock"></i> Tue · Thu &nbsp;·&nbsp; 6:30 AM &amp; 6:00 PM</div>
+          <h3>Power Hour</h3>
+          <p>Resistance bands, kettlebells and sandbags. Progressive overload methodology, outdoors. Build muscle, lose fat.</p>
+          <div class="session__meta">
+            <span><i class="fa-solid fa-users"></i> Up to 15</span>
+            <span><i class="fa-solid fa-clock"></i> 60 min</span>
+            <span><i class="fa-solid fa-location-dot"></i> Riverside Grounds</span>
+          </div>
         </div>
       </article>
 
-      <article class="svc">
-        <div class="svc__media">
-          <img src="img/hero-trainer.jpg" alt="Strength and athletic conditioning class" />
-          <div class="svc__badge">04</div>
+      <article class="session">
+        <div class="session__img">
+          <img src="img/boxing.jpg" alt="Combat Cardio outdoor boxing" />
+          <span class="session__tag">Boxing</span>
         </div>
-        <div class="svc__body">
-          <h3>Strength &amp; Conditioning</h3>
-          <p>Barbell cycles, kettlebells, turf sprints &amp; athletic conditioning designed for all levels.</p>
-          <ul class="svc__list">
-            <li><b>Hypertrophy</b><i>Tue / Thu · 6 AM</i></li>
-            <li><b>Conditioning Lab</b><i>Mon – Sat · 6 PM</i></li>
-            <li><b>Weekend Grinds</b><i>Sat · 8 AM</i></li>
-          </ul>
+        <div class="session__body">
+          <div class="session__time"><i class="fa-regular fa-clock"></i> Sat &nbsp;·&nbsp; 7:00 AM</div>
+          <h3>Combat Cardio</h3>
+          <p>Pad work, shadow boxing and bag drills in the open. Burn 700+ calories while learning real striking fundamentals.</p>
+          <div class="session__meta">
+            <span><i class="fa-solid fa-users"></i> Up to 18</span>
+            <span><i class="fa-solid fa-clock"></i> 55 min</span>
+            <span><i class="fa-solid fa-location-dot"></i> Waterfront Plaza</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="session">
+        <div class="session__img">
+          <img src="img/facility-2.jpg" alt="Weekend Warrior endurance session" />
+          <span class="session__tag">Endurance</span>
+        </div>
+        <div class="session__body">
+          <div class="session__time"><i class="fa-regular fa-clock"></i> Sun &nbsp;·&nbsp; 7:30 AM</div>
+          <h3>Weekend Warrior</h3>
+          <p>Long-format conditioning — trail runs, sled work and obstacle-style circuits. The session that earns your rest day.</p>
+          <div class="session__meta">
+            <span><i class="fa-solid fa-users"></i> Up to 25</span>
+            <span><i class="fa-solid fa-clock"></i> 75 min</span>
+            <span><i class="fa-solid fa-location-dot"></i> Hill Reserve</span>
+          </div>
         </div>
       </article>
     </div>
+
+    <p style="text-align:center; margin-top: 44px;">
+      <a href="pages/schedule.html" class="btn btn--outline">View Full Schedule &amp; All Locations</a>
+    </p>
   </section>
 
-  <!-- ============== FACILITIES (image row) ============== -->
-  <section class="section section--wide section--paper" id="facilities">
+  <!-- ============== LOCATIONS PREVIEW ============== -->
+  <section class="section section--wide section--paper" id="locations">
     <div class="section__head">
       <div>
-        <p class="eyebrow">THE FLOOR · 8,200 SQ FT</p>
-        <h2>Built for the work.</h2>
+        <p class="eyebrow">TRAIN OUTSIDE</p>
+        <h2>Our bootcamp spots.</h2>
+        <p>We run in parks, reserves and open-air plazas so every session feels like an escape, not a chore.</p>
       </div>
     </div>
 
-    <div class="services">
-      <article class="svc">
-        <div class="svc__media">
-          <img src="img/facility-1.jpg" alt="Strength hall with squat racks" />
-          <div class="svc__badge">A</div>
+    <div class="locations" style="max-width: var(--maxw); margin: 0 auto;">
+      <div class="loc">
+        <img src="img/facility-1.jpg" alt="Central Park location" />
+        <span class="loc__badge">Daily</span>
+        <div class="loc__info">
+          <div class="loc__name">Central Park</div>
+          <div class="loc__detail">Mon / Wed / Fri &nbsp;·&nbsp; 6:00 AM</div>
         </div>
-        <div class="svc__body">
-          <h3>Strength Hall</h3>
-          <p>12× Rogue R-4 power racks, 2 competition deadlift platforms, calibrated plates 5–50kg.</p>
-          <ul class="svc__list">
-            <li><b>12 power racks</b><i>with safeties</i></li>
-            <li><b>2 platforms</b><i>for deadlifts</i></li>
-            <li><b>Eleiko + Rogue</b><i>calibrated plates</i></li>
-          </ul>
+      </div>
+      <div class="loc">
+        <img src="img/facility-3.jpg" alt="Riverside Grounds location" />
+        <span class="loc__badge">Tue &amp; Thu</span>
+        <div class="loc__info">
+          <div class="loc__name">Riverside Grounds</div>
+          <div class="loc__detail">6:30 AM &amp; 6:00 PM</div>
         </div>
-      </article>
-
-      <article class="svc">
-        <div class="svc__media">
-          <img src="img/weights.jpg" alt="Dumbbell rack" />
-          <div class="svc__badge">B</div>
+      </div>
+      <div class="loc">
+        <img src="img/boxing.jpg" alt="Waterfront Plaza location" />
+        <span class="loc__badge">Saturday</span>
+        <div class="loc__info">
+          <div class="loc__name">Waterfront Plaza</div>
+          <div class="loc__detail">7:00 AM · Combat Cardio</div>
         </div>
-        <div class="svc__body">
-          <h3>Dumbbells · 5–60 kg</h3>
-          <p>Full set, in pairs, in 2.5kg jumps. No waiting for the 30s. Ever.</p>
-          <ul class="svc__list">
-            <li><b>5–60 kg</b><i>2.5 kg jumps</i></li>
-            <li><b>Hex rubber</b><i>commercial grade</i></li>
-            <li><b>7 benches</b><i>flat + adjustable</i></li>
-          </ul>
+      </div>
+      <div class="loc">
+        <img src="img/facility-2.jpg" alt="Hill Reserve location" />
+        <span class="loc__badge">Sunday</span>
+        <div class="loc__info">
+          <div class="loc__name">Hill Reserve</div>
+          <div class="loc__detail">7:30 AM · Weekend Warrior</div>
         </div>
-      </article>
-
-      <article class="svc">
-        <div class="svc__media">
-          <img src="img/facility-3.jpg" alt="Cardio and conditioning zone" />
-          <div class="svc__badge">C</div>
-        </div>
-        <div class="svc__body">
-          <h3>Cardio · No TVs</h3>
-          <p>Woodway treadmills, Assault bikes, Concept2 rowers, SkiErgs. Bring your own music.</p>
-          <ul class="svc__list">
-            <li><b>4 treadmills</b><i>Woodway</i></li>
-            <li><b>2 rowers</b><i>Concept2</i></li>
-            <li><b>3 SkiErgs</b><i>total-body work</i></li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="svc">
-        <div class="svc__media">
-          <img src="img/boxing.jpg" alt="Combat and MMA cage zone" />
-          <div class="svc__badge">D</div>
-        </div>
-        <div class="svc__body">
-          <h3>Combat &amp; Cage</h3>
-          <p>Full 16ft MMA cage, heavy bags, speedballs, and competition-grade canvas mats.</p>
-          <ul class="svc__list">
-            <li><b>16ft MMA cage</b><i>padded rails</i></li>
-            <li><b>6 heavy bags</b><i>Fairtex bags</i></li>
-            <li><b>Combat mat</b><i>2,000 sq ft</i></li>
-          </ul>
-        </div>
-      </article>
+      </div>
     </div>
+
+    <p style="text-align:center; margin-top: 44px;">
+      <a href="pages/schedule.html" class="btn">See Full Schedule &amp; Map</a>
+    </p>
   </section>
 
   <!-- ============== TRAINERS ============== -->
   <section class="section" id="trainers">
     <div class="section__head">
       <div>
-        <p class="eyebrow">OUR COACHES</p>
-        <h2>People who count your reps.</h2>
+        <p class="eyebrow">YOUR COACHES</p>
+        <h2>Led by the best.</h2>
+        <p>Every Mr Fit coach is certified, passionate about outdoor fitness, and committed to your progress.</p>
       </div>
     </div>
 
     <div class="trainers">
       <article class="trainer">
-        <div class="trainer__photo"><img src="img/coach-1.jpg" alt="Coach Arjun Reddy" /></div>
+        <div class="trainer__photo"><img src="img/coach-1.jpg" alt="Coach James Carter" /></div>
         <div class="trainer__info">
-          <h3 class="trainer__name">John Mathew</h3>
-          <span class="trainer__role">Head Coach · Powerlifting</span>
-          <p class="trainer__bio">National-level powerlifter, 12 years coaching. He helps you
-            finish your warm-up.</p>
+          <h3 class="trainer__name">James Carter</h3>
+          <span class="trainer__role">Head Coach · Strength &amp; Conditioning</span>
+          <p class="trainer__bio">Former military fitness instructor. 10 years leading outdoor group training and tactical conditioning programmes.</p>
           <div class="trainer__spec">
-            <span>Powerlifting</span><span>Programming</span><span>Injury Rehab</span>
+            <span>Bootcamp</span><span>Kettlebells</span><span>Military Fitness</span>
           </div>
         </div>
       </article>
 
       <article class="trainer">
-        <div class="trainer__photo"><img src="img/coach-2.jpg" alt="Coach Priya Shetty" /></div>
+        <div class="trainer__photo"><img src="img/coach-2.jpg" alt="Coach Mia Torres" /></div>
         <div class="trainer__info">
-          <h3 class="trainer__name">Laura Jones</h3>
-          <span class="trainer__role">Boxing Coach · Ex-State Champion</span>
-          <p class="trainer__bio">Eight years competitive boxing. Runs the morning boxing clinic and the evening
-            sparring sessions.</p>
+          <h3 class="trainer__name">Mia Torres</h3>
+          <span class="trainer__role">Cardio &amp; HIIT Coach</span>
+          <p class="trainer__bio">Marathon runner &amp; certified personal trainer. Her Sunrise Burn sessions are the most-booked in the schedule.</p>
           <div class="trainer__spec">
-            <span>Boxing</span><span>Sparring</span><span>Footwork</span>
+            <span>HIIT</span><span>Running</span><span>Circuit Training</span>
           </div>
         </div>
       </article>
 
       <article class="trainer">
-        <div class="trainer__photo"><img src="img/coach-3.jpg" alt="Coach Vimal Kumar" /></div>
+        <div class="trainer__photo"><img src="img/coach-3.jpg" alt="Coach Sam Reid" /></div>
         <div class="trainer__info">
-          <h3 class="trainer__name">Anna Christy</h3>
-          <span class="trainer__role">BJJ &amp; MMA Coach</span>
-          <p class="trainer__bio">BJJ purple belt under Atos. Teaches the Tuesday and Thursday classes plus
-            Saturday open mat.</p>
+          <h3 class="trainer__name">Sam Reid</h3>
+          <span class="trainer__role">Boxing &amp; Combat Coach</span>
+          <p class="trainer__bio">Amateur boxing champion. Runs Combat Cardio and weekend sparring workshops. High-energy, technique-focused.</p>
           <div class="trainer__spec">
-            <span>BJJ</span><span>MMA</span><span>No-Gi</span>
+            <span>Boxing</span><span>Pad Work</span><span>Footwork</span>
           </div>
         </div>
       </article>
-
-
-
     </div>
+
+    <p style="text-align:center; margin-top: 44px;">
+      <a href="pages/trainers.html" class="btn btn--outline">Meet All Trainers</a>
+    </p>
   </section>
 
   <!-- ============== SCHEDULE ============== -->
@@ -371,11 +512,11 @@
     <p class="sched__cta"><a href="./auth/login.html" class="btn btn--outline">Reserve a class</a></p>
   </section>
 
-  <!-- ============== PRICING (orange block) ============== -->
+  <!-- ============== MEMBERSHIP PLANS ============== -->
   <section class="section section--wide section--orange" id="pricing">
     <div class="section__head">
       <div>
-        <p class="eyebrow">MEMBERSHIP · NO CONTRACTS</p>
+        <p class="eyebrow">MEMBERSHIP · NO LOCK-IN</p>
         <h2>Pick your plan.</h2>
       </div>
 
@@ -383,48 +524,48 @@
 
     <div class="plans">
       <article class="plan">
-        <span class="plan__name">Trial Week</span>
-        <p class="plan__price"><b>₹199</b><i>/ 7 days</i></p>
+        <span class="plan__name">Free Trial</span>
+        <p class="plan__price"><b>$0</b><i>/ 7 days</i></p>
         <ul class="plan__list">
-          <li>Full floor access · 7 days</li>
-          <li>One free PT intro session</li>
-          <li>All group classes included</li>
-          <li>Locker &amp; hot shower access</li>
-          <li>No card required</li>
+          <li>Any 3 sessions this week</li>
+          <li>Full coach support included</li>
+          <li>No credit card required</li>
+          <li>Access to all locations</li>
+          <li>App &amp; booking portal</li>
         </ul>
-        <a class="btn btn--white" href="#contact">Start Trial</a>
+        <a class="btn btn--white" href="auth/signup.html">Start Free</a>
       </article>
 
       <article class="plan plan--featured">
-        <span class="plan__badge">Most picked</span>
+        <span class="plan__badge">Best Value</span>
         <span class="plan__name">Monthly</span>
-        <p class="plan__price"><b>₹1,999</b><i>/ month</i></p>
+        <p class="plan__price"><b>$49</b><i>/ month</i></p>
         <ul class="plan__list">
-          <li>Unlimited floor · 5 AM – 11 PM</li>
-          <li>All group classes</li>
-          <li>One 30-min PT session / month</li>
-          <li>Progress check every 6 weeks</li>
-          <li>Member portal · reservations &amp; plans</li>
+          <li>Unlimited sessions</li>
+          <li>All locations included</li>
+          <li>App booking &amp; history</li>
+          <li>Monthly progress check-in</li>
+          <li>Member community access</li>
         </ul>
-        <a class="btn" href="#contact">Join Monthly</a>
+        <a class="btn" href="pages/membership.html">Join Monthly</a>
       </article>
 
       <article class="plan">
-        <span class="plan__name">Quarterly</span>
-        <p class="plan__price"><b>₹5,499</b><i>/ 3 months</i></p>
+        <span class="plan__name">Annual</span>
+        <p class="plan__price"><b>$39</b><i>/ month (billed yearly)</i></p>
         <ul class="plan__list">
           <li>Everything in Monthly</li>
-          <li>Two 30-min PT sessions / month</li>
-          <li>Body composition check monthly</li>
-          <li>Guest pass · 2 / month</li>
-          <li>Save ₹513 vs. monthly</li>
+          <li>2 months free vs monthly</li>
+          <li>1 personal PT session / quarter</li>
+          <li>Priority session booking</li>
+          <li>Guest passes · 2 / month</li>
         </ul>
-        <a class="btn btn--white" href="#contact">Join Quarterly</a>
+        <a class="btn btn--white" href="pages/membership.html">Join Annual</a>
       </article>
     </div>
 
     <p class="plans__foot">
-      Student discount <b>20% off</b> · Couples <b>15% off</b> · Annual prepay <b>2 months free</b>
+      Student discount <b>20% off</b> · Couples <b>15% off</b> · Corporate packs available
     </p>
   </section>
 
@@ -433,60 +574,55 @@
     <div class="section__head">
       <div>
         <p class="eyebrow">MEMBER STORIES</p>
-        <h2>What people actually say.</h2>
+        <h2>Real results, real people.</h2>
       </div>
-
     </div>
 
     <div class="tests">
       <article class="test">
         <div class="test__stars">★★★★★</div>
-        <p class="test__quote">"I joined in March and I'm down 14kg and my squat is up 30kg.
-          Arjun actually reads the programme I send him and tells me when I'm being stupid about volume."</p>
+        <p class="test__quote">"I've tried every gym in the city. Nothing compares to Mr Fit's outdoor sessions. Sunrise Burn at 6 AM with James changed my life. Down 12 kg in 5 months."</p>
         <div class="test__person">
-          <div class="test__avatar"><img src="img/avatar-1.jpg" alt="Anika Rao" /></div>
+          <div class="test__avatar"><img src="img/avatar-1.jpg" alt="Sophie Grant" /></div>
           <div>
-            <b>Anika Rao</b>
-            <i>Member since 2024 · Strength 101</i>
+            <b>Sophie Grant</b>
+            <i>Member since 2023 · Sunrise Burn</i>
           </div>
         </div>
       </article>
 
       <article class="test">
         <div class="test__stars">★★★★★</div>
-        <p class="test__quote">"Best boxing gym in Indiranagar, no contest. Priya is the real deal —
-          she doesn't let you slack and she doesn't let you injure yourself either."</p>
+        <p class="test__quote">"Combat Cardio on Saturdays is the highlight of my week. Sam is an incredible coach — challenging, technical, and surprisingly funny at 7 AM."</p>
         <div class="test__person">
-          <div class="test__avatar"><img src="img/avatar-2.jpg" alt="Karthik Menon" /></div>
+          <div class="test__avatar"><img src="img/avatar-2.jpg" alt="Marcus Lee" /></div>
           <div>
-            <b>Karthik Menon</b>
-            <i>Member since 2023 · Boxing</i>
+            <b>Marcus Lee</b>
+            <i>Member since 2024 · Combat Cardio</i>
           </div>
         </div>
       </article>
 
       <article class="test">
         <div class="test__stars">★★★★★</div>
-        <p class="test__quote">"I travel a lot for work and the ₹1,999 monthly is honest —
-          no contract, no awkward conversation when I don't show up for three weeks. The coaches remember my name."</p>
+        <p class="test__quote">"The flexibility is perfect for my schedule. I can book any session at any location through the app. The community here is unbeatable."</p>
         <div class="test__person">
-          <div class="test__avatar"><img src="img/avatar-3.jpg" alt="Sneha Kapoor" /></div>
+          <div class="test__avatar"><img src="img/avatar-3.jpg" alt="Priya Nair" /></div>
           <div>
-            <b>Sneha Kapoor</b>
-            <i>Member since 2022 · Conditioning</i>
+            <b>Priya Nair</b>
+            <i>Member since 2022 · Power Hour</i>
           </div>
         </div>
       </article>
 
       <article class="test">
         <div class="test__stars">★★★★★</div>
-        <p class="test__quote">"Real equipment, zero influencer nonsense, and people who actually lift heavy. Best
-          atmosphere in Indiranagar to focus and get work done."</p>
+        <p class="test__quote">"Weekend Warrior at Hill Reserve is brutal in the best way. I ran my first half-marathon after 3 months of Sunday sessions. Best investment I've made."</p>
         <div class="test__person">
-          <div class="test__avatar"><img src="img/coach-2.jpg" alt="Rohan Varma" /></div>
+          <div class="test__avatar"><img src="img/coach-2.jpg" alt="Daniel Walsh" /></div>
           <div>
-            <b>Rohan Varma</b>
-            <i>Member since 2023 · Powerlifting</i>
+            <b>Daniel Walsh</b>
+            <i>Member since 2023 · Weekend Warrior</i>
           </div>
         </div>
       </article>
@@ -495,9 +631,9 @@
 
   <!-- ============== CTA STRIP ============== -->
   <section class="cta-strip">
-    <h2>Ready to start?</h2>
-    <p>Trial week is ₹199. No card required. Bring a towel.</p>
-    <a href="#pricing" class="btn btn--lg">Begin Your Trial</a>
+    <h2>Ready to train outdoors?</h2>
+    <p>Your first 7 days are free. No card needed. Just show up.</p>
+    <a href="auth/signup.html" class="btn btn--lg">Start Your Free Trial</a>
   </section>
 
   <!-- ============== FOOTER ============== -->
@@ -511,11 +647,11 @@
         <div class="ftr__brand">
           <a class="hdr__brand" href="index.html">
             <span class="hdr__mark">
-              <img src="assets/logo.png" alt="Namma Gym Logo" />
+              <img src="assets/logo.png" alt="Mr Fit Logo" />
             </span>
-            <span class="hdr__name">NAMMA GYM</span>
+            <span class="hdr__name">MR FIT</span>
           </a>
-          <p class="ftr__brand-tagline">Indiranagar's neighbourhood gym since 2014. No shiny lobby. Just iron, grit, and community.</p>
+          <p class="ftr__brand-tagline">Outdoor fitness bootcamp since 2017. Rain or shine, we train in the open air and build real community.</p>
           <div class="ftr__socials">
             <a href="#" class="ftr__social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="#" class="ftr__social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
@@ -524,17 +660,16 @@
           </div>
         </div>
 
-        <!-- Visit Column -->
+        <!-- Explore Column -->
         <div class="ftr__col">
           <h4>Explore</h4>
           <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="pages/about.html">About Us</a></li>
-            <li><a href="pages/services.html">Services</a></li>
-            <li><a href="pages/pricing.html">Pricing</a></li>
-            <li><a href="pages/blog.html">Blog</a></li>
-            <li><a href="pages/FAQ.html">FAQ</a></li>
+            <li><a href="pages/schedule.html">Schedule &amp; Locations</a></li>
+            <li><a href="pages/membership.html">Membership Plans</a></li>
+            <li><a href="pages/trainers.html">Our Trainers</a></li>
             <li><a href="pages/contact.html">Contact</a></li>
+            <li><a href="pages/FAQ.html">FAQ</a></li>
           </ul>
         </div>
 
@@ -545,9 +680,8 @@
             <li><a href="auth/login.html">Member Login</a></li>
             <li><a href="auth/signup.html">Join Free Trial</a></li>
             <li><a href="auth/user/user-dashboard.html">Member Portal</a></li>
-            <li><a href="auth/login.html">Reserve a Class</a></li>
-            <li><a href="auth/login.html">Workout Plans</a></li>
-            <li><a href="auth/login.html">Attendance Log</a></li>
+            <li><a href="pages/schedule.html">Book a Session</a></li>
+            <li><a href="auth/login.html">My Progress</a></li>
           </ul>
         </div>
 
@@ -557,15 +691,15 @@
           <ul class="ftr__contact-list">
             <li class="ftr__contact-item">
               <i class="fa-solid fa-location-dot ftr__contact-icon"></i>
-              <span class="ftr__contact-text">12th Main Road, 100ft Road,<br>Bengaluru, Karnataka 560038</span>
+              <span class="ftr__contact-text">Multiple outdoor locations<br>across the city</span>
             </li>
             <li class="ftr__contact-item">
               <i class="fa-solid fa-phone ftr__contact-icon"></i>
-              <a class="ftr__contact-text" href="tel:+918012345678">+91 80 1234 5678</a>
+              <a class="ftr__contact-text" href="tel:+15550123456">+1 (555) 012-3456</a>
             </li>
             <li class="ftr__contact-item">
               <i class="fa-solid fa-envelope ftr__contact-icon"></i>
-              <a class="ftr__contact-text" href="mailto:hello@nammagym.in">hello@nammagym.in</a>
+              <a class="ftr__contact-text" href="mailto:hello@mrfit.com">hello@mrfit.com</a>
             </li>
           </ul>
         </div>
@@ -575,19 +709,19 @@
 
     <!-- Decorative tags divider -->
     <div class="ftr__divider">
-      <span class="ftr__tag ftr__tag--accent">Est. 2014</span>
-      <span class="ftr__tag">Strength &amp; Conditioning</span>
-      <span class="ftr__tag">Boxing &amp; MMA</span>
-      <span class="ftr__tag">Hydrotherapy</span>
-      <span class="ftr__tag">Personal Training</span>
-      <span class="ftr__tag">Indiranagar · Koramangala</span>
-      <span class="ftr__tag">Open 5 AM – 11 PM</span>
+      <span class="ftr__tag ftr__tag--accent">Est. 2017</span>
+      <span class="ftr__tag">Outdoor Bootcamp</span>
+      <span class="ftr__tag">Sunrise Burn</span>
+      <span class="ftr__tag">Power Hour</span>
+      <span class="ftr__tag">Combat Cardio</span>
+      <span class="ftr__tag">Weekend Warrior</span>
+      <span class="ftr__tag">Rain or Shine</span>
     </div>
 
     <!-- Bottom bar -->
     <div class="ftr__strip">
-      <span>© 2026 Namma Gym Pvt. Ltd. · Bengaluru, Karnataka</span>
-      <span style="font-family: var(--ff-head); letter-spacing: .1em; font-size: 10px; color: rgba(255,255,255,.12); text-transform: uppercase;">SQUAT · BENCH · DEADLIFT</span>
+      <span>© 2026 Mr Fit Outdoor Bootcamp. All rights reserved.</span>
+      <span style="font-family: var(--ff-head); letter-spacing: .1em; font-size: 10px; color: rgba(255,255,255,.12); text-transform: uppercase;">SWEAT · OUTSIDE · THRIVE</span>
       <span><a href="pages/Privacy-policy.html">Privacy</a> &nbsp;·&nbsp; <a href="pages/Terms-of-service.html">Terms</a></span>
     </div>
 

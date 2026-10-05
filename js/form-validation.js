@@ -1,5 +1,5 @@
 /**
- * NAMMA GYM - Form Validation & Toast Notification System
+ * MR FIT - Form Validation & Toast Notification System
  */
 
 (function () {
@@ -176,7 +176,7 @@
             btn.innerHTML = orig;
             btn.disabled = false;
             form.reset();
-            showToast('You are now subscribed to the Namma Gym Iron & Conditioning dispatch!', 'success', 'VIP Newsletter');
+            showToast('You are now subscribed to the Mr Fit Iron & Conditioning dispatch!', 'success', 'VIP Newsletter');
           }, 600);
         }
       });
@@ -214,7 +214,7 @@
 
           setTimeout(() => {
             const enteredId = (idInput ? idInput.value : '').toLowerCase();
-            showToast('Authentication successful! Welcome to Namma Gym.', 'success', 'Access Granted');
+            showToast('Authentication successful! Welcome to Mr Fit.', 'success', 'Access Granted');
             
             setTimeout(() => {
               if (enteredId.includes('admin') || enteredId.includes('staff') || enteredId.includes('001')) {

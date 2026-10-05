@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Schedule &amp; Locations — Mr Fit Outdoor Bootcamp</title>
+  <meta name="description"
+    content="View the Mr Fit weekly bootcamp schedule and find your nearest outdoor training location. Sessions at parks, reserves and plazas every day of the week." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" href="../assets/logo.png" />
+
+  <style>
+    /* ── Location Detail Cards ── */
+    .loc-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .loc-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-1);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .loc-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
+    .loc-card__img {
+      height: 180px;
+      overflow: hidden;
+    }
+    .loc-card__img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .loc-card:hover .loc-card__img img { transform: scale(1.05); }
+    .loc-card__body { padding: 24px; }
+    .loc-card__tag {
+      display: inline-block;
+      background: var(--orange-lt);
+      color: var(--orange);
+      font-family: var(--ff-head);
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .loc-card__name {
+      font-family: var(--ff-head);
+      font-size: 20px;
+      color: var(--navy);
+      margin: 0 0 6px;
+      text-transform: uppercase;
+    }
+    .loc-card__address {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+    .loc-card__sessions {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .loc-card__sessions li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--ink);
+    }
+    .loc-card__sessions li i {
+      color: var(--orange);
+      width: 14px;
+      text-align: center;
+    }
+
+    /* ── Schedule filters ── */
+    .sched-filters {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+    .sched-filter-btn {
+      padding: 9px 20px;
+      border: 1.5px solid var(--line);
+      background: #fff;
+      color: var(--navy);
+      font-family: var(--ff-head);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .sched-filter-btn:hover,
+    .sched-filter-btn.active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #fff;
+    }
+
+    /* ── Big session table ── */
+    .sched-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .sched-table th {
+      background: var(--navy);
+      color: rgba(255,255,255,.7);
+      font-family: var(--ff-head);
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .sched-table th:first-child { border-radius: var(--radius) 0 0 0; }
+    .sched-table th:last-child  { border-radius: 0 var(--radius) 0 0; }
+    .sched-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+    }
+    .sched-table tr:last-child td { border-bottom: none; }
+    .sched-table tr:hover td { background: #f5f8fb; }
+    .sched-table .session-name {
+      font-family: var(--ff-head);
+      font-size: 14px;
+      color: var(--navy);
+    }
+    .sched-table .session-coach {
+      font-size: 12px;
+      color: var(--gray);
+    }
+    .sched-table .session-type {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-family: var(--ff-head);
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .tag--hiit    { background: #e3f0fb; color: #0e79b2; }
+    .tag--strength{ background: #ece9ff; color: #5b3ccc; }
+    .tag--boxing  { background: #e0f2fe; color: #0284c7; }
+    .tag--endurance{ background: #e3f9ee; color: #1a8a52; }
+    .sched-table time { font-family: var(--ff-head); color: var(--blue); font-size: 13px; }
+    .sched-table .spots {
+      font-size: 12px;
+      color: var(--gray);
+    }
+    .sched-table .spots.low { color: #0e79b2; font-weight: 700; }
+  </style>
+</head>
+
+<body class="page-public">
+
+  <!-- ============== NAVBAR ============== -->
+  <header class="hdr" id="site-header">
+    <div class="hdr__row">
+      <a class="hdr__brand" href="../index.html">
+        <span class="hdr__mark"><img src="../assets/logo.png" alt="Mr Fit Logo" /></span>
+        <span class="hdr__name">MR FIT</span>
+      </a>
+      <nav class="hdr__nav" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="schedule.html" class="is-active">Schedule &amp; Locations</a>
+        <a href="membership.html">Membership Plans</a>
+        <a href="trainers.html">Trainers</a>
+      </nav>
+      <div class="hdr__cta">
+        <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme"><i class="fa-solid fa-sun"></i></button>
+        <div class="profile-dropdown-wrap">
+          <button type="button" class="profile-btn" aria-label="User account"><i class="fa-solid fa-user"></i></button>
+          <div class="profile-menu">
+            <div class="profile-menu__header"><b>Mr Fit Portals</b><span>Member &amp; Management Access</span></div>
+            <ul class="profile-menu__links">
+              <li><a href="../auth/login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i><span>Member Login</span></a></li>
+              <li><a href="../auth/signup.html"><i class="fa-solid fa-user-plus"></i><span>Join / Signup</span><span class="profile-menu__badge">Free Trial</span></a></li>
+              <li><a href="../auth/user/user-dashboard.html"><i class="fa-solid fa-id-card"></i><span>Member Dashboard</span><span class="profile-menu__badge bg-emerald-600">Member</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <a href="../auth/login.html" class="btn btn--sm btn--pill">Login</a>
+        <button class="hdr__burger" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer">
+    <div class="mobile-nav-header">
+      <a class="hdr__brand mobile-nav-brand" href="../index.html">
+        <span class="hdr__mark"><img src="../assets/logo.png" alt="Mr Fit Logo" /></span>
+        <span class="hdr__name">MR FIT</span>
+      </a>
+      <button class="mobile-nav-close" aria-label="Close menu">&times;</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="../index.html">Home</a>
+      <a href="schedule.html" class="is-active">Schedule &amp; Locations</a>
+      <a href="membership.html">Membership Plans</a>
+      <a href="trainers.html">Trainers</a>
+      <a href="../auth/login.html">Member Login</a>
+    </div>
+  </div>
+
+  <!-- ============== PAGE HERO ============== -->
+  <section class="page-hero">
+    <div class="page-hero__inner">
+      <div class="eyebrow">LIVE OUTDOOR SCHEDULE · REAL-TIME SLOTS</div>
+      <h1>TRAIN UNDER THE OPEN SKY.<br /><span class="text-accent">SCHEDULE &amp; LOCATIONS</span></h1>
+      <p>
+        Every workout is coach-led, high-energy, and staged in Bengaluru's finest open parks. Rain or shine with covered fallback zones — book your spot in seconds.
+      </p>
+      
+      <div class="page-hero__pills">
+        <span class="page-hero__pill"><i class="fa-solid fa-tree"></i> 4 Outdoor Parks</span>
+        <span class="page-hero__pill"><i class="fa-solid fa-calendar-check"></i> 28 Weekly Sessions</span>
+        <span class="page-hero__pill"><i class="fa-solid fa-cloud-sun"></i> All-Weather Zones</span>
+        <span class="page-hero__pill"><i class="fa-solid fa-user-group"></i> All Levels Welcome</span>
+      </div>
+
+      <div class="page-hero__actions">
+        <a href="#schedule" class="btn"><i class="fa-solid fa-calendar-days"></i> View Timetable</a>
+        <a href="#locations" class="btn btn--outline" style="border-color: rgba(255,255,255,0.4); color: #fff;"><i class="fa-solid fa-map-location-dot"></i> Explore Parks</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== WEEKLY SCHEDULE TABLE ============== -->
+  <section class="section" id="schedule">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">THIS WEEK</p>
+        <h2>Full weekly timetable.</h2>
+        <p>All times listed in local time. Sessions run rain or shine — we provide wet-weather alternatives at each location.</p>
+      </div>
+    </div>
+
+    <div class="sched-filters">
+      <button class="sched-filter-btn active" data-filter="all">All Sessions</button>
+      <button class="sched-filter-btn" data-filter="hiit">HIIT &amp; Cardio</button>
+      <button class="sched-filter-btn" data-filter="strength">Strength</button>
+      <button class="sched-filter-btn" data-filter="boxing">Boxing</button>
+      <button class="sched-filter-btn" data-filter="endurance">Endurance</button>
+    </div>
+
+    <div style="overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow-1);">
+      <table class="sched-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Day</th>
+            <th>Session</th>
+            <th>Coach</th>
+            <th>Location</th>
+            <th>Type</th>
+            <th>Duration</th>
+            <th>Spots</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><time>6:00 AM</time></td>
+            <td>Mon · Wed · Fri</td>
+            <td><div class="session-name">Sunrise Burn</div><div class="session-coach">with Mia Torres</div></td>
+            <td>Mia Torres</td>
+            <td><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>Central Park</td>
+            <td><span class="session-type tag--hiit">HIIT</span></td>
+            <td>50 min</td>
+            <td class="spots">4 left</td>
+            <td><a href="../auth/login.html" class="btn btn--sm">Book</a></td>
+          </tr>
+          <tr>
+            <td><time>6:30 AM</time></td>
+            <td>Tue · Thu</td>
+            <td><div class="session-name">Power Hour</div><div class="session-coach">with James Carter</div></td>
+            <td>James Carter</td>
+            <td><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>Riverside Grounds</td>
+            <td><span class="session-type tag--strength">Strength</span></td>
+            <td>60 min</td>
+            <td class="spots">8 left</td>
+            <td><a href="../auth/login.html" class="btn btn--sm">Book</a></td>
+          </tr>
+          <tr>
+            <td><time>7:00 AM</time></td>
+            <td>Saturday</td>
+            <td><div class="session-name">Combat Cardio</div><div class="session-coach">with Sam Reid</div></td>
+            <td>Sam Reid</td>
+            <td><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>Waterfront Plaza</td>
+            <td><span class="session-type tag--boxing">Boxing</span></td>
+            <td>55 min</td>
+            <td class="spots low">2 left</td>
+            <td><a href="../auth/login.html" class="btn btn--sm">Book</a></td>
+          </tr>
+          <tr>
+            <td><time>7:30 AM</time></td>
+            <td>Sunday</td>
+            <td><div class="session-name">Weekend Warrior</div><div class="session-coach">with James Carter</div></td>
+            <td>James Carter</td>
+            <td><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>Hill Reserve</td>
+            <td><span class="session-type tag--endurance">Endurance</span></td>
+            <td>75 min</td>
+            <td class="spots">12 left</td>
+            <td><a href="../auth/login.html" class="btn btn--sm">Book</a></td>
+          </tr>
+          <tr>
+            <td><time>12:00 PM</time></td>
+            <td>Mon · Wed</td>
+            <td><div class="session-name">Midday Burn</div><div class="session-coach">with Mia Torres</div></td>
+            <td>Mia Torres</td>
+            <td><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>City Square</td>
+            <td><span class="session-type tag--hiit">HIIT</span></td>
+            <td>45 min</td>
+            <td class="spots">10 left</td>
+            <td><a href="../auth/login.html" class="btn btn--sm">Book</a></td>
+          </tr>
+          <tr>
+            <td><time>6:00 PM</time></td>
+            <td>Tue · Thu</td>
+            <td><div class="session-name">Power Hour (Evening)</div><div class="session-coach">with James Carter</div></td>
+            <td>James Carter</td>
+            <td><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>Riverside Grounds</td>
+            <td><span class="session-type tag--strength">Strength</span></td>
+            <td>60 min</td>
+            <td class="spots">6 left</td>
+            <td><a href="../auth/login.html" class="btn btn--sm">Book</a></td>
+          </tr>
+          <tr>
+            <td><time>6:30 PM</time></td>
+            <td>Mon · Wed · Fri</td>
+            <td><div class="session-name">Sprint &amp; Sweat</div><div class="session-coach">with Mia Torres</div></td>
+            <td>Mia Torres</td>
+            <td><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>Central Park</td>
+            <td><span class="session-type tag--hiit">HIIT</span></td>
+            <td>45 min</td>
+            <td class="spots">15 left</td>
+            <td><a href="../auth/login.html" class="btn btn--sm">Book</a></td>
+          </tr>
+          <tr>
+            <td><time>7:00 PM</time></td>
+            <td>Friday</td>
+            <td><div class="session-name">Boxing Fundamentals</div><div class="session-coach">with Sam Reid</div></td>
+            <td>Sam Reid</td>
+            <td><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>Waterfront Plaza</td>
+            <td><span class="session-type tag--boxing">Boxing</span></td>
+            <td>55 min</td>
+            <td class="spots">7 left</td>
+            <td><a href="../auth/login.html" class="btn btn--sm">Book</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="text-align: center; margin-top: 32px; color: var(--gray); font-size: 14px;">
+      <i class="fa-solid fa-circle-info" style="color: var(--orange);"></i>
+      &nbsp;Members can book up to 7 days in advance. Walk-ins welcome if spots available. <a href="../auth/login.html" style="color: var(--orange); font-weight: 700;">Log in to reserve your spot →</a>
+    </p>
+  </section>
+
+  <!-- ============== LOCATIONS ============== -->
+  <section class="section section--wide section--paper" id="locations">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">OUR LOCATIONS</p>
+        <h2>Find your spot.</h2>
+        <p>All our training venues are publicly accessible, open-air spaces. We bring the equipment — you just show up.</p>
+      </div>
+    </div>
+
+    <div class="loc-cards" style="max-width: var(--maxw); margin: 0 auto;">
+
+      <div class="loc-card">
+        <div class="loc-card__img"><img src="../img/facility-1.jpg" alt="Central Park" /></div>
+        <div class="loc-card__body">
+          <span class="loc-card__tag">Daily · Morning &amp; Evening</span>
+          <div class="loc-card__name">Central Park</div>
+          <div class="loc-card__address"><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>North Lawn, Central Park</div>
+          <ul class="loc-card__sessions">
+            <li><i class="fa-regular fa-clock"></i> Mon · Wed · Fri — 6:00 AM (Sunrise Burn)</li>
+            <li><i class="fa-regular fa-clock"></i> Mon · Wed · Fri — 6:30 PM (Sprint &amp; Sweat)</li>
+          </ul>
+          <a href="../auth/login.html" class="btn btn--outline btn--sm">Book a Session Here</a>
+        </div>
+      </div>
+
+      <div class="loc-card">
+        <div class="loc-card__img"><img src="../img/facility-3.jpg" alt="Riverside Grounds" /></div>
+        <div class="loc-card__body">
+          <span class="loc-card__tag">Tue &amp; Thu</span>
+          <div class="loc-card__name">Riverside Grounds</div>
+          <div class="loc-card__address"><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>Riverside Drive, East Lawn</div>
+          <ul class="loc-card__sessions">
+            <li><i class="fa-regular fa-clock"></i> Tue · Thu — 6:30 AM (Power Hour)</li>
+            <li><i class="fa-regular fa-clock"></i> Tue · Thu — 6:00 PM (Power Hour Evening)</li>
+          </ul>
+          <a href="../auth/login.html" class="btn btn--outline btn--sm">Book a Session Here</a>
+        </div>
+      </div>
+
+      <div class="loc-card">
+        <div class="loc-card__img"><img src="../img/boxing.jpg" alt="Waterfront Plaza" /></div>
+        <div class="loc-card__body">
+          <span class="loc-card__tag">Fri &amp; Sat</span>
+          <div class="loc-card__name">Waterfront Plaza</div>
+          <div class="loc-card__address"><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>Harbour Esplanade, West End</div>
+          <ul class="loc-card__sessions">
+            <li><i class="fa-regular fa-clock"></i> Sat — 7:00 AM (Combat Cardio)</li>
+            <li><i class="fa-regular fa-clock"></i> Fri — 7:00 PM (Boxing Fundamentals)</li>
+          </ul>
+          <a href="../auth/login.html" class="btn btn--outline btn--sm">Book a Session Here</a>
+        </div>
+      </div>
+
+      <div class="loc-card">
+        <div class="loc-card__img"><img src="../img/facility-2.jpg" alt="Hill Reserve" /></div>
+        <div class="loc-card__body">
+          <span class="loc-card__tag">Sunday</span>
+          <div class="loc-card__name">Hill Reserve</div>
+          <div class="loc-card__address"><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>Summit Trail Entrance, Hill Reserve</div>
+          <ul class="loc-card__sessions">
+            <li><i class="fa-regular fa-clock"></i> Sun — 7:30 AM (Weekend Warrior)</li>
+          </ul>
+          <a href="../auth/login.html" class="btn btn--outline btn--sm">Book a Session Here</a>
+        </div>
+      </div>
+
+      <div class="loc-card">
+        <div class="loc-card__img"><img src="../img/group-class.jpg" alt="City Square" /></div>
+        <div class="loc-card__body">
+          <span class="loc-card__tag">Mon &amp; Wed · Midday</span>
+          <div class="loc-card__name">City Square</div>
+          <div class="loc-card__address"><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 5px;"></i>Main Square, City Centre</div>
+          <ul class="loc-card__sessions">
+            <li><i class="fa-regular fa-clock"></i> Mon · Wed — 12:00 PM (Midday Burn)</li>
+          </ul>
+          <a href="../auth/login.html" class="btn btn--outline btn--sm">Book a Session Here</a>
+        </div>
+      </div>
+
+      <div class="loc-card" style="background: var(--navy); border-color: var(--navy); display: flex; align-items: center; justify-content: center; text-align: center; padding: 40px 32px;">
+        <div>
+          <i class="fa-solid fa-map-location-dot" style="font-size: 48px; color: var(--orange); margin-bottom: 20px;"></i>
+          <div style="font-family: var(--ff-head); font-size: 20px; color: #fff; text-transform: uppercase; margin-bottom: 8px;">More Coming Soon</div>
+          <p style="color: rgba(255,255,255,.65); font-size: 14px; margin-bottom: 20px;">We're expanding to 3 new locations this quarter. Sign up to be notified.</p>
+          <a href="../auth/signup.html" class="btn btn--sm">Get Notified</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== CTA ============== -->
+  <section class="cta-strip">
+    <h2>Ready to book your first session?</h2>
+    <p>Create a free account and reserve your spot in under 60 seconds.</p>
+    <a href="../auth/signup.html" class="btn btn--lg">Join Free — No Card Needed</a>
+  </section>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="ftr">
+    <div class="ftr__body">
+      <div class="ftr__main">
+        <div class="ftr__brand">
+          <a class="hdr__brand" href="../index.html">
+            <span class="hdr__mark"><img src="../assets/logo.png" alt="Mr Fit Logo" /></span>
+            <span class="hdr__name">MR FIT</span>
+          </a>
+          <p class="ftr__brand-tagline">Outdoor fitness bootcamp since 2017. Rain or shine, we train in the open air and build real community.</p>
+          <div class="ftr__socials">
+            <a href="#" class="ftr__social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="ftr__social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="ftr__social-btn" aria-label="Strava"><i class="fa-brands fa-strava"></i></a>
+          </div>
+        </div>
+        <div class="ftr__col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="schedule.html">Schedule &amp; Locations</a></li>
+            <li><a href="membership.html">Membership Plans</a></li>
+            <li><a href="trainers.html">Our Trainers</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="ftr__col">
+          <h4>Members</h4>
+          <ul>
+            <li><a href="../auth/login.html">Member Login</a></li>
+            <li><a href="../auth/signup.html">Join Free Trial</a></li>
+            <li><a href="../auth/user/user-dashboard.html">Member Portal</a></li>
+            <li><a href="schedule.html">Book a Session</a></li>
+          </ul>
+        </div>
+        <div class="ftr__col">
+          <h4>Contact</h4>
+          <ul class="ftr__contact-list">
+            <li class="ftr__contact-item">
+              <i class="fa-solid fa-phone ftr__contact-icon"></i>
+              <a class="ftr__contact-text" href="tel:+15550123456">+1 (555) 012-3456</a>
+            </li>
+            <li class="ftr__contact-item">
+              <i class="fa-solid fa-envelope ftr__contact-icon"></i>
+              <a class="ftr__contact-text" href="mailto:hello@mrfit.com">hello@mrfit.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="ftr__divider">
+      <span class="ftr__tag ftr__tag--accent">Est. 2017</span>
+      <span class="ftr__tag">Outdoor Bootcamp</span>
+      <span class="ftr__tag">Rain or Shine</span>
+      <span class="ftr__tag">12+ Locations</span>
+    </div>
+    <div class="ftr__strip">
+      <span>&copy; 2026 Mr Fit Outdoor Bootcamp. All rights reserved.</span>
+      <span style="font-family: var(--ff-head); letter-spacing: .1em; font-size: 10px; color: rgba(255,255,255,.12); text-transform: uppercase;">SWEAT &middot; OUTSIDE &middot; THRIVE</span>
+      <span><a href="Privacy-policy.html">Privacy</a> &nbsp;&middot;&nbsp; <a href="Terms-of-service.html">Terms</a></span>
+    </div>
+  </footer>
+
+  <script src="../js/form-validation.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/script.js"></script>
+  <script>
+    // Filter buttons
+    const filterBtns = document.querySelectorAll('.sched-filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 /**
- * NAMMA GYM - Unified Navbar & Footer Injector, Theme & RTL Manager
+ * MR FIT - Unified Navbar & Footer Injector, Theme & RTL Manager
  */
 
 (function () {
@@ -52,9 +52,9 @@
       <div class="hdr__row">
         <a class="hdr__brand" href="${prefix}index.html">
           <span class="hdr__mark">
-            <img src="${prefix}assets/logo.png" alt="Namma Gym Logo" />
+            <img src="${prefix}assets/logo.png" alt="Mr Fit Logo" />
           </span>
-          <span class="hdr__name">NAMMA GYM</span>
+          <span class="hdr__name">MR FIT</span>
         </a>
 
         <nav class="hdr__nav" aria-label="Primary">
@@ -75,7 +75,7 @@
             <button type="button" class="profile-btn" aria-label="User account and portals" title="Member &amp; Admin Portals"><i class="fa-solid fa-user"></i></button>
             <div class="profile-menu">
               <div class="profile-menu__header">
-                <b>Namma Gym Portals</b>
+                <b>Mr Fit Portals</b>
                 <span>Member &amp; Management Access</span>
               </div>
               <ul class="profile-menu__links">
@@ -104,9 +104,9 @@
       <div class="mobile-nav-header">
         <a class="hdr__brand mobile-nav-brand" href="${prefix}index.html">
           <span class="hdr__mark">
-            <img src="${prefix}assets/logo.png" alt="Namma Gym Logo" />
+            <img src="${prefix}assets/logo.png" alt="Mr Fit Logo" />
           </span>
-          <span class="hdr__name">NAMMA GYM</span>
+          <span class="hdr__name">MR FIT</span>
         </a>
         <button class="mobile-nav-close" aria-label="Close menu">&times;</button>
       </div>
@@ -137,9 +137,9 @@
           <div class="ftr__brand">
             <a class="hdr__brand" href="${prefix}index.html">
               <span class="hdr__mark">
-                <img src="${prefix}assets/logo.png" alt="Namma Gym Logo" />
+                <img src="${prefix}assets/logo.png" alt="Mr Fit Logo" />
               </span>
-              <span class="hdr__name">NAMMA GYM</span>
+              <span class="hdr__name">MR FIT</span>
             </a>
             <p class="ftr__brand-tagline">Indiranagar's neighbourhood gym since 2014. No shiny lobby. Just iron, grit, and community.</p>
             
@@ -187,7 +187,7 @@
               </li>
               <li class="ftr__contact-item">
                 <i class="fa-solid fa-envelope ftr__contact-icon"></i>
-                <a class="ftr__contact-text" href="mailto:hello@nammagym.in">hello@nammagym.in</a>
+                <a class="ftr__contact-text" href="mailto:hello@mrfitbootcamp.com">hello@mrfitbootcamp.com</a>
               </li>
             </ul>
           </div>
@@ -197,7 +197,7 @@
 
       <!-- Bottom bar -->
       <div class="ftr__strip">
-        <span>© 2026 Namma Gym Pvt. Ltd. · Bengaluru, Karnataka</span>
+        <span>© 2026 Mr Fit Pvt. Ltd. · Bengaluru, Karnataka</span>
         <span style="font-family: var(--ff-head); letter-spacing: .1em; font-size: 10px; color: rgba(255,255,255,.12); text-transform: uppercase;">SQUAT · BENCH · DEADLIFT</span>
         <span><a href="${prefix}pages/Privacy-policy.html">Privacy</a> &nbsp;·&nbsp; <a href="${prefix}pages/Terms-of-service.html">Terms</a></span>
       </div>
@@ -222,8 +222,8 @@
   }
 
   // --- Theme Management ---
-  const THEME_KEY = 'nammagym_theme';
-  const RTL_KEY = 'nammagym_rtl';
+  const THEME_KEY = 'mrfit_theme';
+  const RTL_KEY = 'mrfit_rtl';
 
   function initTheme() {
     const savedTheme = localStorage.getItem(THEME_KEY);
@@ -397,12 +397,12 @@
   });
 
   // Global helper exports
-  window.NammaGym = window.NammaGym || {};
-  window.NammaGym.setTheme = setTheme;
-  window.NammaGym.toggleTheme = toggleTheme;
-  window.NammaGym.setRTL = setRTL;
-  window.NammaGym.toggleRTL = toggleRTL;
-  window.NammaGym.renderNavbar = renderUnifiedNavbar;
-  window.NammaGym.renderFooter = renderUnifiedFooter;
+  window.mrfit = window.mrfit || {};
+  window.mrfit.setTheme = setTheme;
+  window.mrfit.toggleTheme = toggleTheme;
+  window.mrfit.setRTL = setRTL;
+  window.mrfit.toggleRTL = toggleRTL;
+  window.mrfit.renderNavbar = renderUnifiedNavbar;
+  window.mrfit.renderFooter = renderUnifiedFooter;
 
 })();

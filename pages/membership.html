@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Membership Plans — Mr Fit Outdoor Bootcamp</title>
+  <meta name="description"
+    content="Choose your Mr Fit membership plan. Free 7-day trial, flexible monthly or discounted annual plans. No lock-in contracts. Train at all outdoor locations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" href="../assets/logo.png" />
+
+  <style>
+    /* ── Enhanced Plan Cards ── */
+    .plans-full {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .plan-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 20px;
+      padding: 36px 32px 40px;
+      position: relative;
+      transition: transform .2s ease, box-shadow .2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .plan-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-2); }
+    .plan-card--featured {
+      border-color: var(--orange);
+      background: var(--navy);
+      color: #fff;
+    }
+    .plan-card--featured h3,
+    .plan-card--featured .plan-price,
+    .plan-card--featured .plan-price b { color: #fff; }
+    .plan-card--featured .plan-feature { color: rgba(255,255,255,.75); }
+    .plan-card--featured .plan-feature i { color: var(--orange); }
+    .plan-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      color: #fff;
+      font-family: var(--ff-head);
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .plan-name {
+      font-family: var(--ff-head);
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .plan-card--featured .plan-name { color: var(--orange); }
+    .plan-price {
+      font-family: var(--ff-display);
+      line-height: 1;
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+    .plan-price b { font-size: 56px; font-family: var(--ff-display); }
+    .plan-price span { font-size: 18px; color: var(--gray); margin-left: 4px; }
+    .plan-period {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 28px;
+    }
+    .plan-card--featured .plan-period { color: rgba(255,255,255,.55); }
+    .plan-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+    .plan-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .plan-feature i {
+      color: var(--orange);
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .plan-feature--muted {
+      opacity: .45;
+      text-decoration: line-through;
+    }
+
+    /* ── Comparison table ── */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .compare-table th {
+      font-family: var(--ff-head);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 16px 20px;
+      text-align: center;
+      background: var(--navy);
+      color: #fff;
+    }
+    .compare-table th:first-child { text-align: left; border-radius: var(--radius) 0 0 0; }
+    .compare-table th:last-child  { border-radius: 0 var(--radius) 0 0; }
+    .compare-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+    .compare-table td:first-child { text-align: left; font-weight: 600; color: var(--ink); }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:hover td { background: #f5f8fb; }
+    .compare-table .check { color: var(--orange); font-size: 16px; }
+    .compare-table .cross { color: #ccd0d8; font-size: 16px; }
+
+    /* ── FAQ accordion ── */
+    .faq-list {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .faq-item {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 20px 24px;
+      background: none;
+      border: none;
+      font-family: var(--ff-head);
+      font-size: 15px;
+      color: var(--navy);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: color .2s;
+    }
+    .faq-question:hover { color: var(--orange); }
+    .faq-question i { transition: transform .3s ease; flex-shrink: 0; color: var(--orange); }
+    .faq-item.open .faq-question i { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+    .faq-answer p {
+      padding: 0 24px 20px;
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.7;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body class="page-public">
+
+  <!-- ============== NAVBAR ============== -->
+  <header class="hdr" id="site-header">
+    <div class="hdr__row">
+      <a class="hdr__brand" href="../index.html">
+        <span class="hdr__mark"><img src="../assets/logo.png" alt="Mr Fit Logo" /></span>
+        <span class="hdr__name">MR FIT</span>
+      </a>
+      <nav class="hdr__nav" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="schedule.html">Schedule &amp; Locations</a>
+        <a href="membership.html" class="is-active">Membership Plans</a>
+        <a href="trainers.html">Trainers</a>
+      </nav>
+      <div class="hdr__cta">
+        <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme"><i class="fa-solid fa-sun"></i></button>
+        <div class="profile-dropdown-wrap">
+          <button type="button" class="profile-btn" aria-label="User account"><i class="fa-solid fa-user"></i></button>
+          <div class="profile-menu">
+            <div class="profile-menu__header"><b>Mr Fit Portals</b><span>Member &amp; Management Access</span></div>
+            <ul class="profile-menu__links">
+              <li><a href="../auth/login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i><span>Member Login</span></a></li>
+              <li><a href="../auth/signup.html"><i class="fa-solid fa-user-plus"></i><span>Join / Signup</span><span class="profile-menu__badge">Free Trial</span></a></li>
+              <li><a href="../auth/user/user-dashboard.html"><i class="fa-solid fa-id-card"></i><span>Member Dashboard</span><span class="profile-menu__badge bg-emerald-600">Member</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <a href="../auth/login.html" class="btn btn--sm btn--pill">Login</a>
+        <button class="hdr__burger" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer">
+    <div class="mobile-nav-header">
+      <a class="hdr__brand mobile-nav-brand" href="../index.html">
+        <span class="hdr__mark"><img src="../assets/logo.png" alt="Mr Fit Logo" /></span>
+        <span class="hdr__name">MR FIT</span>
+      </a>
+      <button class="mobile-nav-close" aria-label="Close menu">&times;</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="../index.html">Home</a>
+      <a href="schedule.html">Schedule &amp; Locations</a>
+      <a href="membership.html" class="is-active">Membership Plans</a>
+      <a href="trainers.html">Trainers</a>
+      <a href="../auth/login.html">Member Login</a>
+    </div>
+  </div>
+
+  <!-- ============== PAGE HERO ============== -->
+  <section class="page-hero">
+    <div class="page-hero__inner">
+      <div class="eyebrow">7 DAYS RISK-FREE · NO CONTRACTS EVER</div>
+      <h1>INVEST IN YOUR STRENGTH.<br /><span class="text-accent">MEMBERSHIP PLANS</span></h1>
+      <p>
+        Simple, transparent, all-access outdoor fitness. One pass gives you unrestricted access to all 4 parks, certified coaches, and every daily session.
+      </p>
+
+      <div class="page-hero__pills">
+        <span class="page-hero__pill"><i class="fa-solid fa-gift"></i> 7-Day Free Trial</span>
+        <span class="page-hero__pill"><i class="fa-solid fa-ban"></i> Zero Joining Fee</span>
+        <span class="page-hero__pill"><i class="fa-solid fa-repeat"></i> Cancel Anytime</span>
+        <span class="page-hero__pill"><i class="fa-solid fa-shield-halved"></i> 100% Satisfaction</span>
+      </div>
+
+      <div class="page-hero__actions">
+        <a href="#plans" class="btn"><i class="fa-solid fa-bolt"></i> View Plans</a>
+        <a href="#comparison" class="btn btn--outline" style="border-color: rgba(255,255,255,0.4); color: #fff;"><i class="fa-solid fa-table-list"></i> Compare Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== PLAN CARDS ============== -->
+  <section class="section" id="plans">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">CHOOSE YOUR PLAN</p>
+        <h2>Flexible membership.</h2>
+        <p>All plans include full access to every outdoor session and location. Upgrade or cancel at any time.</p>
+      </div>
+    </div>
+
+    <div class="plans-full">
+
+      <!-- Free Trial -->
+      <div class="plan-card">
+        <div class="plan-name">Free Trial</div>
+        <div class="plan-price"><b>$0</b></div>
+        <div class="plan-period">For 7 days &mdash; no credit card required</div>
+        <ul class="plan-features">
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> Any 3 sessions across all locations</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> Full coach support included</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> App &amp; booking portal access</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> No credit card required</li>
+          <li class="plan-feature plan-feature--muted"><i class="fa-solid fa-xmark"></i> Priority booking</li>
+          <li class="plan-feature plan-feature--muted"><i class="fa-solid fa-xmark"></i> Progress tracking</li>
+          <li class="plan-feature plan-feature--muted"><i class="fa-solid fa-xmark"></i> Community access</li>
+        </ul>
+        <a href="../auth/signup.html" class="btn btn--outline">Start Free Trial</a>
+      </div>
+
+      <!-- Monthly (Featured) -->
+      <div class="plan-card plan-card--featured">
+        <span class="plan-badge">Most Popular</span>
+        <div class="plan-name">Monthly</div>
+        <div class="plan-price"><b>$49</b><span>/mo</span></div>
+        <div class="plan-period">Billed monthly &mdash; cancel anytime</div>
+        <ul class="plan-features">
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> Unlimited sessions — all days</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> All 12+ outdoor locations</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> App booking up to 7 days ahead</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> Monthly progress check-in</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> Member community access</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> Priority spot reservation</li>
+          <li class="plan-feature plan-feature--muted"><i class="fa-solid fa-xmark"></i> Personal PT sessions</li>
+        </ul>
+        <a href="../auth/signup.html" class="btn" style="background:#fff; color: var(--navy); border-color:#fff;">Join Monthly</a>
+      </div>
+
+      <!-- Annual -->
+      <div class="plan-card">
+        <span class="plan-badge" style="background: var(--navy);">Best Value</span>
+        <div class="plan-name">Annual</div>
+        <div class="plan-price"><b>$39</b><span>/mo</span></div>
+        <div class="plan-period">$468 billed once yearly &mdash; save $120</div>
+        <ul class="plan-features">
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> Everything in Monthly</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> 2 months free vs monthly</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> 1 personal PT session / quarter</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> Priority session booking (14 days)</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> Guest passes — 2 per month</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> Quarterly body composition check</li>
+          <li class="plan-feature"><i class="fa-solid fa-check"></i> Early access to new locations</li>
+        </ul>
+        <a href="../auth/signup.html" class="btn">Join Annual</a>
+      </div>
+
+    </div>
+
+    <p style="text-align: center; margin-top: 32px; color: var(--gray); font-size: 14px;">
+      Student discount <b style="color: var(--ink);">20% off</b> &nbsp;&middot;&nbsp; Couples <b style="color: var(--ink);">15% off</b> &nbsp;&middot;&nbsp; Corporate group rates available.
+      <a href="contact.html" style="color: var(--orange); font-weight: 700;">Contact us &rarr;</a>
+    </p>
+  </section>
+
+  <!-- ============== COMPARISON TABLE ============== -->
+  <section class="section section--wide section--paper" id="compare">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">FULL BREAKDOWN</p>
+        <h2>Compare plans.</h2>
+      </div>
+    </div>
+
+    <div style="max-width: 860px; margin: 0 auto; overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow-1);">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Free Trial</th>
+            <th>Monthly</th>
+            <th>Annual</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sessions per week</td>
+            <td>3 total</td>
+            <td>Unlimited</td>
+            <td>Unlimited</td>
+          </tr>
+          <tr>
+            <td>All outdoor locations</td>
+            <td><i class="fa-solid fa-check check"></i></td>
+            <td><i class="fa-solid fa-check check"></i></td>
+            <td><i class="fa-solid fa-check check"></i></td>
+          </tr>
+          <tr>
+            <td>App &amp; booking portal</td>
+            <td><i class="fa-solid fa-check check"></i></td>
+            <td><i class="fa-solid fa-check check"></i></td>
+            <td><i class="fa-solid fa-check check"></i></td>
+          </tr>
+          <tr>
+            <td>Advance booking window</td>
+            <td>Same day</td>
+            <td>7 days</td>
+            <td>14 days</td>
+          </tr>
+          <tr>
+            <td>Monthly progress check-in</td>
+            <td><i class="fa-solid fa-xmark cross"></i></td>
+            <td><i class="fa-solid fa-check check"></i></td>
+            <td><i class="fa-solid fa-check check"></i></td>
+          </tr>
+          <tr>
+            <td>Member community access</td>
+            <td><i class="fa-solid fa-xmark cross"></i></td>
+            <td><i class="fa-solid fa-check check"></i></td>
+            <td><i class="fa-solid fa-check check"></i></td>
+          </tr>
+          <tr>
+            <td>Personal PT sessions</td>
+            <td><i class="fa-solid fa-xmark cross"></i></td>
+            <td><i class="fa-solid fa-xmark cross"></i></td>
+            <td>1 per quarter</td>
+          </tr>
+          <tr>
+            <td>Guest passes</td>
+            <td><i class="fa-solid fa-xmark cross"></i></td>
+            <td><i class="fa-solid fa-xmark cross"></i></td>
+            <td>2 per month</td>
+          </tr>
+          <tr>
+            <td>Early access to new locations</td>
+            <td><i class="fa-solid fa-xmark cross"></i></td>
+            <td><i class="fa-solid fa-xmark cross"></i></td>
+            <td><i class="fa-solid fa-check check"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============== FAQ ============== -->
+  <section class="section" id="faq">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">GOT QUESTIONS?</p>
+        <h2>Common questions.</h2>
+      </div>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-question" aria-expanded="true">
+          Do I need to bring any equipment?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>No — we bring all necessary equipment to each outdoor location, including resistance bands, kettlebells, sandbags and boxing pads. Just bring yourself, a water bottle and weather-appropriate clothing.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What happens if it rains?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>We train rain or shine! If severe weather makes outdoor training unsafe, we move to a covered nearby area. Members are notified via the app at least 30 minutes before the session starts.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Can I freeze or pause my membership?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>Yes. Monthly members can pause for up to 4 weeks per year for free. Annual members can pause for up to 8 weeks. Simply contact us via the app or email and we'll handle it immediately.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is there a cancellation fee?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>No cancellation fees whatsoever. Monthly members can cancel anytime with no penalty. Annual members who cancel early receive a prorated refund for unused months.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Are the sessions suitable for beginners?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>Absolutely. All our coaches provide scaled options so beginners, intermediate and advanced athletes train side by side at their own pace. We recommend starting with Sunrise Burn or Power Hour if you're new.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CTA ============== -->
+  <section class="cta-strip">
+    <h2>Start with 7 days free.</h2>
+    <p>No credit card. No commitment. Just show up and train.</p>
+    <a href="../auth/signup.html" class="btn btn--lg">Begin Your Free Trial</a>
+  </section>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="ftr">
+    <div class="ftr__body">
+      <div class="ftr__main">
+        <div class="ftr__brand">
+          <a class="hdr__brand" href="../index.html">
+            <span class="hdr__mark"><img src="../assets/logo.png" alt="Mr Fit Logo" /></span>
+            <span class="hdr__name">MR FIT</span>
+          </a>
+          <p class="ftr__brand-tagline">Outdoor fitness bootcamp since 2017. Rain or shine, we train in the open air and build real community.</p>
+          <div class="ftr__socials">
+            <a href="#" class="ftr__social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="ftr__social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="ftr__social-btn" aria-label="Strava"><i class="fa-brands fa-strava"></i></a>
+          </div>
+        </div>
+        <div class="ftr__col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="schedule.html">Schedule &amp; Locations</a></li>
+            <li><a href="membership.html">Membership Plans</a></li>
+            <li><a href="trainers.html">Our Trainers</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="ftr__col">
+          <h4>Members</h4>
+          <ul>
+            <li><a href="../auth/login.html">Member Login</a></li>
+            <li><a href="../auth/signup.html">Join Free Trial</a></li>
+            <li><a href="../auth/user/user-dashboard.html">Member Portal</a></li>
+          </ul>
+        </div>
+        <div class="ftr__col">
+          <h4>Contact</h4>
+          <ul class="ftr__contact-list">
+            <li class="ftr__contact-item">
+              <i class="fa-solid fa-phone ftr__contact-icon"></i>
+              <a class="ftr__contact-text" href="tel:+15550123456">+1 (555) 012-3456</a>
+            </li>
+            <li class="ftr__contact-item">
+              <i class="fa-solid fa-envelope ftr__contact-icon"></i>
+              <a class="ftr__contact-text" href="mailto:hello@mrfit.com">hello@mrfit.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="ftr__divider">
+      <span class="ftr__tag ftr__tag--accent">Est. 2017</span>
+      <span class="ftr__tag">No Lock-in</span>
+      <span class="ftr__tag">Free Trial</span>
+      <span class="ftr__tag">Outdoor Bootcamp</span>
+    </div>
+    <div class="ftr__strip">
+      <span>&copy; 2026 Mr Fit Outdoor Bootcamp. All rights reserved.</span>
+      <span style="font-family: var(--ff-head); letter-spacing: .1em; font-size: 10px; color: rgba(255,255,255,.12); text-transform: uppercase;">SWEAT &middot; OUTSIDE &middot; THRIVE</span>
+      <span><a href="Privacy-policy.html">Privacy</a> &nbsp;&middot;&nbsp; <a href="Terms-of-service.html">Terms</a></span>
+    </div>
+  </footer>
+
+  <script src="../js/form-validation.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/script.js"></script>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+        btn.setAttribute('aria-expanded', (!isOpen).toString());
+      });
+    });
+  </script>
+</body>
+
+</html>

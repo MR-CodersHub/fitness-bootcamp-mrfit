@@ -1,5 +1,5 @@
 /* ============================================================
-   NAMMA GYM · Main Global Interactions & Utility Initializer
+   MR FIT · Main Global Interactions & Utility Initializer
    ============================================================ */
 
 (function () {
