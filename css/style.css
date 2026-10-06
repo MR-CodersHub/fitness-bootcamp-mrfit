@@ -213,7 +213,6 @@ p  { margin: 0 0 1em; }
   color: #ffffff;
 }
 .hdr__nav a.is-active {
-  border-bottom: 2px solid rgba(255, 255, 255, 0.7) !important;
   font-weight: 800 !important;
   text-decoration: none !important;
 }
