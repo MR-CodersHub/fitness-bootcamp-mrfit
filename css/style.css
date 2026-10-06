@@ -20,9 +20,9 @@
   --gray:        #6F7782;
   --gray-lt:     #B6BAC1;
 
-  --ff-display:  'Anton', 'Archivo Black', 'Impact', sans-serif;
-  --ff-head:     'Archivo Black', 'Anton', sans-serif;
-  --ff-body:     'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --ff-display:  'Google Sans', system-ui, -apple-system, sans-serif;
+  --ff-head:     'Google Sans', system-ui, -apple-system, sans-serif;
+  --ff-body:     'Google Sans', system-ui, -apple-system, sans-serif;
 
   --maxw:        1360px;
   --pad:         clamp(20px, 4vw, 56px);
@@ -51,7 +51,7 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--ff-display);
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: -.005em;
   line-height: 1.02;
   margin: 0 0 .5em;

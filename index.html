@@ -7,11 +7,9 @@
   <title>Mr Fit — Outdoor Fitness Bootcamp</title>
   <meta name="description"
     content="Mr Fit outdoor fitness bootcamp: energetic group sessions at parks near you. Build strength, endurance and community in the fresh air. Free 7-day trial." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="./assets/logo.png">
@@ -20,7 +18,7 @@
     /* ── Session Highlights (Bootcamp cards) ── */
     .sessions {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 28px;
     }
     .session {
@@ -45,7 +43,7 @@
     .session__tag {
       position: absolute;
       top: 14px; left: 14px;
-      background: var(--orange);
+      background: var(--blue, #0e79b2);
       color: #fff;
       font-family: var(--ff-head);
       font-size: 11px;
@@ -53,24 +51,69 @@
       text-transform: uppercase;
       padding: 5px 12px;
       border-radius: 999px;
+      font-weight: 700;
     }
     .session__body { padding: 22px 24px 28px; }
     .session__time {
       font-family: var(--ff-head);
       font-size: 11px;
       letter-spacing: .12em;
-      color: var(--orange);
+      color: #0284c7;
       text-transform: uppercase;
       margin-bottom: 8px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .session__body h3 { font-size: 22px; margin-bottom: 8px; color: var(--navy); }
-    .session__body p  { font-size: 14px; color: var(--gray); margin: 0 0 16px; }
+    .session__body h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      color: #0f172a;
+      line-height: 1.25;
+    }
+    .session__body p {
+      font-size: 14px;
+      color: #334155;
+      margin: 0 0 16px;
+      line-height: 1.6;
+    }
     .session__meta {
       display: flex; gap: 14px; flex-wrap: wrap;
-      font-size: 12px; color: var(--gray);
+      font-size: 12px; color: #475569;
     }
     .session__meta span { display: flex; align-items: center; gap: 5px; }
-    .session__meta i { color: var(--orange); }
+    .session__meta i { color: #0284c7; }
+
+    /* Dark mode support & high contrast for session cards */
+    :root[data-theme="dark"] .session,
+    body.dark-mode .session {
+      background: #111d2e !important;
+      border-color: #1f324d !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+    }
+    :root[data-theme="dark"] .session__time,
+    body.dark-mode .session__time {
+      color: #38bdf8 !important;
+    }
+    :root[data-theme="dark"] .session__body h3,
+    body.dark-mode .session__body h3 {
+      color: #ffffff !important;
+    }
+    :root[data-theme="dark"] .session__body p,
+    body.dark-mode .session__body p {
+      color: #cbd5e1 !important;
+    }
+    :root[data-theme="dark"] .session__meta,
+    :root[data-theme="dark"] .session__meta span,
+    body.dark-mode .session__meta,
+    body.dark-mode .session__meta span {
+      color: #94a3b8 !important;
+    }
+    :root[data-theme="dark"] .session__meta i,
+    body.dark-mode .session__meta i {
+      color: #38bdf8 !important;
+    }
 
     /* ── Stats strip ── */
     .stats-strip {
@@ -82,7 +125,7 @@
       max-width: var(--maxw);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 40px;
       text-align: center;
     }
@@ -225,7 +268,6 @@
   <!-- ============== HERO ============== -->
   <section class="hero" id="home">
     <!-- Atmospheric sunburst ray overlay -->
-    <div class="hero__rays" aria-hidden="true"></div>
 
     <div class="hero__inner">
 
@@ -316,13 +358,13 @@
           <span class="session__tag">Strength</span>
         </div>
         <div class="session__body">
-          <div class="session__time"><i class="fa-regular fa-clock"></i> Tue · Thu &nbsp;·&nbsp; 6:30 AM &amp; 6:00 PM</div>
+          <div class="session__time"><i class="fa-regular fa-clock"></i> Tue · Thu &nbsp;·&nbsp; 5:00 PM</div>
           <h3>Power Hour</h3>
-          <p>Resistance bands, kettlebells and sandbags. Progressive overload methodology, outdoors. Build muscle, lose fat.</p>
+          <p>Resistance bands, kettlebells and sandbags. Progressive overload methodology, outdoors.</p>
           <div class="session__meta">
             <span><i class="fa-solid fa-users"></i> Up to 15</span>
             <span><i class="fa-solid fa-clock"></i> 60 min</span>
-            <span><i class="fa-solid fa-location-dot"></i> Riverside Grounds</span>
+            <span><i class="fa-solid fa-location-dot"></i> Riverside </span>
           </div>
         </div>
       </article>
@@ -335,11 +377,11 @@
         <div class="session__body">
           <div class="session__time"><i class="fa-regular fa-clock"></i> Sat &nbsp;·&nbsp; 7:00 AM</div>
           <h3>Combat Cardio</h3>
-          <p>Pad work, shadow boxing and bag drills in the open. Burn 700+ calories while learning real striking fundamentals.</p>
+          <p>Pad work, shadow boxing and bag drills in the open. Burn 700+ calories while learning fundamentals.</p>
           <div class="session__meta">
             <span><i class="fa-solid fa-users"></i> Up to 18</span>
             <span><i class="fa-solid fa-clock"></i> 55 min</span>
-            <span><i class="fa-solid fa-location-dot"></i> Waterfront Plaza</span>
+            <span><i class="fa-solid fa-location-dot"></i> Water Plaza</span>
           </div>
         </div>
       </article>
@@ -352,7 +394,7 @@
         <div class="session__body">
           <div class="session__time"><i class="fa-regular fa-clock"></i> Sun &nbsp;·&nbsp; 7:30 AM</div>
           <h3>Weekend Warrior</h3>
-          <p>Long-format conditioning — trail runs, sled work and obstacle-style circuits. The session that earns your rest day.</p>
+          <p>Long-format conditioning — trail runs, sled work and circuits. The session that earns your rest day.</p>
           <div class="session__meta">
             <span><i class="fa-solid fa-users"></i> Up to 25</span>
             <span><i class="fa-solid fa-clock"></i> 75 min</span>
