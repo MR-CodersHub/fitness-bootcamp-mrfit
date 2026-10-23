@@ -221,25 +221,25 @@
 
       <div class="hdr__cta">
         <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Switch Light/Dark Mode"><i class="fa-solid fa-sun"></i></button>
+        <button type="button" class="rtl-toggle-btn" aria-label="Toggle RTL layout" title="Switch LTR/RTL">RTL</button>
 
-        <!-- Profile Dropdown -->
-        <div class="profile-dropdown-wrap">
-          <button type="button" class="profile-btn" aria-label="User account and portals" title="Member Portals"><i class="fa-solid fa-user"></i></button>
+        <!-- Portal Primary CTA -->
+        <div class="portal-dropdown-wrap profile-dropdown-wrap">
+          <a href="auth/login.html" class="btn btn--sm btn--portal" aria-label="Access Member and Staff Portals" title="Member &amp; Admin Portals">Portal</a>
           <div class="profile-menu">
             <div class="profile-menu__header">
               <b>Mr Fit Portals</b>
               <span>Member &amp; Management Access</span>
             </div>
             <ul class="profile-menu__links">
-              <li><a href="auth/login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i><span>Member Login</span></a></li>
-              <li><a href="auth/signup.html"><i class="fa-solid fa-user-plus"></i><span>Join / Signup</span><span class="profile-menu__badge">Free Trial</span></a></li>
-              <li><a href="auth/user/user-dashboard.html"><i class="fa-solid fa-id-card"></i><span>Member Dashboard</span><span class="profile-menu__badge bg-emerald-600">Member</span></a></li>
-              <li><a href="auth/admin/admin-dashboard.html"><i class="fa-solid fa-shield-halved"></i><span>Admin Dashboard</span><span class="profile-menu__badge bg-rose-600">Staff</span></a></li>
+              <li><a href="auth/login.html"><i class="fa-solid fa-arrow-right-to-bracket text-orange-500"></i><span>Member Login</span></a></li>
+              <li><a href="auth/signup.html"><i class="fa-solid fa-user-plus text-amber-400"></i><span>Join / Signup</span><span class="profile-menu__badge">Free Trial</span></a></li>
+              <li><a href="auth/user/user-dashboard.html"><i class="fa-solid fa-id-card text-emerald-400"></i><span>Member Dashboard</span><span class="profile-menu__badge bg-emerald-600">Member</span></a></li>
+              <li><a href="auth/admin/admin-dashboard.html"><i class="fa-solid fa-shield-halved text-rose-400"></i><span>Admin Dashboard</span><span class="profile-menu__badge bg-rose-600">Staff</span></a></li>
             </ul>
           </div>
         </div>
 
-        <a href="auth/login.html" class="btn btn--sm btn--pill">Login</a>
         <button class="hdr__burger" aria-label="Open menu" aria-expanded="false">&#9776;</button>
       </div>
     </div>
@@ -409,8 +409,44 @@
     </p>
   </section>
 
+  <!-- ============== HOW IT WORKS ============== -->
+  <section class="section section--paper section--wide" id="how-it-works">
+    <div class="section__head section__head--center">
+      <div>
+        <p class="eyebrow">HOW IT WORKS</p>
+        <h2>4 Steps to Your First Session.</h2>
+        <p style="max-width: 620px; margin: 0 auto; color: var(--gray);">
+          No locked contracts, no complicated signups. From booking to cooldown in under 60 minutes.
+        </p>
+      </div>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-card__num">01</span>
+        <h3>Pick Your Park</h3>
+        <p>Choose from 12+ green outdoor venues across the city with morning and evening sessions scheduled daily.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-card__num">02</span>
+        <h3>Reserve in Portal</h3>
+        <p>Grab your free 7-day trial pass and reserve any session in seconds through your online Member Portal.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-card__num">03</span>
+        <h3>Show Up &amp; Sweat</h3>
+        <p>Coaches bring all kettlebells, ropes, and sprint sleds. Just bring running shoes, water, and ready energy.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-card__num">04</span>
+        <h3>Track Real Gains</h3>
+        <p>Log attendance, track aerobic volume, and celebrate personal bests alongside an encouraging community.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ============== LOCATIONS PREVIEW ============== -->
-  <section class="section section--wide section--paper" id="locations">
+  <section class="section section--wide" id="locations">
     <div class="section__head">
       <div>
         <p class="eyebrow">TRAIN OUTSIDE</p>
@@ -457,6 +493,42 @@
     <p style="text-align:center; margin-top: 44px;">
       <a href="pages/schedule.html" class="btn">See Full Schedule &amp; Map</a>
     </p>
+  </section>
+
+  <!-- ============== THE OUTDOOR ADVANTAGE ============== -->
+  <section class="section section--paper section--wide" id="outdoor-advantage">
+    <div class="section__head section__head--center">
+      <div>
+        <p class="eyebrow">THE OUTDOOR ADVANTAGE</p>
+        <h2>Why We Train Outside.</h2>
+        <p style="max-width: 640px; margin: 0 auto; color: var(--gray);">
+          Commercial gyms trap you under fluorescent lights. Training in the open air delivers proven physical and neurological benefits.
+        </p>
+      </div>
+    </div>
+
+    <div class="adv-grid">
+      <div class="adv-card">
+        <div class="adv-card__icon"><i class="fa-solid fa-wind"></i></div>
+        <h3>Fresh Oxygen &amp; Sun</h3>
+        <p>Natural morning sunlight optimizes your circadian cycle while high airflow increases VO2 recovery between working intervals.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-card__icon"><i class="fa-solid fa-mountain"></i></div>
+        <h3>Multi-Terrain Agility</h3>
+        <p>Grass, park hills, and trail paths recruit ankle and hip stabilizers that flat rubber gym floors let go dormant.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-card__icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>All-Weather Resilience</h3>
+        <p>Training through crisp morning mists or light drizzle builds the unshakeable mental fortitude of a true outdoor athlete.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-card__icon"><i class="fa-solid fa-people-group"></i></div>
+        <h3>Real Community Vibe</h3>
+        <p>No headphone zombies or mirror posers. High-fives, partner drags, and shared effort make every workout fly by.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ============== TRAINERS ============== -->
@@ -664,7 +736,7 @@
           <div class="test__avatar"><img src="img/coach-2.jpg" alt="Daniel Walsh" /></div>
           <div>
             <b>Daniel Walsh</b>
-            <i>Member since 2023 · Weekend Warrior</i>
+            <i>Member since 2023 · Warrior</i>
           </div>
         </div>
       </article>

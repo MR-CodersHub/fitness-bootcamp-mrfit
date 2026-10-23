@@ -42,7 +42,7 @@
 
         <!-- Profile Dropdown -->
         <div class="profile-dropdown-wrap">
-          <button type="button" class="profile-btn" aria-label="User account and portals" title="Member &amp; Admin Portals"><i class="fa-solid fa-user"></i></button>
+          <a href="../auth/login.html" class="btn btn--sm btn--portal" aria-label="Access Member and Staff Portals" title="Member &amp; Admin Portals">Portal</a>
           <div class="profile-menu">
             <div class="profile-menu__header">
               <b>Mr Fit Portals</b>
@@ -84,8 +84,13 @@
   </div>
 
   <!-- ============== PAGE HERO ============== -->
-  <section class="page-hero">
+  <section class="page-hero page-hero--pricing">
     <div class="page-hero__inner">
+      <nav class="page-breadcrumbs" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-current">Membership Pricing</span>
+      </nav>
       <p class="eyebrow">TRANSPARENT VALUE · NO CONTRACTS</p>
       <h1>Membership Plans.</h1>
       <p>
@@ -285,12 +290,26 @@
     </div>
   </section>
 
-  <!-- ============== CTA STRIP ============== -->
-  <section class="cta-strip">
-    <h2>Ready to join the tribe?</h2>
-    <p>Trial week is ₹199. No card required. Bring a towel.</p>
-    <a href="../auth/signup.html" class="btn btn--lg">Begin Your Trial</a>
+  <!-- ============== PURPOSEFUL CLOSING TRIAL & GUARANTEE SECTION (REQ 11) ============== -->
+  <section class="section section--paper section--wide" style="border-top: 1px solid var(--line);">
+    <div style="background: linear-gradient(135deg, #191923 0%, #0e79b2 100%); border-radius: var(--radius); padding: clamp(40px, 6vw, 64px); color: #ffffff; text-align: center; max-width: 900px; margin: 0 auto; box-shadow: var(--shadow-2);">
+      <span style="display: inline-block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: #70c4f8; background: rgba(0,0,0,0.3); padding: 5px 16px; border-radius: 999px; margin-bottom: 16px;">100% SATISFACTION GUARANTEE</span>
+      <h2 style="color: #ffffff; margin-bottom: 14px; font-size: clamp(26px, 4vw, 38px);">Ready to join the tribe?</h2>
+      <p style="color: rgba(255, 255, 255, 0.92); font-size: 16px; line-height: 1.65; max-width: 680px; margin: 0 auto 28px;">
+        Start your 7-day trial pass for just ₹199. No lock-in contracts, no credit card auto-charge, and zero cancellation friction. Experience full facility and coaching access today.
+      </p>
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px;">
+        <a href="../auth/signup.html" class="btn btn--lg btn--white">Claim 7-Day Trial Pass</a>
+        <a href="contact.html" class="btn btn--lg btn--hero-outline">Schedule Facility Walkthrough</a>
+      </div>
+      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 12.5px; color: #d0eaf8; font-family: var(--ff-head); letter-spacing: .06em; text-transform: uppercase;">
+        <span><i class="fa-solid fa-check text-orange mr-1"></i> No Hidden Fees</span>
+        <span><i class="fa-solid fa-check text-orange mr-1"></i> Cancel Anytime</span>
+        <span><i class="fa-solid fa-check text-orange mr-1"></i> Both Campuses Included</span>
+      </div>
+    </div>
   </section>
+
   <!-- ============== FOOTER ============== -->
   <footer class="ftr">
 

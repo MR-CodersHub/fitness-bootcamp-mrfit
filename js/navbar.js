@@ -70,19 +70,19 @@
           <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Switch Light/Dark Mode"><i class="fa-solid fa-sun"></i></button>
           <button type="button" class="rtl-toggle-btn" aria-label="Toggle RTL layout" title="Switch LTR/RTL">RTL</button>
 
-          <!-- Profile Dropdown -->
-          <div class="profile-dropdown-wrap">
-            <button type="button" class="profile-btn" aria-label="User account and portals" title="Member &amp; Admin Portals"><i class="fa-solid fa-user"></i></button>
+          <!-- Portal Primary CTA Button -->
+          <div class="portal-dropdown-wrap profile-dropdown-wrap">
+            <a href="${prefix}auth/login.html" class="btn btn--sm btn--portal" aria-label="Access Member and Staff Portals" title="Member &amp; Admin Portals">Portal</a>
             <div class="profile-menu">
               <div class="profile-menu__header">
                 <b>Mr Fit Portals</b>
                 <span>Member &amp; Management Access</span>
               </div>
               <ul class="profile-menu__links">
-                <li><a href="${prefix}auth/login.html"><i class="fa-solid fa-arrow-right-to-bracket text-orange-500"></i><span>Login</span></a></li>
-                <li><a href="${prefix}auth/signup.html"><i class="fa-solid fa-user-plus text-amber-400"></i><span>Signup</span></a></li>
-                <li><a href="${prefix}auth/user/user-dashboard.html"><i class="fa-solid fa-id-card text-emerald-400"></i><span>User Dashboard</span></a></li>
-                <li><a href="${prefix}auth/admin/admin-dashboard.html"><i class="fa-solid fa-shield-halved text-rose-400"></i><span>Admin Dashboard</span></a></li>
+                <li><a href="${prefix}auth/login.html"><i class="fa-solid fa-arrow-right-to-bracket text-orange-500"></i><span>Member Login</span></a></li>
+                <li><a href="${prefix}auth/signup.html"><i class="fa-solid fa-user-plus text-amber-400"></i><span>Join / Signup</span><span class="profile-menu__badge">Free Trial</span></a></li>
+                <li><a href="${prefix}auth/user/user-dashboard.html"><i class="fa-solid fa-id-card text-emerald-400"></i><span>User Dashboard</span><span class="profile-menu__badge bg-emerald-600">Member</span></a></li>
+                <li><a href="${prefix}auth/admin/admin-dashboard.html"><i class="fa-solid fa-shield-halved text-rose-400"></i><span>Admin Dashboard</span><span class="profile-menu__badge bg-rose-600">Staff</span></a></li>
               </ul>
             </div>
           </div>
@@ -117,6 +117,7 @@
         <a href="${prefix}pages/services.html"${servicesActive}>Services</a>
         <a href="${prefix}pages/blog.html"${blogActive}>Blog</a>
         <a href="${prefix}pages/contact.html"${contactActive}>Contact</a>
+        <a href="${prefix}auth/login.html" class="mobile-nav-portal-btn"><i class="fa-solid fa-arrow-right-to-bracket"></i> Portal Access</a>
       </div>
     `;
   }
@@ -287,38 +288,58 @@
     });
   }
 
-  // --- Profile Dropdown Setup ---
+  // --- Profile / Portal Dropdown Setup ---
   function setupProfileDropdown() {
-    const profileBtns = document.querySelectorAll('.profile-btn');
-    profileBtns.forEach(btn => {
-      const menu = btn.parentElement.querySelector('.profile-menu');
-      if (!menu) return;
+    const portalWraps = document.querySelectorAll('.portal-dropdown-wrap, .profile-dropdown-wrap');
+    portalWraps.forEach(wrap => {
+      const trigger = wrap.querySelector('.btn--portal, .profile-btn');
+      const menu = wrap.querySelector('.profile-menu');
+      if (!trigger || !menu) return;
 
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isOpen = menu.classList.contains('is-open');
-        document.querySelectorAll('.profile-menu.is-open').forEach(m => m.classList.remove('is-open'));
-        if (!isOpen) {
+      // Click behavior: on touch/mobile or hover-fallback
+      trigger.addEventListener('click', (e) => {
+        // If user explicitly clicks the trigger, if dropdown isn't open, open it; or if double click / right-click navigate
+        // For accessibility, allow clicking to toggle dropdown if desired
+        if (window.innerWidth <= 1024) {
+          e.preventDefault();
+          const isOpen = menu.classList.contains('is-open');
+          document.querySelectorAll('.profile-menu.is-open').forEach(m => m.classList.remove('is-open'));
+          if (!isOpen) {
+            menu.classList.add('is-open');
+            trigger.classList.add('active');
+          } else {
+            menu.classList.remove('is-open');
+            trigger.classList.remove('active');
+          }
+        }
+      });
+
+      // Desktop hover interaction
+      wrap.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 1024) {
           menu.classList.add('is-open');
-          btn.classList.add('active');
-        } else {
+          trigger.classList.add('active');
+        }
+      });
+      wrap.addEventListener('mouseleave', () => {
+        if (window.innerWidth > 1024) {
           menu.classList.remove('is-open');
-          btn.classList.remove('active');
+          trigger.classList.remove('active');
         }
       });
     });
 
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('.profile-dropdown-wrap')) {
+      if (!e.target.closest('.portal-dropdown-wrap, .profile-dropdown-wrap')) {
         document.querySelectorAll('.profile-menu.is-open').forEach(m => m.classList.remove('is-open'));
-        document.querySelectorAll('.profile-btn.active').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.btn--portal.active, .profile-btn.active').forEach(b => b.classList.remove('active'));
       }
     });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         document.querySelectorAll('.profile-menu.is-open').forEach(m => m.classList.remove('is-open'));
-        document.querySelectorAll('.profile-btn.active').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.btn--portal.active, .profile-btn.active').forEach(b => b.classList.remove('active'));
       }
     });
   }

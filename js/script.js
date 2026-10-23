@@ -20,15 +20,50 @@
     });
   });
 
-  /* ----- Single-open Accordion for FAQ lists ----- */
-  const faqs = document.querySelectorAll('.faq details, .faq-accordion details');
-  faqs.forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) {
-        faqs.forEach(other => { if (other !== d) other.open = false; });
-      }
+  /* ----- Accessible Accordion for FAQ lists (.faq-trigger and <details>) ----- */
+  function initFaqAccordions() {
+    const faqTriggers = document.querySelectorAll('.faq-trigger');
+    faqTriggers.forEach((trigger, idx) => {
+      const item = trigger.closest('.faq-item');
+      const content = item ? item.querySelector('.faq-content') : null;
+      if (!item || !content) return;
+
+      const contentId = content.id || `faq-answer-${idx + 1}`;
+      content.id = contentId;
+      trigger.setAttribute('aria-controls', contentId);
+      trigger.setAttribute('aria-expanded', item.classList.contains('is-active') ? 'true' : 'false');
+
+      trigger.addEventListener('click', () => {
+        const isActive = item.classList.contains('is-active');
+        const accordion = item.closest('.faq-accordion') || item.parentElement;
+        if (accordion) {
+          accordion.querySelectorAll('.faq-item').forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('is-active');
+              const otherTrigger = otherItem.querySelector('.faq-trigger');
+              if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
+        if (isActive) {
+          item.classList.remove('is-active');
+          trigger.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('is-active');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
     });
-  });
+
+    const detailsFaqs = document.querySelectorAll('.faq details, .faq-accordion details');
+    detailsFaqs.forEach(d => {
+      d.addEventListener('toggle', () => {
+        if (d.open) {
+          detailsFaqs.forEach(other => { if (other !== d) other.open = false; });
+        }
+      });
+    });
+  }
 
   /* ----- Pricing Switcher (Monthly vs Annual) ----- */
   const pricingToggles = document.querySelectorAll('.pricing-billing-toggle');
@@ -138,6 +173,11 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     initCountdown();
+    initFaqAccordions();
   });
+  // Also call immediately in case DOM is already loaded
+  if (document.readyState === 'interactive' || document.readyState === 'complete') {
+    initFaqAccordions();
+  }
 
 })();

@@ -187,7 +187,7 @@
       <div class="hdr__cta">
         <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme"><i class="fa-solid fa-sun"></i></button>
         <div class="profile-dropdown-wrap">
-          <button type="button" class="profile-btn" aria-label="User account"><i class="fa-solid fa-user"></i></button>
+          <a href="../auth/login.html" class="btn btn--sm btn--portal" aria-label="Access Member and Staff Portals" title="Member &amp; Admin Portals">Portal</a>
           <div class="profile-menu">
             <div class="profile-menu__header"><b>Mr Fit Portals</b><span>Member &amp; Management Access</span></div>
             <ul class="profile-menu__links">
@@ -222,8 +222,13 @@
   </div>
 
   <!-- ============== PAGE HERO ============== -->
-  <section class="page-hero">
+  <section class="page-hero page-hero--schedule">
     <div class="page-hero__inner">
+      <nav class="page-breadcrumbs" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-current">Schedule &amp; Timetable</span>
+      </nav>
       <div class="eyebrow">LIVE OUTDOOR SCHEDULE · REAL-TIME SLOTS</div>
       <h1>TRAIN UNDER THE OPEN SKY.<br /><span class="text-accent">SCHEDULE &amp; LOCATIONS</span></h1>
       <p>
@@ -468,11 +473,19 @@
     </div>
   </section>
 
-  <!-- ============== CTA ============== -->
-  <section class="cta-strip">
-    <h2>Ready to book your first session?</h2>
-    <p>Create a free account and reserve your spot in under 60 seconds.</p>
-    <a href="../auth/signup.html" class="btn btn--lg">Join Free — No Card Needed</a>
+  <!-- ============== PURPOSEFUL CLOSING CTA STRIP (REQ 11) ============== -->
+  <section class="section section--paper section--wide" style="border-top: 1px solid var(--line);">
+    <div style="background: linear-gradient(135deg, #0e79b2 0%, #084365 60%, #191923 100%); border-radius: var(--radius); padding: clamp(40px, 6vw, 64px); color: #ffffff; text-align: center; max-width: 900px; margin: 0 auto; box-shadow: var(--shadow-2);">
+      <span style="display: inline-block; font-family: var(--ff-head); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: #d0eaf8; background: rgba(0,0,0,0.25); padding: 5px 16px; border-radius: 999px; margin-bottom: 16px;">INSTANT RESERVATION</span>
+      <h2 style="color: #ffffff; margin-bottom: 14px; font-size: clamp(26px, 4vw, 38px);">Ready to book your first outdoor slot?</h2>
+      <p style="color: rgba(255, 255, 255, 0.92); font-size: 16px; line-height: 1.65; max-width: 680px; margin: 0 auto 28px;">
+        Reserve your spot in under 60 seconds. Our coaches bring all equipment, hydration stations, and recovery wraps to each open park.
+      </p>
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+        <a href="../auth/signup.html" class="btn btn--lg btn--white">Join Free — No Card Needed</a>
+        <a href="membership.html" class="btn btn--lg btn--hero-outline">View Membership Passes</a>
+      </div>
+    </div>
   </section>
 
   <!-- ============== FOOTER ============== -->

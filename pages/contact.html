@@ -42,7 +42,7 @@
 
         <!-- Profile Dropdown -->
         <div class="profile-dropdown-wrap">
-          <button type="button" class="profile-btn" aria-label="User account and portals" title="Member &amp; Admin Portals"><i class="fa-solid fa-user"></i></button>
+          <a href="../auth/login.html" class="btn btn--sm btn--portal" aria-label="Access Member and Staff Portals" title="Member &amp; Admin Portals">Portal</a>
           <div class="profile-menu">
             <div class="profile-menu__header">
               <b>Mr Fit Portals</b>
@@ -84,8 +84,13 @@
   </div>
 
   <!-- ============== PAGE HERO ============== -->
-  <section class="page-hero">
+  <section class="page-hero page-hero--contact">
     <div class="page-hero__inner">
+      <nav class="page-breadcrumbs" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-current">Contact &amp; Locations</span>
+      </nav>
       <p class="eyebrow">STEP INSIDE · CONNECT WITH US</p>
       <h1>Find the Sanctuary.</h1>
       <p>
@@ -216,6 +221,100 @@
       </div>
     </div>
   </section>
+
+  <!-- ============== CONTACT FAQ SECTION ============== -->
+  <section class="section" id="contact-faq">
+    <div class="section__head section__head--center">
+      <div>
+        <p class="eyebrow">HELP &amp; INQUIRIES</p>
+        <h2>Frequently Asked Questions.</h2>
+        <p style="max-width: 620px; margin: 0 auto; color: var(--gray);">
+          Quick answers regarding bookings, trial sessions, response times, beginner onboarding, and training ground amenities.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-accordion">
+      <!-- FAQ Item 1 -->
+      <div class="faq-item is-active">
+        <button class="faq-trigger" type="button" aria-expanded="true">
+          <span>How do I schedule an inquiry or book a trial workout?</span>
+          <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-content">
+          You can book directly by submitting the inquiry form above, messaging our front desk via WhatsApp (+91 80 4928 3720), or selecting an open slot on our live schedule. Our team will pair you with a certified coach and prepare your orientation pass before your arrival.
+        </div>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" aria-expanded="false">
+          <span>What is your customer support response time?</span>
+          <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-content">
+          During gym hours (05:00 AM – 10:00 PM Monday through Sunday), our front desk and admissions team respond to digital inquiries within 2 operational hours. Urgent questions can be resolved immediately via direct phone call or WhatsApp dispatch.
+        </div>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" aria-expanded="false">
+          <span>Can beginners join with no prior bootcamp or combat experience?</span>
+          <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-content">
+          Absolutely. Over 65% of Mr Fit members joined with zero barbell, combat, or outdoor bootcamp background. Every drill features tiered progression tracks (Rookie, Athlete, Pro) coached with close attention to form, biomechanics, and safety.
+        </div>
+      </div>
+
+      <!-- FAQ Item 4 -->
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" aria-expanded="false">
+          <span>What gear or apparel should I bring for my first session?</span>
+          <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-content">
+          Wear breathable athletic clothing and supportive cross-training or running shoes. We recommend bringing a refillable water bottle and personal sweat towel. For combat arts and barbell workouts, sanitized gloves, hand wraps, chalk, and belts are provided on-site.
+        </div>
+      </div>
+
+      <!-- FAQ Item 5 -->
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" aria-expanded="false">
+          <span>Can I freeze, pause, or transfer my membership?</span>
+          <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-content">
+          Yes! All quarterly and annual memberships include complimentary pause privileges for up to 30 days per calendar year. You can freeze your billing directly via the Member Portal or notify the front desk at least 48 hours prior to your travel dates.
+        </div>
+      </div>
+
+      <!-- FAQ Item 6 -->
+      <div class="faq-item">
+        <button class="faq-trigger" type="button" aria-expanded="false">
+          <span>Do you accommodate corporate groups or private team sessions?</span>
+          <span class="faq-icon"><i class="fa-solid fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-content">
+          Yes, we host customized corporate wellness bootcamps, executive metabolic challenges, and private group athletic testing. Reach out through the form above with your organization name and estimated head count for custom scheduling.
+        </div>
+      </div>
+    </div>
+
+    <!-- Final Contact Prompt Strip -->
+    <div style="max-width: 860px; margin: 48px auto 0; padding: 28px 32px; background: linear-gradient(135deg, rgba(14, 121, 178, 0.12), rgba(11, 95, 138, 0.05)); border: 1.5px solid rgba(14, 121, 178, 0.3); border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <div>
+        <h4 style="margin: 0 0 4px; font-size: 18px;">Still have a question not covered above?</h4>
+        <p style="margin: 0; font-size: 14px; color: var(--gray);">Our coaching and member desk is available 7 days a week to guide your journey.</p>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+        <a href="tel:+918049283720" class="btn btn--sm btn--outline"><i class="fa-solid fa-phone text-xs"></i> Call Desk</a>
+        <a href="https://wa.me/918049283720" class="btn btn--sm" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ============== FOOTER ============== -->
   <footer class="ftr">
 

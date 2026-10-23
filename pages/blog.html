@@ -42,7 +42,7 @@
 
         <!-- Profile Dropdown -->
         <div class="profile-dropdown-wrap">
-          <button type="button" class="profile-btn" aria-label="User account and portals" title="Member &amp; Admin Portals"><i class="fa-solid fa-user"></i></button>
+          <a href="../auth/login.html" class="btn btn--sm btn--portal" aria-label="Access Member and Staff Portals" title="Member &amp; Admin Portals">Portal</a>
           <div class="profile-menu">
             <div class="profile-menu__header">
               <b>Mr Fit Portals</b>
@@ -84,8 +84,13 @@
   </div>
 
   <!-- ============== PAGE HERO ============== -->
-  <section class="page-hero">
+  <section class="page-hero page-hero--blog">
     <div class="page-hero__inner">
+      <nav class="page-breadcrumbs" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-current">The Iron Dispatch Blog</span>
+      </nav>
       <p class="eyebrow">ATHLETIC RESEARCH · PROTOCOLS</p>
       <h1>The Iron Dispatch.</h1>
       <p>
@@ -320,6 +325,36 @@
 
     </div>
   </section>
+
+  <!-- ============== BLOG CLOSING SECTION: FACULTY DISPATCH & RESEARCH Q&A ============== -->
+  <section class="section section--paper section--wide" style="border-top: 1px solid var(--line);">
+    <div style="background: linear-gradient(135deg, rgba(14, 121, 178, 0.08) 0%, rgba(25, 25, 35, 0.04) 100%); border: 1.5px solid rgba(14, 121, 178, 0.25); border-radius: var(--radius); padding: clamp(32px, 5vw, 48px); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; align-items: center;">
+      <div>
+        <span style="font-family: var(--ff-head); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--orange); font-weight: 800; display: block; margin-bottom: 8px;">COACHING DESK · ATHLETIC INQUIRIES</span>
+        <h3 style="margin-bottom: 12px; font-size: 26px;">Have a specific training protocol question?</h3>
+        <p style="color: var(--gray); font-size: 15px; line-height: 1.6; margin: 0 0 20px;">
+          Our CSCS coaches and ISSN nutritionists address member submissions every month in our long-form deep dives. Send us your questions about periodization, fight camp prep, or thermal recovery.
+        </p>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a href="contact.html" class="btn btn--sm">Ask a Coach</a>
+          <a href="services.html" class="btn btn--sm btn--outline">Browse Syllabus</a>
+        </div>
+      </div>
+      <div style="background: #ffffff; padding: 24px; border-radius: 12px; border: 1px solid var(--line); box-shadow: var(--shadow-1);">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 14px;">
+          <img src="../img/coach-1.jpg" alt="Coach Vikram" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--orange);" />
+          <div>
+            <b style="display: block; font-size: 14px; color: var(--navy);">Vikram Rao, CSCS</b>
+            <span style="font-size: 12px; color: var(--gray);">Head Coach · Strength &amp; Biomechanics</span>
+          </div>
+        </div>
+        <p style="font-size: 13.5px; color: var(--gray); line-height: 1.55; margin: 0; font-style: italic;">
+          "Theory without bar velocity is just philosophy. We test every protocol on our own lifting platforms before writing about it."
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- ============== FOOTER ============== -->
   <footer class="ftr">
 
