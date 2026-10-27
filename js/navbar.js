@@ -80,7 +80,7 @@
               </div>
               <ul class="profile-menu__links">
                 <li><a href="${prefix}auth/login.html"><i class="fa-solid fa-arrow-right-to-bracket text-orange-500"></i><span>Member Login</span></a></li>
-                <li><a href="${prefix}auth/signup.html"><i class="fa-solid fa-user-plus text-amber-400"></i><span>Join / Signup</span><span class="profile-menu__badge">Free Trial</span></a></li>
+                <li><a href="${prefix}auth/signup.html"><i class="fa-solid fa-user-plus text-amber-400"></i><span>Join / Signup</span></a></li>
                 <li><a href="${prefix}auth/user/user-dashboard.html"><i class="fa-solid fa-id-card text-emerald-400"></i><span>User Dashboard</span><span class="profile-menu__badge bg-emerald-600">Member</span></a></li>
                 <li><a href="${prefix}auth/admin/admin-dashboard.html"><i class="fa-solid fa-shield-halved text-rose-400"></i><span>Admin Dashboard</span><span class="profile-menu__badge bg-rose-600">Staff</span></a></li>
               </ul>
