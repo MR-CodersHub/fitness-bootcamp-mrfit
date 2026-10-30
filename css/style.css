@@ -3821,7 +3821,7 @@ p  { margin: 0 0 1em; }
 
 .profile-menu {
   position: absolute;
-  top: calc(100% + 12px);
+  top: 100%;
   right: 0;
   width: 260px;
   background: #0f1e2e;
